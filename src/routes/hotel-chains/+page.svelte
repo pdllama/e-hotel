@@ -1,0 +1,1 @@
+<h1>list of all hotel-chains</h1>

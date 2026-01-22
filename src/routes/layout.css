@@ -1,3 +1,18 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+
+.nav-container {
+    width: 100%;
+    height: 70px;
+    background-color: rgb(80, 140, 214);
+    box-shadow: 0px -10px 10px 10px black;
+}
+
+.footer-container {
+    width: 100%;
+    height: 50px;
+    background-color: rgb(34, 47, 88);
+    box-shadow: 0px 10px 10px 10px black;
+}
