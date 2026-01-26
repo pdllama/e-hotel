@@ -1,0 +1,41 @@
+.home-main-container {
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 30%), url("$lib/assets/main-page.jpg");
+    width: 100%;
+    height: 800px;
+    background-size: cover;
+    margin-top: -110px;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0px 0px 10px rgba(255,255,255, 1);
+    }
+    25% {
+        box-shadow: 0px 0px 25x rgba(255,255,255, 1);
+    }
+    50% {
+        box-shadow: 0px 0px 40px rgba(255,255,255, 1);
+    }
+    75% {
+        box-shadow: 0px 0px 25px rgba(255,255,255, 1);
+    }
+    100% {
+        box-shadow: 0px 0px 10px rgba(255,255,255, 1);
+    }
+}
+
+.home-nav-decoration {
+    height: 110px;
+    background-color: white;
+    opacity: 75%;
+    max-width: 1300px;
+    width: 100%;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    animation: pulse;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
