@@ -8,7 +8,7 @@
 
 <svelte:head><link rel="icon" /></svelte:head>
 <div class="flex flex-col justify-center items-center min-h-screen m-0">
-	<nav class="nav-container">
+	<nav class="nav-container z-1">
 		<div class="logo-container flex justify-center items-center">
 			<p class="logo-text">DomiLux</p>
 		</div>
