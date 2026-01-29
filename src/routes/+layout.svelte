@@ -14,8 +14,8 @@
 		</div>
 		<div class="size-full flex justify-end items-center">
 			<div class="nav-item-container">
-				<img src={userIcon} alt="user icon" width="40px" height="50px" class="opacity-75 m-2 ml-3"/>
-				<p class="font-bold text-[22px] text-start w-[100%]">Sign in</p>
+				<img src={userIcon} alt="user icon" width="20px" height="30px" class="opacity-75 m-2 ml-2"/>
+				<p class="font-bold text-[14px] text-start w-[100%]">Sign in</p>
 			</div>
 		</div>
 		

@@ -1,11 +1,16 @@
 <script lang="ts">
     import clearIcon from "$lib/assets/clear-icon.png"
+    import forwardTarget from "$lib/util/forwardtarget";
+    import Button from "./button.svelte";
     let { 
         placeholder, value, oninput, nameId, //input props
         divClasses='', inputProps={}, inputClasses='', //customization
         icon=null, iconAlt='', iconClasses="", //optional elements
         clearHandler=null //optional elements
     } = $props();
+
+    const removePlaceholder = (e: HTMLInputElement) => {e.placeholder = "";}
+    const replacePlaceholder = (e: HTMLInputElement) => {e.placeholder = placeholder}
 </script>
 
 <style>
@@ -20,6 +25,7 @@
         border: 1px solid oklch(0.546 0.245 262.881);
         border-radius: 8px;
     }
+    
 </style>
 
 <div class={`flex justify-center items-center p-1 shadow ${divClasses}`}>
@@ -36,14 +42,19 @@
         class={`
             w-[100%] 
             h-[100%] 
-            rounded-lg conditional-border
+            rounded-lg conditional-border font-bold
             ${inputClasses}
         `}
         {...inputProps}
+        onfocus={(e) => forwardTarget(e, removePlaceholder)}
+        onfocusout={(e) => forwardTarget(e, replacePlaceholder)}
     />
     {#if (clearHandler !== null)}
-            <button>
-                <img src={clearIcon} alt="clear input icon" class={"w-[100%]"}/>
-            </button>
+            <Button
+                onClick={clearHandler}
+                buttonClasses="min-w-[40px] min-h-[40px] w-[24px] h-[24px] mr-1 ml-1.5 p-2 rounded-lg grey-hover"
+            >
+                <img src={clearIcon} alt="clear input icon" class={"w-[100%] h-[100%]"}/>
+            </Button>
     {/if}
 </div>
