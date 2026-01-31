@@ -6,7 +6,8 @@
         placeholder, value, oninput, nameId, //input props
         divClasses='', inputProps={}, inputClasses='', //customization
         icon=null, iconAlt='', iconClasses="", //optional elements
-        clearHandler=null //optional elements
+        clearHandler=null, submitHandler=null, //optional elements
+        submitText="", submitButtonClasses="", submitTextClasses="" //optional elements
     } = $props();
 
     const removePlaceholder = (e: HTMLInputElement) => {e.placeholder = "";}
@@ -55,6 +56,14 @@
                 buttonClasses="min-w-[40px] min-h-[40px] w-[24px] h-[24px] mr-1 ml-1.5 p-2 rounded-lg grey-hover"
             >
                 <img src={clearIcon} alt="clear input icon" class={"w-[100%] h-[100%]"}/>
+            </Button>
+    {/if}
+    {#if (submitHandler !== null)}
+            <Button
+                onClick={submitHandler}
+                buttonClasses={`min-w-[70px] mr-1 p-2 rounded-lg blue ${submitButtonClasses}`}
+            >
+                <span class={submitTextClasses}>{submitText}</span>
             </Button>
     {/if}
 </div>

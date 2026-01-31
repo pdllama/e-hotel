@@ -1,8 +1,10 @@
 <script lang="ts">
+    import "./../util/buttonstyles.css"
     let {
         children,
         onClick=null,
-        buttonClasses=""
+        buttonClasses="",
+        totalContainerClasses="" // If we need a container around the button. optional
     } = $props();
 
     let button:HTMLButtonElement;
@@ -56,6 +58,12 @@
     }
     .grey-hover:hover {
         background-color: rgb(220,220,220);
+    }
+    .black-white-invert {
+        background-color: white;
+    }
+    .black-white-invert:hover {
+        filter: invert(100%);
     }
 </style>
 
