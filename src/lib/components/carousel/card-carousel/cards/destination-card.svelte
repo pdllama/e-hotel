@@ -5,21 +5,29 @@
     } = $props();
 
     let text:HTMLDivElement;
-    let image:HTMLDivElement;
+    // svelte-ignore non_reactive_update
+    let image:HTMLImageElement;
+    let imgDarken:HTMLDivElement;
     // svelte-ignore state_referenced_locally
     const conditionalBg = imgLink == "" ? "bg-stone-300" : ""
 
     function cardOnHover() {
         //produces events for the text and for the image
-        image.classList.add("zoom-in-event");
+        if (image != undefined) {
+            image.classList.remove("zoom-out-event");
+            image.classList.add("zoom-in-event");
+        }
         text.classList.add("bg-stone-200");
+        imgDarken.classList.add("opacity-20");
     }
     function cardOnHoverOut() {
-        image.classList.add("zoom-out-event");
+        if (image != undefined) {
+            image.classList.remove("zoom-in-event");
+            image.classList.add("zoom-out-event");
+        }
         text.classList.remove("bg-stone-200");
+        imgDarken.classList.remove("opacity-20");
     }
-
-    
 
 </script>
 <style>
@@ -27,19 +35,19 @@
         box-shadow: 0px 5px 5px -1px rgb(60, 60, 60);
     }
     @keyframes zoom-in {
-        0% {zoom: 100%;}
-        100% {zoom: 125%;}
+        0% {scale: 100%;}
+        100% {scale: 120% 120%;}
     }
     @keyframes zoom-out {
-         0% {zoom: 125%;}
-        100% {zoom: 100%;}
+         0% {scale: 120% 120%;}
+        100% {scale: 100%;}
     }
 
     .zoom-in-event {
-        animation: zoom-in 1.5s ease-out forwards;
+        animation: zoom-in 0.5s ease-out forwards;
     }
     .zoom-out-event {
-        animation: zoom-out 1.5s ease-out;
+        animation: zoom-out 0.5s ease-out forwards;
     }
     
 </style>
@@ -51,15 +59,16 @@
     class="
         w-[250px] h-[90%] min-w-[250px]
         flex flex-col justify-start align-center
-        shadow rounded-2xl mx-[10px] hover:cursor-pointer
+        shadow rounded-2xl hover:cursor-pointer
+        overflow-hidden
     "
 >
     <div 
-        bind:this={image}
-        class={`w-[100%] h-[70%] rounded-t-2xl flex justify-center items-center ${conditionalBg}`}
+        class={`w-[100%] h-[70%] rounded-t-2xl flex justify-center items-center overflow-hidden relative ${conditionalBg}`}
     >
+        <div bind:this={imgDarken} class="z-5 size-full rounded-t-2xl bg-black opacity-0 absolute"></div>
         {#if (imgLink != "")}
-            <img src={imgLink} alt={imgAlt}/>
+            <img bind:this={image} src={imgLink} alt={imgAlt} class="bg-cover rounded-t-2xl h-[100%] w-[100%] scale-100"/>
         {:else}
             <p class="text-sm text-stone-500 text-center italic">Image Unavailable</p>
         {/if}
@@ -67,7 +76,7 @@
     <div 
         bind:this={text}
         
-        class="w-[90%] h-[30%] rounded-2xl flex flex-col justify-center items-start m-3 p-2"
+        class="w-[97%] h-[30%] rounded-2xl flex flex-col justify-center items-start m-1 p-4"
     >
         <p class="text-xl color-black font-bold mb-1">{name}</p>
         <p class="text-sm color-black"><span class="font-bold text-md">{numHotels}</span> Hotels</p>

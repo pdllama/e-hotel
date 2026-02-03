@@ -15,6 +15,8 @@
     function search() {
         null
     }
+
+    //items={[{name: "Mexico City", numHotels: 634, avgPrice: 172}, {name: "random city", numHotels: 17, avgPrice: 87}]}
 </script>
 
 <div class='flex flex-col justify-start items-center home-main-container'>
@@ -54,6 +56,6 @@
     <h2 class="font-bold">Popular Destinations</h2>
     <CardCarousel
         type="destination"
-        items={[{name: "Mexico City", numHotels: 634, avgPrice: 172}, {name: "random city", numHotels: 17, avgPrice: 87}]}
+        items={cityHotelData}
     />
 </div>
