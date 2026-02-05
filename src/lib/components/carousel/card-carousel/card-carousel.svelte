@@ -13,7 +13,8 @@
     //type = destination, 
     const {
         items=[], type, // required props
-        containerClasses="", cardMargin=20 //optional
+        containerClasses="", cardMargin=20, //optional
+        shift_duration=0.5 //optional, shift duration in seconds
     } = $props();
 
     // svelte-ignore state_referenced_locally
@@ -22,13 +23,12 @@
     const cardWidth = type == "destination" ? 250 : 0;
 
     let outer_w = $state(-1);
-    let boundaries = $state({left: 0, right: 0, keyframe: ""}) // right gets updated on mount
-    let render_arrows = $state({left: false, right: false})
+    let boundaries = $state({left: 0, right: 0}) // right gets updated on mount
     // svelte-ignore state_referenced_locally
     let calculatedWidth = $state(items.length == 0 ? 0 : cardWidth*items.length + (cardMargin*(items.length-1)))
 
-
     let inner:HTMLDivElement;
+    let move_timer:any;
 
     
 
@@ -37,31 +37,44 @@
     const styleWidth = items.length == 0 ? "100%" : `${calculatedWidth}px`
 
     onMount(() => {
-        const carouselExceedsContainer = calculatedWidth > outer_w;
-        if (carouselExceedsContainer) {render_arrows.right = true}
         boundaries.right = outer_w;
     })
 
-    function setRightState() {
-        inner.classList.remove("start-animation");
+    function setRightState() {  
         boundaries = move_right(
             calculatedWidth, boundaries.left, boundaries.right,
             parseInt(inner.style.left), cardWidth, cardMargin, boxShadowExtend
         )
-        inner.classList.add("start-animation");
+        const base_num = boundaries.right == calculatedWidth ? boundaries.left+boxShadowExtend : boundaries.left-boxShadowExtend
+        inner.style.left = `${-1*(base_num)}px`;
     }
-    function setLeftState(value:boolean) {render_arrows.left = value;}
+    function setLeftState() {  
+        boundaries = move_left(
+            calculatedWidth, boundaries.left, boundaries.right,
+            parseInt(inner.style.left), cardWidth, cardMargin, boxShadowExtend
+        )
+        inner.style.left = `${-1*(boundaries.left-boxShadowExtend)}px`;
+    }
 
     $effect(() => {
+        const prev_window_width = boundaries.right-boundaries.left;
+        const curr_window_width = outer_w;
+        const difference = curr_window_width-prev_window_width
+        const move_from_left = boundaries.right == calculatedWidth && difference > 0
+        if (move_from_left) {
+            boundaries.left = boundaries.left-(difference)
+        } else {
+            boundaries.right = boundaries.right+(curr_window_width-prev_window_width);
+        }
         
-        const rightContentMissing = calculatedWidth > outer_w && inner.style.right != `${boxShadowExtend}px`;
-        if (rightContentMissing) {render_arrows.right = true;}
-        else {render_arrows.right = false;}
-        const leftContentMissing = inner.style.left != `${boxShadowExtend}px`;
-        if (leftContentMissing) {render_arrows.left = true;}
-        else {render_arrows.left = false;}
+        if (move_from_left) {
+            clearTimeout(move_timer);
+            move_timer = setTimeout(() => {
+                inner.style.left = `${-1*(boundaries.left)-difference}px`;
+            }, 500)
+        }
+        
     })
-
 
 </script>
 
@@ -74,7 +87,6 @@
         filter: invert(100);
     }
 </style>
-{@html `<style>${boundaries.keyframe}</style>`}
 <div 
     bind:clientWidth={outer_w} 
     class={`
@@ -85,7 +97,7 @@
     `}
 >
     
-    {#if (render_arrows.left)}
+    {#if (boundaries.left > 0)}
         <div class="absolute left-[0%] top-[calc(50%-16px)] z-20">
             <Button 
                 buttonClasses="
@@ -93,7 +105,7 @@
                     w-[32px] h-[32px] rounded-md black-white-invert
                     
                 "
-                onClick={() => {}}
+                onClick={setLeftState}
             >
                 <img src={ArrowIcon} width=20 height=20 alt="arrow left" class="rotate-180"/>
             </Button>
@@ -109,6 +121,7 @@
             width: ${styleWidth}; 
             gap: ${cardMargin}px; 
             left: ${boxShadowExtend}px;
+            transition: left ${shift_duration}s;
         `}
     >
         {#each items as item}
@@ -116,6 +129,7 @@
                 name={item.name}
                 numHotels={item.numHotels}
                 avgPrice={item.avgPrice}
+                imgLink={item.imgLink}
             />
         {:else}
         <div class="flex size-full justify-center items-center">
@@ -123,7 +137,7 @@
         </div>
         {/each}
     </div>
-    {#if (render_arrows.right)}
+    {#if (boundaries.right < calculatedWidth)}
         <div class="absolute right-[0%] top-[calc(50%-16px)] z-20">
             <Button 
                 buttonClasses="

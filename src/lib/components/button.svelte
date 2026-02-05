@@ -37,7 +37,11 @@
         onClick();
 
         setTimeout(() => {
-            span.classList.remove("active")
+            if (span !== null) { 
+                // If covers cases where clicking the button may transition
+                // into a state where the button is not actually rendered anymore.
+                span.classList.remove("active")
+            }
         }, 600)
     }
 </script>
