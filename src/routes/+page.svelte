@@ -4,6 +4,7 @@
     import searchIcon from "$lib/assets/search-icon.png";
     import CardCarousel from "$lib/components/carousel/card-carousel/card-carousel.svelte";
     import { cityHotelData } from "$lib/util/testdata";
+    import { enter_search } from "./search/searchlogic";
 
     let countrySearch = $state("");
     function on_search(e: HTMLInputElement) {
@@ -11,9 +12,6 @@
     } 
     function clear_input() {
         countrySearch = "";
-    }
-    function search() {
-        null
     }
 
     //items={[{name: "Mexico City", numHotels: 634, avgPrice: 172}, {name: "random city", numHotels: 17, avgPrice: 87}]}
@@ -35,7 +33,7 @@
             icon={searchIcon}
             iconAlt="search icon"
             clearHandler={clear_input}
-            submitHandler={search}
+            submitHandler={enter_search}
             submitText="SEARCH"
         />
         <!-- <form action="/">
