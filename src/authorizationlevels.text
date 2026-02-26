@@ -1,0 +1,56 @@
+Make a new relationship table "organizes"
+which points from Employee to Hotel Chain.
+
+This set will have an attribute "clearance"
+which will determine their authorization level
+in the hotel organization.
+
+1. Employee level
+    Operates only within their own hotel
+    a. Has access to view:
+        - Bookings and Rentals
+        - Rooms and Room problems
+        - Basic information on other employees
+        only within their own hotel
+    b. Can create:
+        - rental records and archives
+        - room problems
+    c. Can modify:
+        - rental records and archives
+        - room problems
+
+2. Manager level
+    Operates only within their own hotel
+    Has previous level and also:
+    a. Has access to view:
+        - All hotel photos
+        - All information on other employees
+    b. Can create:
+        - Rooms
+        - Hotel photo
+        - Employee
+    c. Can modify:
+        - Rooms
+        - Hotel
+        - Employee
+    d. Can delete:
+        - Rooms
+        - Hotel photo
+        - Employee
+
+3. Executive level
+    Operates on the hotel chain level
+    Has previous level and also:
+    a. Has access to view:
+        - All hotel information
+        - All employees across all hotels
+    b. Can create:
+        - hotels
+    c. Can modify:
+        - hotel chain
+    d. Can delete:
+        - hotels
+
+4. Site administrator level
+    Operates across all hotel chains, but doesn't necessarily own it.
+    Does not have access to previous level, but can create and delete hotel chains and executive level employees

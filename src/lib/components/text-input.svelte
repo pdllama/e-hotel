@@ -7,7 +7,8 @@
         divClasses='', inputProps={}, inputClasses='', //customization
         icon=null, iconAlt='', iconClasses="", //optional elements
         clearHandler=null, submitHandler=null, //optional elements
-        submitText="", submitButtonClasses="", submitTextClasses="" //optional elements
+        submitText="", submitButtonClasses="", submitTextClasses="", //optional elements
+        label="", labelClasses="" //optional
     } = $props();
 
     const removePlaceholder = (e: HTMLInputElement) => {e.placeholder = "";}
@@ -32,6 +33,9 @@
 <div class={`flex justify-center items-center p-1 shadow ${divClasses}`}>
     {#if (icon !== null)}
         <img alt={iconAlt} src={icon} width="30px" height="30px" class={`p-1 mx-1 ${iconClasses}`}/>
+    {/if}
+    {#if (label !== "")}
+        <label class={labelClasses} for={nameId}>{label}</label>
     {/if}
     <input 
         type="text"
