@@ -8,7 +8,7 @@
         icon=null, iconAlt='', iconClasses="", //optional elements
         clearHandler=null, submitHandler=null, //optional elements
         submitText="", submitButtonClasses="", submitTextClasses="", //optional elements
-        label="", labelClasses="" //optional
+        label="", labelClasses="", showBorder=false, borderColor="black" //optional
     } = $props();
 
     const removePlaceholder = (e: HTMLInputElement) => {e.placeholder = "";}
@@ -18,10 +18,6 @@
 <style>
     .shadow {
         box-shadow: 0px 0px 40px white;
-    }
-    .conditional-border {
-        border: 1px solid white;
-        border-radius: 8px;
     }
     .conditional-border:focus {
         border: 1px solid oklch(0.546 0.245 262.881);
@@ -50,6 +46,7 @@
             rounded-lg conditional-border font-bold
             ${inputClasses}
         `}
+        style={`border: 1px solid ${showBorder? borderColor : "white"}; border-radius: 8px;`}
         {...inputProps}
         onfocus={(e) => forwardTarget(e, removePlaceholder)}
         onfocusout={(e) => forwardTarget(e, replacePlaceholder)}
