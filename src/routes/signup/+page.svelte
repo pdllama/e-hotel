@@ -14,6 +14,11 @@
     let nameInit = {first_name: "", middle_name: "", last_name: ""}
     let form_data = $state({SSN: "", address: addressInit, name: nameInit})
 
+    $effect(() => {
+        console.log("UPDATED")
+    })
+
+    // $inspect(form_data.address.country)
 </script>
 <div class='flex flex-col justify-start items-center gap-2'>
     <h1>Sign up</h1>
@@ -22,7 +27,7 @@
         label="SSN"
         value={form_data.SSN}
         nameId="SSN"
-        oninput={(e:Event) => forwardTarget(e, stateChanges.handleSSNChange)}
+        oninput={(e:HTMLInputElement) => stateChanges.handleSSNChange(e.value, form_data)}
         divClasses="relative"
         inputClasses="border border-black border-solid"
         labelClasses="font-bold mr-2"
@@ -30,10 +35,9 @@
         borderColor="grey"
     />
     <AddressInput 
-        addressValues={form_data.address}
-        bind:fullFormData={form_data}
-        handleStreetChange={(e:Event) => forwardTarget(e, stateChanges.handleStreetChange)}
-        handleAddressChange={(e:Event) => forwardTarget(e, stateChanges.handleAddressChange)}
+        bind:addressValues={form_data.address}
+        handleStreetChange={(value:string, type:any) => stateChanges.handleStreetChange(value, form_data, type)}
+        handleAddressChange={(value:string, type:any) => form_data = stateChanges.handleAddressChange(value, form_data, type)}
     />
 </div>
 

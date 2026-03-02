@@ -3,7 +3,7 @@
     import forwardTarget from "$lib/util/forwardtarget";
     import Button from "./button.svelte";
     let { 
-        placeholder, value, oninput, nameId, //input props
+        placeholder, value, oninput=null, nameId, //input props. no oninput = unhandled input
         divClasses='', inputProps={}, inputClasses='', //customization
         icon=null, iconAlt='', iconClasses="", //optional elements
         clearHandler=null, submitHandler=null, //optional elements
@@ -39,7 +39,10 @@
         name={nameId}
         {placeholder}
         {value}
-        {oninput}
+        oninput={(e:Event) => {
+            e.preventDefault()
+            forwardTarget(e, oninput)
+        }}
         class={`
             w-[100%] 
             h-[100%] 

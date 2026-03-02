@@ -40,6 +40,7 @@ const stateChanges = {
     handleStreetChange: (value:string, state:SignupFormData, field:StreetField) => {
         if (field !== StreetField.name) {
             if (value != "" && isNaN(parseInt(value))) {
+                console.log("HIT HERE")
                 return
             }
         }
@@ -52,9 +53,9 @@ const stateChanges = {
         if (field == AddressField.postal_code) {
             // ... do special regex checking for postal code here
         }
-       
-        state.address[field] = value
 
+        // state.address[field] = value
+        return {...state, address: {...state.address, [field]: value}}
     }
 }
 
