@@ -1,25 +1,24 @@
 <script lang="ts">
     import forwardTarget from "$lib/util/forwardtarget";
     let {
-        listOfOptions, selected=$bindable(), changeSelected,
+        listOfOptions, selected=$bindable(""), changeSelected,
         name,
         divClasses="", label="", labelClasses="", //optional
-        disabled=false //optional
+        disabled=false//optional
     } = $props()
 
-    // svelte-ignore state_referenced_locally
-    const disabledClasses = disabled ? "opacity-50 pointer-events-none" : ""
 </script>
 
 <div class={`flex justify-center items-center p-1 shadow ${divClasses}`}>
 {#if label !== ""}
-    <label for={name} class={`${labelClasses} ${disabledClasses}`}>{label}</label>
+    <label for={name} class={`${labelClasses} ${disabled ? "opacity-50 pointer-events-none" : ""}`}>{label}</label>
 {/if}
 <select
     name={name}
     bind:value={selected}
     onchange={(e:Event) => {forwardTarget(e, changeSelected)}}
-    class={disabledClasses}
+    class={disabled ? `opacity-50 pointer-events-none w-[100%]` : "w-[100%]"}
+    disabled={disabled}
 >
     {#each listOfOptions as option}
         <option 

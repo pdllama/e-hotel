@@ -2,7 +2,7 @@
     import "./../util/buttonstyles.css"
     let {
         children,
-        onClick=null,
+        onClick=() => {},
         buttonClasses="",
         totalContainerClasses="" // If we need a container around the button. optional
     } = $props();

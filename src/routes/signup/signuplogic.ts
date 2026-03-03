@@ -34,19 +34,19 @@ enum StreetField {
 const stateChanges = {
     handleSSNChange: (value:string, state:SignupFormData) => {return {...state, SSN: value}},
     handleNameChange: (value:string, state:SignupFormData, field:NameField) => {
-       state.name[field] = value
+       return {...state, name: {...state.name, [field]:value}}
     },
 
     handleStreetChange: (value:string, state:SignupFormData, field:StreetField) => {
         if (field !== StreetField.name) {
             if (value != "" && isNaN(parseInt(value))) {
-                console.log("HIT HERE")
-                return
+                return state
             }
         }
 
         // const newObj = type == "number" ? {number: value} : type == "apt_number" ? {apt_number: value} : {name: value}
-        state.address.street[field] = value
+        // state.address.street[field] = value
+        return {...state, address: {...state.address, street: {...state.address.street, [field]: value}}}
     },
 
     handleAddressChange: (value:string, state:SignupFormData, field:AddressField) => {
@@ -54,8 +54,11 @@ const stateChanges = {
             // ... do special regex checking for postal code here
         }
 
+        // We want to reset state/city if country is changed
+        const otherFields = field == AddressField.country ? {state: "", city: ""} : {}
+
         // state.address[field] = value
-        return {...state, address: {...state.address, [field]: value}}
+        return {...state, address: {...state.address, [field]: value, ...otherFields}}
     }
 }
 

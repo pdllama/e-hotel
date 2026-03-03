@@ -8,7 +8,8 @@
         icon=null, iconAlt='', iconClasses="", //optional elements
         clearHandler=null, submitHandler=null, //optional elements
         submitText="", submitButtonClasses="", submitTextClasses="", //optional elements
-        label="", labelClasses="", showBorder=false, borderColor="black" //optional
+        label="", labelClasses="", showBorder=false, borderColor="black", //optional
+        numeric=false, charLimit=null //optional
     } = $props();
 
     const removePlaceholder = (e: HTMLInputElement) => {e.placeholder = "";}
@@ -40,8 +41,17 @@
         {placeholder}
         {value}
         oninput={(e:Event) => {
-            e.preventDefault()
             forwardTarget(e, oninput)
+        }}
+        onkeydown={(e:KeyboardEvent) => {
+            if (numeric && e.key.length == 1 && isNaN(parseInt(e.key))) {
+                // If numeric and they typed a non-number
+                e.preventDefault()
+            }
+            if (charLimit != null && value.length == charLimit && e.key != "Backspace") {
+                // If there's a char limit, they reached it, and they're not deleting a char
+                e.preventDefault()
+            }
         }}
         class={`
             w-[100%] 

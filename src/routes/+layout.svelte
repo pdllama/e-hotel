@@ -11,7 +11,7 @@
 <div class="flex flex-col justify-center items-center min-h-screen m-0">
 	<nav class="nav-container z-1">
 		<div class="logo-container flex justify-center items-center">
-			<p class="logo-text">DomiLux</p>
+			<a class="logo-text py-4 hover:opacity-50" href="/">DomiLux</a>
 		</div>
 		<div class="size-full flex justify-end items-center">
 			<Button buttonClasses="nav-item-container" onClick={() => {}}>

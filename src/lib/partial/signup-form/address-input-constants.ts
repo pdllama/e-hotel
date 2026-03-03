@@ -7,7 +7,9 @@ const getListOfStatesByCountry = (isoCode:string) => {
 }
 
 const getListOfCitiesByCountry = (isoCode:string) => {
-    return City.getCitiesOfCountry(isoCode)?.map(c => {return {name: c.name, value: c.name}})
+    const obj = City.getCitiesOfCountry(isoCode)
+    return obj ? obj.map(c => {return {name: c.name, value: c.name}}) : []
 }
+
 
 export {listOfCountries, getListOfStatesByCountry, getListOfCitiesByCountry}
