@@ -1,5 +1,5 @@
 import {uuid, pgTable, pgEnum, date, integer} from "drizzle-orm/pg-core"
-import { archiveStatusStrArr, test } from "../../static/archive_status_types"
+import { archiveStatusStrArr } from "../../static/archive_status_types"
 
 // const archiveStatus = ['booked', 'renting', 'completed', 'cancelled'] as const;
 
