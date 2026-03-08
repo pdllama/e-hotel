@@ -23,9 +23,12 @@
 //     NOISE = "noise", // room has a lot of noise and inadequate sound proofing
 // }
 const archiveStatusStrArr = ["booked", "renting", "completed", "cancelled"] as const;
+
 const problemStatusStrArr = ["ongoing", "resolved"] as const;
 const problemTypeStrArr = ["electronic", "infrastructure", "infestation", "missing_amenity", "unclean", "noise"] as const;
 
+const roomViewTypes = ['mountain', 'sea'] as const
+
 export {
-    archiveStatusStrArr, problemStatusStrArr, problemTypeStrArr
+    archiveStatusStrArr, problemStatusStrArr, problemTypeStrArr, roomViewTypes
 }
