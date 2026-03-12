@@ -16,14 +16,14 @@ export const hotel_phone_number = pgTable("hotel_phone_number", {
 ])
 
 export const chain_email = pgTable("chain_email", {
-    chain_name: uuid().references(() => hotel_chain.chain_name),
+    chain_name: varchar().references(() => hotel_chain.chain_name),
     e_mail: varchar()
 }, (table) => [
     primaryKey({columns: [table.chain_name, table.e_mail]})
 ])
 
 export const chain_phone_number = pgTable("chain_phone_number", {
-    chain_name: uuid().references(() => hotel_chain.chain_name),
+    chain_name: varchar().references(() => hotel_chain.chain_name),
     phone_number: varchar()
 }, (table) => [
     primaryKey({columns: [table.chain_name, table.phone_number]})

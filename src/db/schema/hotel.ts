@@ -1,11 +1,13 @@
-import {uuid, pgTable, pgEnum, timestamp, integer, varchar, boolean, text, primaryKey} from "drizzle-orm/pg-core"
+import {uuid, pgTable, pgEnum, timestamp, integer, varchar, boolean, text, primaryKey, foreignKey} from "drizzle-orm/pg-core"
 import { address } from "./address"
 import { employee } from "./person"
 import { roomViewTypes, problemStatusStrArr, problemTypeStrArr } from "../../static/db_enum_types"
 
-const viewsEnum = pgEnum("room_views", roomViewTypes)
-const problemStatusEnum = pgEnum("problem_status", problemStatusStrArr)
-const problemTypeEnum = pgEnum("problem_type", problemTypeStrArr)
+// TO-DO: NO ORMs. Raw SQL queries
+
+export const viewsEnum = pgEnum("room_views", roomViewTypes)
+export const problemStatusEnum = pgEnum("problem_status", problemStatusStrArr)
+export const problemTypeEnum = pgEnum("problem_type", problemTypeStrArr)
 
 
 export const hotel_chain = pgTable('hotel_chain', {
@@ -32,14 +34,19 @@ export const room = pgTable('room', {
 
 export const room_problem = pgTable('room_problem', {
     problem_id: uuid().primaryKey(),
-    address_id: uuid().references(() => room.address_id),
-    room_number: integer().references(() => room.room_number),
+    address_id: uuid(),
+    room_number: integer(),
     type: problemTypeEnum(),
     description: text(),
     status: problemStatusEnum(),
     log_date: timestamp(),
     resolved_date: timestamp()
-})
+}, (table) => [
+    foreignKey({
+        columns: [table.address_id, table.room_number],
+        foreignColumns: [room.address_id, room.room_number]
+    })
+])
 
 export const room_amenity = pgTable("amenity", {
     amenity_name: varchar().primaryKey(),
@@ -47,9 +54,13 @@ export const room_amenity = pgTable("amenity", {
 })
 
 export const room_has_amenity = pgTable("room_has_amenity", {
-    address_id: uuid().references(() => room.address_id),
-    room_number: integer().references(() => room.room_number),
+    address_id: uuid(),
+    room_number: integer(),
     amenity_name: varchar().references(() => room_amenity.amenity_name)
 }, (table) => [
-    primaryKey({columns: [table.address_id, table.room_number, table.amenity_name]})
+    primaryKey({columns: [table.address_id, table.room_number, table.amenity_name]}),
+    foreignKey({
+        columns: [table.address_id, table.room_number],
+        foreignColumns: [room.address_id, room.room_number]
+    })
 ])

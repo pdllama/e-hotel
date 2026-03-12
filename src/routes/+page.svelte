@@ -5,6 +5,7 @@
     import CardCarousel from "$lib/components/carousel/card-carousel/card-carousel.svelte";
     import { cityHotelData } from "$lib/util/testdata";
     import { enter_search } from "./search/searchlogic";
+    import { thing } from "../db/seeding/address-seeding";
 
     let countrySearch = $state("");
     function on_search(e: HTMLInputElement) {

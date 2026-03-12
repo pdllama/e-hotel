@@ -9,22 +9,22 @@ export const photo = pgTable("photo", {
 })
 
 export const hotel_photo = pgTable("hotel_photo", {
-    url: uuid().primaryKey().references(() => photo.url),
+    url: varchar().primaryKey().references(() => photo.url),
     address_id: uuid().references(() => hotel.address_id)
 })
 
 export const review_photo = pgTable("review_table", {
-    url: uuid().primaryKey().references(() => photo.url),
+    url: varchar().primaryKey().references(() => photo.url),
     review_id: uuid().references(() => review.review_id)
 })
 
 export const room_problem_photo = pgTable("room_problem_photo", {
-    url: uuid().primaryKey().references(() => photo.url),
+    url: varchar().primaryKey().references(() => photo.url),
     problem_id: uuid().references(() => room_problem.problem_id)
 })
 
 export const profile_picture = pgTable("profile_picture", {
-    url: uuid().primaryKey().references(() => photo.url),
-    SSN: uuid().references(() => person.SSN)
+    url: varchar().primaryKey().references(() => photo.url),
+    SSN: integer().references(() => person.SSN)
 })
 

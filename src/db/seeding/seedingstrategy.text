@@ -1,0 +1,46 @@
+The amount of allowed countries are as listed in allowed-countries.
+
+We will select the capital city of each country as a potential 
+city as well as 3-5 of the most popular tourist destinations of each
+country as potential cities. 
+
+The following countries are excepted and will have even more potential cities (12-15):
+    1. Canada
+    2. USA
+
+We are seeding with:
+    - 50 countries
+    - 3-5 cities per country, + 7-12 in Canada, + 7-12 in USA
+    - 3-5 hotels per city
+
+So we can expect anywhere from:
+    lower-bound: 50x3+
+
+Maximum number of rooms in the table: 225,000
+
+The following requirements for seeding should be followed:
+    1. At least 3 hotels per city, max 5
+    2. At least one hotel per chain
+    3. Anywhere from 10-150 rooms per hotel, with a higher likelihood of being in the middle/lower range
+    
+    4. At least 10 employees per hotel, scaling with the number of rooms.
+        You can use the following scaling algorithm:
+            1. Every 10 additional rooms, you add 5 more employees (janitors, cooks, etc)
+            2. every 20 additional rooms, you add another assistant manager
+        Results can vary
+
+    5. Up to 5 reviews per hotel
+        Star ratings should be within each other with some outliers.
+        Can decide beforehand if the hotel is meant to center around 2 star, 3 star, 5 star, etc and use probability functions to generate the star ratings
+        Use AI to generate a bunch of review contents (~5,000 per star level)
+        Some reviews will just be no content (null), just the star level
+        If a review does have content, there will be a ~0.5% chance that there will be a photo attached. 
+            This photo is attached to certain review content
+
+    6. Bookings for 10% of rooms per hotel, Rentals for 
+
+    7. At least 30 hotel chains
+    8. Room problems on 1% of rooms, with 5% of them having photos.
+    9. ~ 2000 Customers
+    10. 
+

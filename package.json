@@ -44,6 +44,7 @@
 	},
 	"dependencies": {
 		"country-state-city": "^3.2.1",
-		"drizzle-orm": "^0.45.1"
+		"drizzle-orm": "^0.45.1",
+		"pg": "^8.20.0"
 	}
 }

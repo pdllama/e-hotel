@@ -29,6 +29,17 @@ const problemTypeStrArr = ["electronic", "infrastructure", "infestation", "missi
 
 const roomViewTypes = ['mountain', 'sea'] as const
 
+const employeeRoles = [
+    'General Manager', 'Assistant Manager', 'Sales and Marketing Manager', 'Human Resources Manager',
+    'Receptionist', 'Concierge', 'Bellhop', 'Night Auditor', 'Doorkeeper',
+    'Executive Housekeeper', 'Room Attendant', 'Houseman', 'Maintenance Technician',
+    'Restaurant Manager', 'Cook', 'Server', 'Bartender', 
+    'Security Officer'
+] as const
+
 export {
-    archiveStatusStrArr, problemStatusStrArr, problemTypeStrArr, roomViewTypes
+    archiveStatusStrArr, 
+    problemStatusStrArr, problemTypeStrArr, 
+    roomViewTypes,
+    employeeRoles
 }

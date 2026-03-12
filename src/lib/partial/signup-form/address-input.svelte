@@ -2,7 +2,7 @@
     import Select from "$lib/components/select/select.svelte";
     import TextInput from "$lib/components/text-input.svelte";
     import { AddressField, NameField, StreetField } from "../../../routes/signup/signuplogic";
-    import {listOfCountries, getListOfStatesByCountry, getListOfCitiesByCountry} from "./address-input-constants"
+    import {listOfCountries, getListOfStatesByCountry, getListOfCitiesByCountry} from "./../../../static/address_inputs.ts"
 
     let {
         addressValues=$bindable(),
