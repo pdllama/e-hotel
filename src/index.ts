@@ -2,13 +2,14 @@
 
 import "dotenv/config"
 import {drizzle} from 'drizzle-orm/node-postgres';
+import { migrate } from "drizzle-orm/node-postgres/migrator";
+import { Pool } from "pg";
 
-const db = drizzle({
-    connection: {
-        connectionString: process.env.DATABASE_URL!,
-        ssl: true
-    }
-});
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+const db = drizzle(pool);
+
+await migrate(db, {migrationsFolder: "./drizzle"});
 
 // async function test() {
 //     await db.
