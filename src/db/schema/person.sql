@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS customer (
 CREATE TABLE IF NOT EXISTS works_in (
     SSN         INTEGER     PRIMARY KEY,
     address_id  UUID,
-    role        VARCHAR,
+    role        employee_role,
     FOREIGN KEY (SSN) REFERENCES employee(SSN),
     FOREIGN KEY (address_id) REFERENCES address(address_id)
 );

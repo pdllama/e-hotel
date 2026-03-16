@@ -37,9 +37,13 @@ const employeeRoles = [
     'Security Officer'
 ] as const
 
+const allTypes = [archiveStatusStrArr, problemStatusStrArr, problemTypeStrArr, roomViewTypes, employeeRoles];
+const allTypeNames = ["archive_status", "problem_status", "problem_type", "room_view", "employee_role"];
+
 export {
     archiveStatusStrArr, 
     problemStatusStrArr, problemTypeStrArr, 
     roomViewTypes,
-    employeeRoles
+    employeeRoles,
+    allTypes, allTypeNames
 }

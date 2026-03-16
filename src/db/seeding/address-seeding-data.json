@@ -1,0 +1,394 @@
+{
+  "AL": {
+    "name": "Albania",
+    "language": "IT",
+    "street_format": "p n",
+    "postal_format": "dddd",
+    "cities": ["Tirana", "Ksamil", "Himarë"],
+    "states": ["Tirana County", "Vlorë County", "Vlorë County"]
+  },
+  "DZ": {
+    "name": "Algeria",
+    "language": "FR",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Algiers", "Constantine"],
+    "states": ["Algiers Province", "Constantine Province"]
+  },
+  "AR": {
+    "name": "Argentina",
+    "language": "ES",
+    "street_format": "p n",
+    "postal_format": "lddddlll",
+    "cities": ["Buenos Aires"],
+    "states": ["Buenos Aires Province"]
+  },
+  "AU": {
+    "name": "Australia",
+    "language": "EN",
+    "street_format": "n p",
+    "postal_format": "dddd",
+    "cities": ["Canberra", "Sydney", "Cairns"],
+    "states": ["Australian Capital Territory", "New South Wales", "Queensland"]
+  },
+  "BS": {
+    "name": "The Bahamas",
+    "language": "EN",
+    "street_format": "n p",
+    "postal_format": "",
+    "cities": ["Nassau"],
+    "states": ["New Providence"]
+  },
+  "BE": {
+    "name": "Belgium",
+    "language": "FR",
+    "street_format": "p n",
+    "postal_format": "dddd",
+    "cities": ["Brussels", "Brugge"],
+    "states": ["Brussels Capital Region", "West Flanders Province"]
+  },
+  "BR": {
+    "name": "Brazil",
+    "language": "PT",
+    "street_format": "p n",
+    "postal_format": "ddddd ddd",
+    "cities": ["Rio de Janeiro", "São Paulo", "Salvador"],
+    "states": ["Rio de Janeiro State", "São Paulo State", "Bahia State"]
+  },
+  "CA": {
+    "name": "Canada",
+    "language": "EN",
+    "street_format": "n p",
+    "postal_format": "ldl dld",
+    "cities": ["Ottawa", "Toronto", "Vancouver", "Victoria", "Québec City", "Calgary", "Niagara Falls", "Banff", "Halifax", "St. John's"],
+    "states": ["Ontario", "Ontario", "British Columbia", "British Columbia", "Québec", "Alberta", "Ontario", "Alberta", "Nova Scotia", "Newfoundland and Labrador"]
+  },
+  "CL": {
+    "name": "Chile",
+    "language": "ES",
+    "street_format": "p n",
+    "postal_format": "ddddddd",
+    "cities": ["Santiago"],
+    "states": ["Santiago Metropolitan Region"]
+  },
+  "CN": {
+    "name": "China",
+    "language": "EN",
+    "street_format": "n p",
+    "postal_format": "dddddd",
+    "cities": ["Beijing", "Shanghai"],
+    "states": ["Beijing Municipality", "Shanghai Municipality"]
+  },
+  "CR": {
+    "name": "Costa Rica",
+    "language": "ES",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["San José", "Liberia"],
+    "states": ["San José Province", "Guanacaste Province"]
+  },
+  "DK": {
+    "name": "Denmark",
+    "language": "DE",
+    "street_format": "n p",
+    "postal_format": "dddd",
+    "cities": ["Copenhagen", "Aarhus"],
+    "states": ["Capital Region", "Central Denmark Region"]
+  },
+  "EG": {
+    "name": "Egypt",
+    "language": "AR",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Cairo", "Giza"],
+    "states": ["Cairo Governorate", "Giza Governorate"]
+  },
+  "FI": {
+    "name": "Finland",
+    "language": "FI",
+    "street_format": "n p",
+    "postal_format": "ddddd",
+    "cities": ["Helsinki", "Rovaniemi"],
+    "states": ["Uusimaa Region", "Lapland Region"]
+  },
+  "FR": {
+    "name": "France",
+    "language": "FR",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Paris", "Nice"],
+    "states": ["Île-de-France", "Provence-Alpes-Côte d'Azur"]
+  },
+  "DE": {
+    "name": "Germany",
+    "language": "DE",
+    "street_format": "n p",
+    "postal_format": "ddddd",
+    "cities": ["Berlin", "Munich", "Hamburg"],
+    "states": ["Berlin State", "Bavaria State", "Hamburg State"]
+  },
+  "GR": {
+    "name": "Greece",
+    "language": "IT",
+    "street_format": "p n",
+    "postal_format": "ddd dd",
+    "cities": ["Athens"],
+    "states": ["Attica Region"]
+  },
+  "GL": {
+    "name": "Greenland",
+    "language": "DA",
+    "street_format": "n p",
+    "postal_format": "dddd",
+    "cities": ["Nuuk", "Ilulissat"],
+    "states": ["Kommuneqarfik Sermersooq", "Qeqertalik"]
+  },
+  "HT": {
+    "name": "Haiti",
+    "language": "FR",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Port-au-Prince", "Jacmel"],
+    "states": ["Ouest Department", "Sud-Est Department"]
+  },
+  "IN": {
+    "name": "India",
+    "language": "HI",
+    "street_format": "n p",
+    "postal_format": "dddddd",
+    "cities": ["New Delhi", "Mumbai"],
+    "states": ["Delhi Territory", "Maharashtra State"]
+  },
+  "ID": {
+    "name": "Indonesia",
+    "language": "ID",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Jakarta", "Bali"],
+    "states": ["Jakarta Province", "Bali Province"]
+  },
+  "IT": {
+    "name": "Italy",
+    "language": "IT",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Rome", "Florence", "Venice"],
+    "states": ["Lazio Region", "Tuscany Region", "Veneto Region"]
+  },
+  "JM": {
+    "name": "Jamaica",
+    "language": "EN",
+    "street_format": "n p",
+    "postal_format": "",
+    "cities": ["Kingston", "Montego Bay"],
+    "states": ["Kingston Parish", "Saint James Parish"]
+  },
+  "JP": {
+    "name": "Japan",
+    "language": "JP",
+    "street_format": "n-p",
+    "postal_format": "ddd dddd",
+    "cities": ["Tokyo", "Kyoto", "Osaka"],
+    "states": ["Tokyo Metropolis", "Kyoto Prefecture", "Osaka Prefecture"]
+  },
+  "KR": {
+    "name": "South Korea",
+    "language": "JP",
+    "street_format": "n-p",
+    "postal_format": "ddddd",
+    "cities": ["Seoul", "Busan"],
+    "states": ["Seoul Capital Area", "Busan Metropolitan City"]
+  },
+  "LU": {
+    "name": "Luxembourg",
+    "language": "FR",
+    "street_format": "p n",
+    "postal_format": "dddd",
+    "cities": ["Luxembourg"],
+    "states": ["Luxembourg District"]
+  },
+  "MY": {
+    "name": "Malaysia",
+    "language": "MS",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Kuala Lumpur", "George Town"],
+    "states": ["Federal Territory of Kuala Lumpur", "Penang State"]
+  },
+  "MX": {
+    "name": "Mexico",
+    "language": "ES",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Mexico City", "Cancún"],
+    "states": ["Mexico City (Federal entity)", "Quintana Roo State"]
+  },
+  "MA": {
+    "name": "Morocco",
+    "language": "AR",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Rabat", "Marrakech", "Casablanca"],
+    "states": ["Rabat-Salé-Kénitra Region", "Marrakesh-Safi Region", "Casablanca-Settat Region"]
+  },
+  "NL": {
+    "name": "Netherlands",
+    "language": "NL",
+    "street_format": "n p",
+    "postal_format": "dddd ll",
+    "cities": ["Amsterdam", "Rotterdam"],
+    "states": ["North Holland Province", "South Holland Province"]
+  },
+  "NZ": {
+    "name": "New Zealand",
+    "language": "EN",
+    "street_format": "n p",
+    "postal_format": "dddd",
+    "cities": ["Wellington", "Auckland", "Queenstown"],
+    "states": ["Wellington Region", "Auckland Region", "Otago Region"]
+  },
+  "NG": {
+    "name": "Nigeria",
+    "language": "EN",
+    "street_format": "n p",
+    "postal_format": "dddddd",
+    "cities": ["Abuja", "Lagos"],
+    "states": ["Federal Capital Territory", "Lagos State"]
+  },
+  "NO": {
+    "name": "Norway",
+    "language": "NO",
+    "street_format": "n p",
+    "postal_format": "dddd",
+    "cities": ["Oslo"],
+    "states": ["Oslo County"]
+  },
+  "PH": {
+    "name": "Philippines",
+    "language": "TL",
+    "street_format": "p n",
+    "postal_format": "dddd",
+    "cities": ["Manila", "Cebu"],
+    "states": ["Metro Manila", "Central Visayas Region"]
+  },
+  "PL": {
+    "name": "Poland",
+    "language": "PL",
+    "street_format": "p n",
+    "postal_format": "dd ddd",
+    "cities": ["Warsaw"],
+    "states": ["Masovian Voivodeship"]
+  },
+  "PT": {
+    "name": "Portugal",
+    "language": "PT",
+    "street_format": "p n",
+    "postal_format": "dddd ddd",
+    "cities": ["Lisbon", "Porto", "Faro"],
+    "states": ["Lisbon District", "Porto District", "Faro District"]
+  },
+  "PR": {
+    "name": "Puerto Rico",
+    "language": "ES",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["San Juan", "Ponce"],
+    "states": ["San Juan Municipality", "Ponce Municipality"]
+  },
+  "RO": {
+    "name": "Romania",
+    "language": "RO",
+    "street_format": "p n",
+    "postal_format": "dddddd",
+    "cities": ["Bucharest", "Brașov"],
+    "states": ["Bucharest Municipality", "Brașov County"]
+  },
+  "RU": {
+    "name": "Russia",
+    "language": "RU",
+    "street_format": "p n",
+    "postal_format": "dddddd",
+    "cities": ["Moscow", "St. Petersburg", "Sochi"],
+    "states": ["Moscow City", "Saint Petersburg City", "Krasnodar Krai"]
+  },
+  "SA": {
+    "name": "Saudi Arabia",
+    "language": "AR",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Riyadh"],
+    "states": ["Riyadh Province"]
+  },
+  "ZA": {
+    "name": "South Africa",
+    "language": "EN",
+    "street_format": "n p",
+    "postal_format": "dddd",
+    "cities": ["Pretoria", "Cape Town"],
+    "states": ["Gauteng Province", "Western Cape Province"]
+  },
+  "ES": {
+    "name": "Spain",
+    "language": "ES",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Madrid", "Barcelona", "Seville"],
+    "states": ["Community of Madrid", "Catalonia", "Andalusia"]
+  },
+  "SE": {
+    "name": "Sweden",
+    "language": "SV",
+    "street_format": "n p",
+    "postal_format": "ddd dd",
+    "cities": ["Stockholm", "Gothenburg"],
+    "states": ["Stockholm County", "Västra Götaland County"]
+  },
+  "CH": {
+    "name": "Switzerland",
+    "language": "DE",
+    "street_format": "n p",
+    "postal_format": "dddd",
+    "cities": ["Bern"],
+    "states": ["Canton of Bern"]
+  },
+  "TH": {
+    "name": "Thailand",
+    "language": "TH",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Bangkok", "Chiang Mai"],
+    "states": ["Bangkok Metropolis", "Chiang Mai Province"]
+  },
+  "TR": {
+    "name": "Turkey",
+    "language": "TR",
+    "street_format": "p n",
+    "postal_format": "ddddd",
+    "cities": ["Ankara", "Istanbul"],
+    "states": ["Ankara Province", "Istanbul Province"]
+  },
+  "AE": {
+    "name": "United Arab Emirates",
+    "language": "AR",
+    "street_format": "p n",
+    "postal_format": "",
+    "cities": ["Abu Dhabi", "Dubai"],
+    "states": ["Abu Dhabi Emirate", "Dubai Emirate"]
+  },
+  "US": {
+    "name": "United States",
+    "language": "EN",
+    "street_format": "n p",
+    "postal_format": "ddddd",
+    "cities": ["Washington, D.C.", "New York City", "Los Angeles", "Chicago", "San Francisco", "Las Vegas", "Miami", "New Orleans", "Orlando"],
+    "states": ["District of Columbia", "New York State", "California", "Illinois", "California", "Nevada", "Florida", "Louisiana", "Florida"]
+  },
+  "VE": {
+    "name": "Venezuela",
+    "language": "ES",
+    "street_format": "p n",
+    "postal_format": "dddd",
+    "cities": ["Caracas", "Mérida"],
+    "states": ["Capital District", "Mérida State"]
+  }
+}
