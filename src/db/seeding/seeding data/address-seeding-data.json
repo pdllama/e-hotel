@@ -89,7 +89,7 @@
   },
   "DK": {
     "name": "Denmark",
-    "language": "DE",
+    "language": "DA",
     "street_format": "n p",
     "postal_format": "dddd",
     "cities": ["Copenhagen", "Aarhus"],
@@ -137,7 +137,7 @@
   },
   "GL": {
     "name": "Greenland",
-    "language": "DA",
+    "language": "KL",
     "street_format": "n p",
     "postal_format": "dddd",
     "cities": ["Nuuk", "Ilulissat"],
@@ -193,7 +193,7 @@
   },
   "KR": {
     "name": "South Korea",
-    "language": "JP",
+    "language": "KO",
     "street_format": "n-p",
     "postal_format": "ddddd",
     "cities": ["Seoul", "Busan"],

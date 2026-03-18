@@ -18,14 +18,14 @@
 //     ELECTRONIC = "electronic", // some electrical device in the room is non-functional
 //     INFRASTRUCTURE = "infrastructure", // some infrastructure is malfunctioning ex air conditioning, plumbing, water in the room
 //     INFESTATION = "infestation", // room is infested. Note: make room inaccessible if theres a problem like this?
-//     MISSING_AMENITY = "missing_amenity", // room is missing some required amenity (ies)
-//     UNCLEAN = "unclean", // room for whatever reason is unclean and cannot be cleaned by staff
-//     NOISE = "noise", // room has a lot of noise and inadequate sound proofing
+// REMOVED    MISSING_AMENITY = "missing_amenity", // room is missing some required amenity (ies)
+// REMOVED    UNCLEAN = "unclean", // room for whatever reason is unclean and cannot be cleaned by staff
+// REMOVED    NOISE = "noise", // room has a lot of noise and inadequate sound proofing
 // }
 const archiveStatusStrArr = ["booked", "renting", "completed", "cancelled"] as const;
 
 const problemStatusStrArr = ["ongoing", "resolved"] as const;
-const problemTypeStrArr = ["electronic", "infrastructure", "infestation", "missing_amenity", "unclean", "noise"] as const;
+const problemTypeStrArr = ["electronic", "infrastructure", "infestation"] as const;
 
 const roomViewTypes = ['mountain', 'sea'] as const
 

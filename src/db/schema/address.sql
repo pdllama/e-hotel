@@ -1,9 +1,11 @@
 CREATE TABLE IF NOT EXISTS address (
-    address_id      UUID        PRIMARY KEY,
+    address_id      UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
     street_number   INTEGER,
-    apt_number      VARCHAR,
+    street_name     VARCHAR,
+    apt_number      VARCHAR DEFAULT 0,
     postal_code     VARCHAR,
     city            VARCHAR,
     state           VARCHAR,
-    country         VARCHAR
+    country         VARCHAR,
+    UNIQUE(street_number, street_name, apt_number, postal_code, city, state, country)
 );

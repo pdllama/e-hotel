@@ -9,19 +9,24 @@ The following countries are excepted and will have even more potential cities (1
     2. USA
 
 We are seeding with:
-    - 50 countries
-    - 3-5 cities per country, + 7-12 in Canada, + 7-12 in USA
-    - 3-5 hotels per city
+    - 49 countries
+    - 1-3 cities per country, with the exception of 10 in Canada and 9 in USA
+    - 3-5 hotels per city (variable per seeding)
 
-So we can expect anywhere from:
-    lower-bound: 50x3+
+The total number of cities in the seeding data is 115.
 
-Maximum number of rooms in the table: 225,000
+The lower bound # of hotels is 115x3 = 345.
+The upper bound # of hotels is 115x5 = 575.
+
+The number of hotel chains are completely variable, but it will always be at least 49 (# of countries).
 
 The following requirements for seeding should be followed:
     1. At least 3 hotels per city, max 5
     2. At least one hotel per chain
     3. Anywhere from 10-150 rooms per hotel, with a higher likelihood of being in the middle/lower range
+        Small hotels    - 10-60 rooms
+        Mid-size hotels - 61-120 rooms
+        Large hotels    - 121-150 rooms
     
     4. At least 10 employees per hotel, scaling with the number of rooms.
         You can use the following scaling algorithm:

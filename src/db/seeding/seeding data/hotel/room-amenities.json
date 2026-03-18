@@ -1,0 +1,178 @@
+[
+  {
+    "amenity_name": "Air Conditioning",
+    "amenity_description": "Individually controlled air conditioning to maintain a comfortable room temperature."
+  },
+  {
+    "amenity_name": "Heating",
+    "amenity_description": "Room heating system to keep the space warm and cozy during colder seasons."
+  },
+  {
+    "amenity_name": "Wi-Fi",
+    "amenity_description": "High-speed wireless internet access available in the room for browsing, work, and streaming."
+  },
+  {
+    "amenity_name": "Television",
+    "amenity_description": "Flat-screen TV with cable or satellite channels and on-demand content."
+  },
+  {
+    "amenity_name": "Mini Bar",
+    "amenity_description": "A stocked mini bar with beverages and snacks available for purchase."
+  },
+  {
+    "amenity_name": "Refrigerator",
+    "amenity_description": "Compact fridge for storing food, drinks, and personal items."
+  },
+  {
+    "amenity_name": "Coffee Maker",
+    "amenity_description": "In-room coffee machine or kettle with complimentary coffee and tea supplies."
+  },
+  {
+    "amenity_name": "Safe",
+    "amenity_description": "Electronic or key-access safe to store valuables securely."
+  },
+  {
+    "amenity_name": "Desk",
+    "amenity_description": "Work desk with lamp and power outlets for business or study purposes."
+  },
+  {
+    "amenity_name": "Seating Area",
+    "amenity_description": "A small lounge area or chairs for relaxing, reading, or working."
+  },
+  {
+    "amenity_name": "Room Service",
+    "amenity_description": "On-demand food and beverage service delivered directly to your room."
+  },
+  {
+    "amenity_name": "Hair Dryer",
+    "amenity_description": "Hair dryer provided in the bathroom for personal grooming."
+  },
+  {
+    "amenity_name": "Toiletries",
+    "amenity_description": "Shampoo, conditioner, soap, lotion, and other personal care items provided."
+  },
+  {
+    "amenity_name": "Bathrobe",
+    "amenity_description": "Comfortable bathrobe provided for guest use."
+  },
+  {
+    "amenity_name": "Slippers",
+    "amenity_description": "Disposable or reusable slippers for comfort and hygiene."
+  },
+  {
+    "amenity_name": "Bathtub",
+    "amenity_description": "Standalone or combined bathtub for soaking and relaxation."
+  },
+  {
+    "amenity_name": "Iron",
+    "amenity_description": "In-room iron and ironing board for garment care."
+  },
+  {
+    "amenity_name": "Closet",
+    "amenity_description": "Spacious closet or wardrobe with hangers to store clothes."
+  },
+  {
+    "amenity_name": "Soundproofing",
+    "amenity_description": "Noise reduction features to ensure a quiet and restful stay."
+  },
+  {
+    "amenity_name": "Electric Kettle",
+    "amenity_description": "Boil water easily for tea, coffee, or instant meals."
+  },
+  {
+    "amenity_name": "Microwave",
+    "amenity_description": "Small microwave for reheating food and beverages."
+  },
+  {
+    "amenity_name": "Alarm Clock",
+    "amenity_description": "In-room alarm clock with optional wake-up service."
+  },
+  {
+    "amenity_name": "Laptop Safe",
+    "amenity_description": "Dedicated safe to securely store laptops and electronics."
+  },
+  {
+    "amenity_name": "Universal Power Outlets",
+    "amenity_description": "Multi-format power outlets for charging international devices."
+  },
+  {
+    "amenity_name": "Streaming Services",
+    "amenity_description": "Access to Netflix, Hulu, or other streaming platforms on the TV."
+  },
+  {
+    "amenity_name": "Room Lighting Control",
+    "amenity_description": "Adjustable lights or dimmers to customize room ambiance."
+  },
+  {
+    "amenity_name": "Telephone with Voicemail",
+    "amenity_description": "Direct-dial phone with voicemail for receiving messages."
+  },
+  {
+    "amenity_name": "Intercom",
+    "amenity_description": "Room intercom for contacting the front desk or other hotel services."
+  },
+  {
+    "amenity_name": "Wi-Fi Printer",
+    "amenity_description": "Optional in-room wireless printer for guest convenience."
+  },
+  {
+    "amenity_name": "LED Mood Lighting",
+    "amenity_description": "Color-adjustable lights to create relaxing or romantic ambiance."
+  },
+  {
+    "amenity_name": "Charging Stations",
+    "amenity_description": "Convenient charging points for phones, tablets, and other devices."
+  },
+  {
+    "amenity_name": "Bluetooth Speaker",
+    "amenity_description": "Wireless speaker for personal music enjoyment in the room."
+  },
+  {
+    "amenity_name": "Streaming HDMI Ports",
+    "amenity_description": "TV connection for streaming devices like Chromecast or Apple TV."
+  },
+  {
+    "amenity_name": "Welcome Snacks",
+    "amenity_description": "Complimentary snacks or fruits provided upon check-in."
+  },
+  {
+    "amenity_name": "Coffee & Tea Supplies",
+    "amenity_description": "Complimentary coffee, tea bags, sugar, and creamer available in-room."
+  },
+  {
+    "amenity_name": "Complimentary Bottled Water",
+    "amenity_description": "Fresh bottled water replenished daily for guest convenience."
+  },
+  {
+    "amenity_name": "Eco-friendly Amenities",
+    "amenity_description": "Environmentally conscious toiletries, linens, and recycling options."
+  },
+  {
+    "amenity_name": "Baby Cot",
+    "amenity_description": "Available on request for guests traveling with infants."
+  },
+  {
+    "amenity_name": "Extra Bed",
+    "amenity_description": "Additional sleeping arrangement available upon request."
+  },
+  {
+    "amenity_name": "Wheelchair Accessible",
+    "amenity_description": "Room designed for guests with mobility challenges, including wide doorways and accessible bathrooms."
+  },
+  {
+    "amenity_name": "Pet-Friendly",
+    "amenity_description": "Rooms designed to accommodate guests traveling with pets."
+  },
+  {
+    "amenity_name": "Hypoallergenic Bedding",
+    "amenity_description": "Special bedding for guests with allergies or sensitive skin."
+  },
+  {
+    "amenity_name": "Blackout Curtains",
+    "amenity_description": "Heavy curtains that block outside light for maximum comfort."
+  },
+  {
+    "amenity_name": "Balcony",
+    "amenity_description": "Outdoor balcony attached to the room, providing views and fresh air."
+  }
+]

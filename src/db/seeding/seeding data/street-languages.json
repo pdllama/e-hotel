@@ -1,0 +1,233 @@
+{
+  "EN": {
+    "prefixes": ["Street","Avenue","Road","Boulevard","Drive","Lane","Court","Way", "Crescent"],
+    "names": [
+      "Maple","Oak","Pine","Cedar","Elm","Willow","Birch","Ash","Cherry","Walnut",
+      "River","Lake","Hill","Valley","Forest","Brook","Meadow","Ridge","Highland","Harbor",
+      "Park","Garden","Sunset","Sunrise","Fairview","Grandview","Riverside","Lakeside","Woodland","Hillcrest",
+      "Washington","Lincoln","Jefferson","Madison","Franklin","Adams","Victoria","King","Queen","Prince",
+      "Main","Center","Broad","Front","Union","Liberty", "Canyon", "Bay", "Creek", "Glen", "Spruce", "Hawthorn", 
+      "Sycamore", "Poplar", "Aspen", "Dogwood", "Magnolia", "Cottonwood", "Hickory", "Ironwood", "Juniper", "Linden", 
+      "Palm", "Sequoia", "Olive", "Maplewood", "Brighton", "Cliff", "Brookside", "Stone", "Field", "Gardenia", 
+      "Hillside", "Meadowbrook", "Pinecrest", "Silverwood", "Oakwood", "Rosedale", "Sunnyside", "Windy", 
+      "Hilltop", "Crestview", "Evergreen", "Bluebell", "Marigold", "Laurel", "Aspenwood", "Briar", "Chestnut", "Fairview Heights", 
+      "Greenwood", "Ivy", "Peachtree", "Sunflower", "Valewood", "Willowbrook"
+    ]
+  },
+
+  "ES": {
+    "prefixes": ["Calle","Avenida","Paseo","Camino","Boulevard","Callejón"],
+    "names": [
+      "Libertad","Independencia","Constitución","Revolución","Progreso","Unidad","Amistad","Esperanza","Victoria","Paz",
+      "San Martín","San Juan","San Pedro","San José","Santa María","Santa Rosa","Santa Ana","Santa Lucía","Santa Teresa","San Carlos",
+      "Bolívar","Hidalgo","Juárez","Morelos","Allende","Colón","Cervantes","Zapata","Madero","Belgrano",
+      "Sol","Luna","Primavera","Aurora","Horizonte","Las Flores","Los Pinos","Las Palmas","Monte Verde","El Mirador",
+      "Del Río","Del Lago","Del Valle","Del Monte","La Paz","Nueva Esperanza"
+    ]
+  },
+
+  "FR": {
+    "prefixes": ["Rue","Avenue","Boulevard","Place","Allée","Chemin"],
+    "names": [
+      "de la République","de la Liberté","de la Paix","de la Gare","de l'Église","de la Fontaine","de la Victoire","de la Nation","de l'Europe","du Marché",
+      "Victor Hugo","Jean Jaurès","Pasteur","Voltaire","Molière","Descartes","Rousseau","Lafayette","Zola","Balzac",
+      "Saint-Michel","Saint-Pierre","Saint-Jean","Saint-Paul","Saint-Jacques","Saint-Louis","Sainte-Anne","Sainte-Marie","Sainte-Claire","Saint-Antoine",
+      "du Soleil","de la Lune","du Parc","du Château","du Moulin","du Lac","de la Forêt","des Fleurs","des Écoles","des Lilas",
+      "de Bretagne","de Normandie","de Provence","de Lyon","de Paris"
+    ]
+  },
+
+  "PT": {
+    "prefixes": ["Rua","Avenida","Travessa","Estrada","Alameda"],
+    "names": [
+      "Liberdade","Independência","Constituição","Progresso","Esperança","Vitória","Paz","União","Aurora","Horizonte",
+      "São João","São Pedro","São Paulo","São José","Santa Maria","Santa Luzia","Santo Antônio","Nossa Senhora","São Sebastião","Santa Clara",
+      "Tiradentes","Dom Pedro","Getúlio Vargas","Rio Branco","Duque de Caxias","Tancredo Neves","Juscelino Kubitschek","Castelo Branco","Barão do Rio Branco","José Bonifácio",
+      "Flores","Palmeiras","Oliveira","Ipiranga","Paulista","Monte Verde","Boa Vista","Campo Grande","Lago Azul","Serra Azul",
+      "Vale Verde","Costa Verde","Atlântica","Jardim","Central"
+    ]
+  },
+
+  "DE": {
+    "prefixes": ["Straße","Allee","Platz","Weg","Ring"],
+    "names": [
+      "Goethe","Schiller","Mozart","Beethoven","Bach","Humboldt","Lessing","Heine","Bismarck","Kant",
+      "Haupt","Bahnhof","Markt","Dom","Kirch","Garten","Park","Brücken","Mühlen","Wald",
+      "Berg","Tal","Nord","Süd","Ost","West","Europa","Freiheit","Einheit","Frieden",
+      "Linden","Ahorn","Eichen","Rosen","Tulpen","Blumen","Sonnen","Mond","Stern","See",
+      "Kaiser","König","Friedrich","Wilhelm","Ludwig"
+    ]
+  },
+
+  "IT": {
+    "prefixes": ["Via","Viale","Piazza","Corso","Largo"],
+    "names": [
+      "Roma","Milano","Torino","Napoli","Firenze","Venezia","Genova","Bologna","Verona","Padova",
+      "Garibaldi","Mazzini","Cavour","Verdi","Dante","Manzoni","Colombo","Marconi","Leonardo","Michelangelo",
+      "Libertà","Indipendenza","Europa","Vittoria","Risorgimento","Unità","Pace","Progresso","Aurora","Primavera",
+      "San Marco","San Giovanni","San Pietro","San Paolo","Santa Maria","Santa Lucia","San Carlo","San Lorenzo","San Francesco","Sant'Antonio",
+      "del Sole","della Luna","dei Fiori","del Lago","del Monte"
+    ]
+  },
+
+  "NL": {
+    "prefixes": ["Straat","Laan","Weg","Plein","Singel"],
+    "names": [
+      "Kerk","School","Molen","Haven","Park","Bos","Dijk","Markt","Station","Brug",
+      "Rembrandt","Vermeer","Spinoza","Erasmus","Van Gogh","Prins","Koning","Oranje","Willem","Beatrix",
+      "Tulpen","Rozen","Linde","Eiken","Wilgen","Bloemen","Zonne","Maan","Ster","Meer",
+      "Vrijheid","Vrede","Europa","Eenheid","Toekomst","Noord","Zuid","Oost","West","Binnen",
+      "Buiten","Nieuwe","Oude","Grote","Kleine"
+    ]
+  },
+
+  "SV": {
+    "prefixes": ["Gatan","Vägen","Allén","Torget"],
+    "names": [
+      "Kung","Drottning","Kyrko","Skol","Park","Äng","Björk","Tall","Gran","Lind",
+      "Sjö","Hamn","Bro","Torg","Marknad","Sol","Måne","Stjärna","Nord","Syd",
+      "Öst","Väst","Frihet","Fred","Viking","Karl","Gustav","Svea","Erik","Olof",
+      "Lund","Skog","Strand","Höjd","Dal","Ros","Lilja","Ek","Asp","Granat"
+    ]
+  },
+
+  "RU": {
+    "prefixes": ["Ulitsa","Prospekt","Ploshchad"],
+    "names": [
+      "Lenina","Pushkina","Gagarina","Tolstogo","Dostoevskogo","Tverskaya","Nevsky","Lermontova","Chekhova","Gorkogo",
+      "Oktyabrskaya","Sovetskaya","Pobedy","Druzhby","Mira","Svobody","Edinstva","Molodyozhnaya","Studencheskaya","Universitetskaya",
+      "Solnechnaya","Zvezdnaya","Lunnaya","Lesnaya","Polevaya","Sadovaya","Parkovaya","Rechnaya","Ozernaya","Berezovaya",
+      "Yasnaya","Tsentralnaya","Yubileynaya","Promyshlennaya","Severnaya","Yuzhnaya","Zapadnaya","Vostochnaya","Krasnaya","Zelenaya"
+    ]
+  },
+
+  "HI": {
+    "prefixes": ["Marg","Path","Chowk"],
+    "names": [
+      "Gandhi","Nehru","Patel","Tagore","Subhash","Azad","Vivekananda","Ambedkar","Tilak","Bose",
+      "Shanti","Azadi","Pragati","Vikas","Sanskriti","Ekta","Maitri","Vijay","Jyoti","Uday",
+      "Surya","Chandra","Tara","Pushp","Kamal","Gulab","Amaltas","Neem","Peepal","Banyan",
+      "Ganga","Yamuna","Saraswati","Narmada","Himalaya","Aravali","Vindhya","Satpura","Shivalik","Doab"
+    ]
+  },
+
+  "AR": {
+    "prefixes": ["Shari", "Tariq", "Harat", "Sikka", "Darb", "Zuqaq", "Midan", "Saha", "Jadda", "Corniche"],
+    "names": [
+      "Noor", "Salam", "Amal", "Huda", "Rahma", "Baraka", "Karim", "Latif", "Hakim", "Rashid",
+      "Farah", "Najah", "Saif", "Nasser", "Yasmin", "Layla", "Omar", "Ali", "Hassan", "Hussein",
+      "Khalid", "Tariq", "Zayd", "Amina", "Fatima", "Zahra", "Samir", "Adel", "Majid", "Basim",
+      "Qamar", "Shams", "Najm", "Badr", "Rihab", "Ward", "Zaytun", "Nakhil", "Safa", "Marwa"
+    ]
+  },
+
+  "FI": {
+    "prefixes": ["Katu", "Tie", "Polku", "KujA", "Raitti", "Vayla", "Kuja", "Puistotie", "Rinne", "KehA"],
+    "names": [
+      "Koivu", "Mänty", "Kuusi", "Pihlaja", "Tammi", "Lehmus", "Haapa", "Kataja", "Paju", "Vaahtera",
+      "Järvi", "Joki", "Lahti", "Niemi", "Saari", "Kallio", "Mäki", "Ranta", "Suo", "Koski",
+      "Aurinko", "Kuu", "Tähti", "Taivas", "Tuuli", "Sade", "Lumi", "Jää", "Pilvi", "Sumu",
+      "Sisu", "Onni", "Toivo", "Rauha", "Valo", "Varjo", "Aamu", "Ilta", "Päivä", "Yö"
+    ]
+  },
+
+  "DA": {
+    "prefixes": ["Gade", "Vej", "Allé", "Stræde", "Plads", "Torv", "Boulevard", "Passage", "Kaj", "Sti"],
+    "names": [
+      "Bøg", "Eg", "Ask", "Elm", "Lind", "Pil", "Gran", "Fyr", "Hyld", "Røn",
+      "Sø", "Å", "Bugt", "Strand", "Havn", "Ø", "Klit", "Eng", "Mark", "Bak",
+      "Sol", "Måne", "Stjerne", "Himmel", "Vind", "Regn", "Sne", "Tåge", "Sky", "Is",
+      "Fred", "Håb", "Glæde", "Mod", "Lykke", "Ro", "Dag", "Nat", "Lys", "Skygge"
+    ]
+  },
+
+  "ID": {
+    "prefixes": ["Jalan", "Gang", "Lorong", "Kampung", "Perumahan", "Kompleks", "Boulevard", "Raya", "Simpang", "Taman"],
+    "names": [
+      "Merdeka", "Pahlawan", "Nusantara", "Sejahtera", "Makmur", "Sentosa", "Damai", "Harapan", "Jaya", "Abadi",
+      "Melati", "Mawar", "Anggrek", "Kenanga", "Cempaka", "Teratai", "Flamboyan", "Bougenvil", "Kamboja", "Seruni",
+      "Gunung", "Pantai", "Samudra", "Danau", "Sungai", "Rimba", "Hutan", "Bukit", "Lembah", "Pulau",
+      "Surya", "Cahaya", "Bintang", "Langit", "Angin", "Hujan", "Awan", "Pelangi", "Fajar", "Senja"
+    ]
+  },
+
+  "KO": {
+    "prefixes": ["Daero", "Ro", "Gil", "Beon-gil", "Gwangjang", "Geori", "Hangang-daero", "Jungang-ro", "Munhwa-ro", "Teheran-ro"],
+    "names": [
+      "Haneul", "Baram", "Bada", "San", "Gang", "Bit", "Nuri", "Ara", "Sora", "Nara",
+      "Mirae", "Seonggong", "Jayu", "Pyeonghwa", "Huimang", "Haengbok", "Ujeong", "Sarange", "Yeonggwang", "Jinhwa",
+      "Mugunghwa", "Baekdu", "Hallasan", "Jirisan", "Seoraksan", "Hangang", "Nakdong", "Geumgang", "Yeongsan", "Taebaek",
+      "Dal", "Byeol", "Haetbit", "Eoreum", "Nun", "Bich", "Achim", "Jeonyeok", "Bam", "Saebyeok"
+    ]
+  },
+
+  "MS": {
+    "prefixes": ["Jalan", "Lorong", "Persiaran", "Lebuh", "Lebuhraya", "Jalan Raya", "Taman", "Kampung", "Bandar", "Dataran"],
+    "names": [
+      "Merdeka", "Perdana", "Sejahtera", "Makmur", "Sentosa", "Damai", "Harmoni", "Jaya", "Abadi", "Bestari",
+      "Melati", "Mawar", "Cempaka", "Kenanga", "Teratai", "Anggerik", "Bougainvillea", "Seri", "Seroja", "Bakawali",
+      "Gunung", "Bukit", "Lembah", "Rimba", "Hutan", "Sungai", "Tasik", "Pantai", "Pulau", "Teluk",
+      "Suria", "Cahaya", "Bintang", "Langit", "Angin", "Hujan", "Awan", "Pelangi", "Fajar", "Senja"
+    ]
+  },
+
+  "NO": {
+    "prefixes": ["Gate", "Vei", "Allé", "Plass", "Torg", "Bakke", "Sti", "Bru", "Kai", "Sving"],
+    "names": [
+      "Bjørk", "Eik", "Furu", "Gran", "Lind", "Selje", "Rogn", "Hassel", "Alm", "Ask",
+      "Fjord", "Sund", "Vik", "Strand", "Havn", "Øy", "Elv", "Dal", "Li", "Vidde",
+      "Sol", "Måne", "Stjerne", "Himmel", "Vind", "Regn", "Snø", "Tåke", "Sky", "Is",
+      "Fred", "Håp", "Glede", "Mot", "Lykke", "Ro", "Dag", "Natt", "Lys", "Skygge"
+    ]
+  },
+
+  "TL": {
+    "prefixes": ["Kalsada", "Daan", "Kalye", "Abenida", "Eskina", "Looban", "Bulebar", "Linya", "Pook", "Liwasan"],
+    "names": [
+      "Kalayaan", "Pagasa", "Pagkakaisa", "Kapayapaan", "Kaunlaran", "Kabayanihan", "Katarungan", "Karangalan", "Kasaganaan", "Katapatan",
+      "Sampaguita", "Gumamela", "Rosal", "IlangIlang", "DamaDeNoche", "Santol", "Mangga", "Narra", "Kawayan", "Balete",
+      "Bundok", "Ilog", "Dagat", "Lawa", "Gubat", "Burol", "Lambak", "Pulo", "Baybayin", "Talon",
+      "Araw", "Buwan", "Bituin", "Langit", "Hangin", "Ulan", "Ulap", "Bahaghari", "BukangLiwayway", "Takipsilim"
+    ]
+  },
+
+  "PL": {
+    "prefixes": ["Ulica", "Aleja", "Plac", "Droga", "Trakt", "Skwer", "Bulwar", "Osiedle", "Zaułek", "Rynek"],
+    "names": [
+      "Dąb", "Brzoza", "Sosna", "Świerk", "Lipa", "Wierzba", "Jesion", "Grab", "Klon", "Topola",
+      "Wisła", "Odra", "Warta", "Bug", "Narew", "San", "Bałtyk", "Tatry", "Sudety", "Bieszczady",
+      "Słońce", "Księżyc", "Gwiazda", "Niebo", "Wiatr", "Deszcz", "Śnieg", "Mgła", "Chmura", "Lód",
+      "Pokój", "Nadzieja", "Radość", "Odwaga", "Szczęście", "Spokój", "Dzień", "Noc", "Światło", "Cień"
+    ]
+  },
+
+  "RO": {
+    "prefixes": ["Strada", "Bulevardul", "Aleea", "Piața", "Calea", "Drumul", "Șoseaua", "Intrarea", "Splaiul", "Fundătura"],
+    "names": [
+      "Stejar", "Fag", "Brad", "Molid", "Tei", "Salcie", "Plop", "Frasin", "Arțar", "Castan",
+      "Dunărea", "Prut", "Olt", "Mureș", "Someș", "Siret", "Carpați", "Bucegi", "Retezat", "Făgăraș",
+      "Soare", "Lună", "Stea", "Cer", "Vânt", "Ploaie", "Zăpadă", "Ceață", "Nor", "Gheață",
+      "Pace", "Speranță", "Bucurie", "Curaj", "Fericire", "Liniște", "Zi", "Noapte", "Lumină", "Umbră"
+    ]
+  },
+
+  "TR": {
+    "prefixes": ["Cadde", "Sokak", "Bulvar", "Mevkii", "Mahalle", "Caddesi", "Yolu", "Köyü", "Sokagi", "Meydan"],
+    "names": [
+      "Güneş", "Ay", "Yıldız", "Deniz", "Dağ", "Irmak", "Vadi", "Orman", "Çam", "Lale",
+      "Gül", "Menekşe", "Sakarya", "Bosphorus", "Marmara", "Ankara", "İzmir", "Bursa", "Ege", "Karadeniz",
+      "Barış", "Umut", "Mutluluk", "Sevgi", "Huzur", "Özgürlük", "Adalet", "Cesaret", "Işık", "Gölge",
+      "Sabah", "Akşam", "Gece", "Gündüz", "Rüzgar", "Yağmur", "Kar", "Bulut", "Gök", "Toprak"
+    ]
+  },
+
+  "TH": {
+    "prefixes": ["Thanon", "Soi", "Khet", "Khwaeng", "Ratcha", "Moo", "Phraya", "Chumchon", "Phra", "Trok"],
+    "names": [
+      "Chai", "Prasert", "Somchai", "Somsak", "Narin", "Kanya", "Malee", "Suda", "Anong", "Ratchanee",
+      "Mekong", "ChaoPhraya", "Ping", "Nan", "Yom", "Chi", "Doi", "Phu", "Khao", "Pa",
+      "Dao", "Phun", "Nang", "Supaporn", "Srisuda", "Wichai", "Suwan", "Pimchan", "Thida", "Kanok",
+      "Chompoo", "Rang", "Saeng", "Nam", "Fah", "Lom", "Fon", "Tawan", "Phloen", "Sang"
+    ]
+  }
+}
