@@ -20,7 +20,8 @@ export interface City_Stats {
     lang: string,
     num_hotels: number,
     hotel_chains: string[]
-    hotel_sizes: string[]
+    hotel_sizes: string[],
+    hotel_address_uuid: string[]
 }
 
 export function roll_chance_binary(percent:number) {

@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS person (
 );
 
 CREATE TABLE IF NOT EXISTS employee (
-    SSN     INTEGER     PRIMARY KEY,
+    SSN                 INTEGER     PRIMARY KEY,
+    education_level     education,
     FOREIGN KEY (SSN) REFERENCES person(SSN)
 );
 
@@ -22,6 +23,8 @@ CREATE TABLE IF NOT EXISTS works_in (
     SSN         INTEGER     PRIMARY KEY,
     address_id  UUID,
     role        employee_role,
+    pay_struct  pay_structure,
+    pay         INTEGER
     FOREIGN KEY (SSN) REFERENCES employee(SSN),
     FOREIGN KEY (address_id) REFERENCES address(address_id)
 );

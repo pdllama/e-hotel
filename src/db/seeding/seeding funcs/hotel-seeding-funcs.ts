@@ -1,6 +1,7 @@
 import type { Hotel_Assignment, Chain_Assignment, City_Stats } from './../seedingutils.ts';
 import { get_rand_idx, roll_chance_binary, roll_chance_multi } from './../seedingutils.ts';
 import {default as chain_name_data} from "./../seeding data/hotel/chain-data.json" with {type:'json'} 
+import {v4 as uuidv4} from 'uuid';
 
 const chainNamesByLang:{[key:string]: Set<string>} = {}
 
@@ -76,6 +77,7 @@ function decide_hotel_chain(
             chains.push({chain_name: randLocalChainName, size: "local", origin: city})
             city_stats[city].hotel_chains.push(randLocalChainName)
             city_stats[city].hotel_sizes.push(decide_hotel_size("local"))
+            city_stats[city].hotel_address_uuid.push(uuidv4())
             city_stats[city].num_hotels+=1
 
         } else {
@@ -83,6 +85,7 @@ function decide_hotel_chain(
             chains.push({chain_name: existingChain, size: "local", origin: city})
             city_stats[city].hotel_chains.push(existingChain)
             city_stats[city].hotel_sizes.push(decide_hotel_size("local"))
+            city_stats[city].hotel_address_uuid.push(uuidv4()) // Note: this uuid corresponds to the hotel address_id! Must be unique!
             city_stats[city].num_hotels+=1
         }
     } else {
@@ -94,7 +97,8 @@ function decide_hotel_chain(
         if (isNewChain || mustBeNew) {
             const randIntlChainName = popRandom(chainNamesByLang[city_stats[city].lang]);
             const chain_info = {chain_name: randIntlChainName, size: "intl", origin: city}
-            city_stats[city].hotel_chains.push(randIntlChainName)
+            city_stats[city].hotel_chains.push(randIntlChainName),
+            city_stats[city].hotel_address_uuid.push(uuidv4())
             city_stats[city].num_hotels+=1
 
             const expansionCity = getExpandedIntlCountry(city_stats, city)
@@ -114,7 +118,8 @@ function decide_hotel_chain(
             }
         } else {
             city_stats[city].hotel_chains.push(existingIntlChain)
-            city_stats[city].hotel_sizes.push(decide_hotel_size("intl"))
+            city_stats[city].hotel_sizes.push(decide_hotel_size("intl")),
+            city_stats[city].hotel_address_uuid.push(uuidv4())
             city_stats[city].num_hotels+=1
         }
     }
@@ -143,6 +148,8 @@ function getRandLocalChainNotInCity(
             }
         })
     }
+
+
 
     return allApplicableLocalChains[get_rand_idx(allApplicableLocalChains.length)] // can be undefined if theres no applicable local chain
 } 

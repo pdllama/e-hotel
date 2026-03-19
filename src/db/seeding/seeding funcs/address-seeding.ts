@@ -4,7 +4,7 @@ import {default as address} from './../seeding data/address-seeding-data.json' w
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-interface Address {
+export interface Address {
     street_number: number,
     street_name: string,
     apt_number: number,

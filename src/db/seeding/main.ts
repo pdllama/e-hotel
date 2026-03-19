@@ -6,10 +6,9 @@ import type { Hotel_Assignment, Chain_Assignment, City_Stats } from './seedingut
 
 
 const chains : Chain_Assignment[] = [];
-
-const hotels : {[key: string]: Hotel_Assignment} = {};
-
+//const hotels : {[key: string]: Hotel_Assignment} = {};
 const cityStats : {[key: string]: City_Stats} = {}
+
 
 
 type CountriesType = typeof countries
@@ -21,11 +20,12 @@ for (let country of country_codes as (keyof CountriesType)[]) {
     const data = countries[country];
     for (let i=0; i < data.cities.length; i++) {
         const city = data.cities[i];
-        const cityToStateCountryObj : City_Stats = {country: data.name, state: data.states[i], lang: data.language, num_hotels: 0, hotel_chains: [], hotel_sizes: []};
+        const cityToStateCountryObj : City_Stats = {country: data.name, state: data.states[i], lang: data.language, num_hotels: 0, hotel_chains: [], hotel_sizes: [], hotel_address_uuid: []};
         cityStats[city] = cityToStateCountryObj;
     }
 }
 
+//assigns chain names, hotels, and hotel sizes to each of the cities
 for (let country of country_codes as (keyof CountriesType)[]) {
     const data = countries[country];
     for (let i=0; i < data.cities.length; i++) {
@@ -35,3 +35,8 @@ for (let country of country_codes as (keyof CountriesType)[]) {
     }
 }
 
+// Generates 
+for (let city of Object.keys(cityStats)) {
+    const cityStat = cityStats[city];
+
+}

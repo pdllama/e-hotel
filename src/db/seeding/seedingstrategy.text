@@ -27,12 +27,16 @@ The following requirements for seeding should be followed:
         Small hotels    - 10-60 rooms
         Mid-size hotels - 61-120 rooms
         Large hotels    - 121-150 rooms
-    
+
+        Upper Bound # of rooms: 575*150 = 86,250
+
     4. At least 10 employees per hotel, scaling with the number of rooms.
         You can use the following scaling algorithm:
             1. Every 10 additional rooms, you add 5 more employees (janitors, cooks, etc)
             2. every 20 additional rooms, you add another assistant manager
         Results can vary
+        Max-num of employees in a hotel: 150 rooms --- 10 + (14*5) + (7*1) = 87
+        upper-bound employees: 575*87 = 50,025
 
     5. Up to 5 reviews per hotel
         Star ratings should be within each other with some outliers.
