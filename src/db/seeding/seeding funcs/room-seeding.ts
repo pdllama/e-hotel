@@ -1,4 +1,4 @@
-import { get_rand_idx, roll_chance_binary, roll_chance_multi } from "../seedingutils";
+import { get_rand_idx, roll_chance_binary, roll_chance_multi, get_rand_between } from "../seedingutils";
 
 // Note: We differentiate room-specific vs hotel-specific amenities in the calculations here when there's no such distinction in the db (only room-specific).
 // This is just used to seed dynamic, sensible prices.
@@ -63,7 +63,18 @@ export function generateRoom(
 
     if (roll_chance_binary(10)) {
         // roll for view
+        room.view = roll_chance_binary(50) ? "mountain" : "sea"
+        room.price += get_rand_between(75, 125)
     }
+
+    if (roll_chance_binary(30)) {
+        //extension possible
+        room.extension_possible = true;
+        room.price += get_rand_between(10, 40)
+    }
+
+    const room_amns = roll_room_amenities(hotel_size)
+    for (let i=0;i<room_amns.length;i++) {room.price += get_rand_between(10, 15)}
 
     // todo: roll for amenities, roll for extension, update price, roll for problem.
 
@@ -77,8 +88,8 @@ export function decideBaseRoomPrice(
     const max = hotel_size == 'sm' ? 70 : hotel_size == 'md' ? 150 : 249
     const base_price = Math.floor(Math.random() * (max - min + 1)) + min;
 
-    const cap2Price = base_price * (Math.floor(Math.random() * (2 - 1.5 + 1)) + 1.5); // random num between 1.5-2
-    const cap4Price = base_price * (Math.floor(Math.random() * (4 - 3 + 1)) + 3); // random num between 3-4
+    const cap2Price = base_price * get_rand_between(1.5, 2); // random num between 1.5-2
+    const cap4Price = base_price * get_rand_between(3, 4); // random num between 3-4
 
     return {base: base_price, two: cap2Price, four: cap4Price}
 }
@@ -125,4 +136,8 @@ function roll_room_amenities(hotel_size: string) {
         }
     }
     return amns;
+}
+
+function roll_num_of_rooms(hotel_size:string) {
+    return hotel_size == "sm" ? get_rand_between(10, 60) : hotel_size == "md" ? get_rand_between(61, 120) : get_rand_between(121, 150)
 }

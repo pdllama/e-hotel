@@ -1,0 +1,120 @@
+{
+    "General Manager": {
+        "salary_chance": 100,
+        "pay_salary_min": 120000,
+        "pay_salary_max": 200000
+    }, 
+    "Assistant Manager": {
+        "salary_chance": 100,
+        "pay_salary_min": 90000,
+        "pay_salary_max": 120000
+    }, 
+    "Sales and Marketing Manager": {
+        "salary_chance": 100,
+        "pay_salary_min": 90000,
+        "pay_salary_max": 120000
+    }, 
+    "Human Resources Manager": {
+        "salary_chance": 100,
+        "pay_salary_min": 90000,
+        "pay_salary_max": 120000
+    },
+    "Receptionist": {
+        "salary_chance": 70,
+        "pay_salary_min": 60000,
+        "pay_salary_max": 80000,
+        "pay_hourly_min": 30,
+        "pay_hourly_max": 40
+    }, 
+    "Concierge": {
+        "salary_chance": 60,
+        "pay_salary_min": 50000,
+        "pay_salary_max": 75000,
+        "pay_hourly_min": 24,
+        "pay_hourly_max": 36
+    }, 
+    "Bellhop": {
+        "salary_chance": 30,
+        "pay_salary_min": 30000,
+        "pay_salary_max": 40000,
+        "pay_hourly_min": 15,
+        "pay_hourly_max": 19
+    }, 
+    "Night Auditor": {
+        "salary_chance": 35,
+        "pay_salary_min": 35000,
+        "pay_salary_max": 40000,
+        "pay_hourly_min": 17,
+        "pay_hourly_max": 19
+    }, 
+    "Doorkeeper": {
+        "salary_chance": 35,
+        "pay_salary_min": 35000,
+        "pay_salary_max": 40000,
+        "pay_hourly_min": 17,
+        "pay_hourly_max": 19
+    },
+    "Executive Housekeeper": {
+        "salary_chance": 70,
+        "pay_salary_min": 45000,
+        "pay_salary_max": 65000,
+        "pay_hourly_min": 22,
+        "pay_hourly_max": 32
+    }, 
+    "Housekeeper": {
+        "salary_chance": 50,
+        "pay_salary_min": 40000,
+        "pay_salary_max": 50000,
+        "pay_hourly_min": 20,
+        "pay_hourly_max": 24
+    }, 
+    "Houseman": {
+        "salary_chance": 75,
+        "pay_salary_min": 55000,
+        "pay_salary_max": 65000,
+        "pay_hourly_min": 26,
+        "pay_hourly_max": 32
+    }, 
+    "Maintenance Technician": {
+        "salary_chance": 90,
+        "pay_salary_min": 70000,
+        "pay_salary_max": 90000,
+        "pay_hourly_min": 34,
+        "pay_hourly_max": 44
+    },
+    "Restaurant Manager": {
+        "salary_chance": 90,
+        "pay_salary_min": 75000,
+        "pay_salary_max": 95000,
+        "pay_hourly_min": 35,
+        "pay_hourly_max": 45
+    }, 
+    "Cook": {
+        "salary_chance": 60,
+        "pay_salary_min": 60000,
+        "pay_salary_max": 75000,
+        "pay_hourly_min": 29,
+        "pay_hourly_max": 36
+    }, 
+    "Server": {
+        "salary_chance": 40,
+        "pay_salary_min": 35000,
+        "pay_salary_max": 45000,
+        "pay_hourly_min": 17,
+        "pay_hourly_max": 22
+    }, 
+    "Bartender": {
+        "salary_chance": 80,
+        "pay_salary_min": 50000,
+        "pay_salary_max": 65000,
+        "pay_hourly_min": 24,
+        "pay_hourly_max": 32
+    }, 
+    "Security Officer": {
+        "salary_chance": 85,
+        "pay_salary_min": 60000,
+        "pay_salary_max": 75000,
+        "pay_hourly_min": 29,
+        "pay_hourly_max": 36
+    }
+}

@@ -11,7 +11,7 @@ export interface Hotel_Assignment {
 export interface Chain_Assignment {
     chain_name: string,
     size: string,    // local, intl
-    origin: string   // if intl, this tells you if this is the origin city of the international chain ie its home country, where to put the co-address. if local, meaningless.
+    city: string   // tells you where to put the co-address
 }
 
 export interface City_Stats {
@@ -22,6 +22,15 @@ export interface City_Stats {
     hotel_chains: string[]
     hotel_sizes: string[],
     hotel_address_uuid: string[]
+}
+
+export interface Hotel_Stats {
+    [key:string]: {
+        [key:number]: {
+            room: {}
+            problems: []
+        }
+    }
 }
 
 export function roll_chance_binary(percent:number) {
@@ -51,4 +60,9 @@ export function roll_chance_multi(percents:number[], results: any[]) {
 // get a random idx given a length
 export function get_rand_idx(length:number) {
     return Math.floor(Math.random() * length)
+}
+
+// get a random integer between min and max
+export function get_rand_between(min:number, max:number) {
+    return (Math.floor(Math.random() * (max - min + 1)) + min)
 }

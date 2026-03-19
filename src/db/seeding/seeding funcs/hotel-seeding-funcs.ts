@@ -1,7 +1,10 @@
 import type { Hotel_Assignment, Chain_Assignment, City_Stats } from './../seedingutils.ts';
-import { get_rand_idx, roll_chance_binary, roll_chance_multi } from './../seedingutils.ts';
+import { get_rand_between, get_rand_idx, roll_chance_binary, roll_chance_multi } from './../seedingutils.ts';
 import {default as chain_name_data} from "./../seeding data/hotel/chain-data.json" with {type:'json'} 
+import {default as role_pay_data} from "./../seeding data/hotel/role-pay-map.json" with {type:'json'} 
 import {v4 as uuidv4} from 'uuid';
+import { employeeRoles } from '../../../static/db_enum_types.ts';
+import { generateEmployee } from './person-seeding.ts';
 
 const chainNamesByLang:{[key:string]: Set<string>} = {}
 
@@ -12,6 +15,14 @@ for (let lang of lang_codes as (keyof ChainType)[]) {
     const chains = chain_name_data[lang]
     const setVer = new Set(chains);
     chainNamesByLang[lang] = setVer
+}
+
+export interface Works_In_Type {
+    address_id: string,
+    SSN:number,
+    role: string,
+    pay_struct: string,
+    pay: number
 }
 
 export function seed_city(
@@ -74,7 +85,7 @@ function decide_hotel_chain(
             // Also, if the hotels in other cities are all international branches, then it also has to be a new chain
 
             const randLocalChainName = popRandom(chainNamesByLang[city_stats[city].lang]);
-            chains.push({chain_name: randLocalChainName, size: "local", origin: city})
+            chains.push({chain_name: randLocalChainName, size: "local", city})
             city_stats[city].hotel_chains.push(randLocalChainName)
             city_stats[city].hotel_sizes.push(decide_hotel_size("local"))
             city_stats[city].hotel_address_uuid.push(uuidv4())
@@ -82,7 +93,7 @@ function decide_hotel_chain(
 
         } else {
             // use existingChain data.
-            chains.push({chain_name: existingChain, size: "local", origin: city})
+            chains.push({chain_name: existingChain, size: "local", city})
             city_stats[city].hotel_chains.push(existingChain)
             city_stats[city].hotel_sizes.push(decide_hotel_size("local"))
             city_stats[city].hotel_address_uuid.push(uuidv4()) // Note: this uuid corresponds to the hotel address_id! Must be unique!
@@ -96,7 +107,7 @@ function decide_hotel_chain(
 
         if (isNewChain || mustBeNew) {
             const randIntlChainName = popRandom(chainNamesByLang[city_stats[city].lang]);
-            const chain_info = {chain_name: randIntlChainName, size: "intl", origin: city}
+            const chain_info = {chain_name: randIntlChainName, size: "intl", city}
             city_stats[city].hotel_chains.push(randIntlChainName),
             city_stats[city].hotel_address_uuid.push(uuidv4())
             city_stats[city].num_hotels+=1
@@ -180,4 +191,49 @@ function getExpandedIntlCountry(
     const intlCities: string[] = Object.keys(city_stats).filter(c => city_stats[c].country != city_stats[city].country && city_stats[c].num_hotels < 5)
 
     return intlCities[get_rand_idx(intlCities.length)] // can be undefined if theres no intl city meeting criteria
+}
+
+const requiredEmpRoles = [
+    'Receptionist', 'Night Auditor', 'Concierge', 'Doorkeeper',
+    'Executive Housekeeper', 'Housekeeper', 'Houseman','Restaurant Manager', 'Cook'
+] // 9 Employees excluding General Manager 
+const managerRoles = ['Assistant Manager', 'Sales and Marketing Manager', 'Human Resources Manager','Restaurant Manager'] // manager roles
+const scaledRoles = ['Housekeeper', 'Receptionist', 'Cook'] // roles that require more as more people come
+const addRoles = ['Maintenance Technician','Server', 'Bartender', 'Security Officer', 'Concierge', 'Bellhop'] // other possible roles 
+
+type RolePayType = typeof role_pay_data
+export function generateEmployees(num_rooms:number, hotel_address_id:string, homeCity:string, homeCityStats:City_Stats) {
+    const rolesAdded = [...requiredEmpRoles]
+    const employees = []
+
+    let i = 10;
+    let m = 10;
+
+    while ((i + 10) < num_rooms) {
+        for (let sr of scaledRoles) {rolesAdded.push(sr)} // add one extra scaled role per 10 extra rooms
+        for (let j=0;j<2;j++) {rolesAdded.push(addRoles[get_rand_idx(addRoles.length)])} // add 2 random addRoles per 10 extra rooms
+        // total 5 extra roles per 10 rooms
+    }
+    while ((m+20) < num_rooms) {
+        rolesAdded.push(managerRoles[get_rand_idx(managerRoles.length)]) // add an extra manager role per 20 extra rooms
+    }
+
+
+
+    for (let r of rolesAdded) {
+        const {person, education_level} = generateEmployee(homeCity, homeCityStats);
+        const roleData = role_pay_data[r as keyof RolePayType];
+        type roleDataType = typeof roleData
+        const pay_struct = roll_chance_binary(roleData.salary_chance) ? "salary" : "hourly"
+        const fullEmployeeData = {person, education_level, works_in: {
+            address_id: hotel_address_id,
+            SSN: person.SSN,
+            role: r,
+            pay_struct,
+            pay: get_rand_between(roleData[`pay-${pay_struct}-min` as keyof roleDataType], roleData[`pay-${pay_struct}-max` as keyof roleDataType])
+        } as Works_In_Type}
+        employees.push(fullEmployeeData)
+    }
+
+    return employees
 }

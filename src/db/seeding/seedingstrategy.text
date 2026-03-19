@@ -53,3 +53,7 @@ The following requirements for seeding should be followed:
     9. ~ 2000 Customers
     10. 
 
+
+Seeding order: 
+    1. Generate hotel/chain assignments by city. 
+    2. INSERT chain + generated co-address for every 

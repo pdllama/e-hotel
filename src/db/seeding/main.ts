@@ -1,6 +1,17 @@
+import "dotenv/config"
+import pkg from "pg"
 import {default as countries} from './seeding data/address-seeding-data.json' with {type:'json'} 
 import { seed_city } from './seeding funcs/hotel-seeding-funcs.ts';
 import type { Hotel_Assignment, Chain_Assignment, City_Stats } from './seedingutils.ts';
+import { seedChains } from "./querybuilders.ts";
+
+const { Client } = pkg;
+
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+})
+
+await client.connect();
 
 // We setup assignments for the num of hotels (3-5 per city)
 
@@ -35,7 +46,11 @@ for (let country of country_codes as (keyof CountriesType)[]) {
     }
 }
 
-// Generates 
+//Inserts hotel chains
+const chainQuery = seedChains(chains, cityStats);
+await client.query(chainQuery);
+
+// Generates hotels per city
 for (let city of Object.keys(cityStats)) {
     const cityStat = cityStats[city];
 
