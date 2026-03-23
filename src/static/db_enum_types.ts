@@ -32,10 +32,12 @@ const roomViewTypes = ['mountain', 'sea'] as const
 const employeeRoles = [
     'General Manager', 'Assistant Manager', 'Sales and Marketing Manager', 'Human Resources Manager',
     'Receptionist', 'Concierge', 'Bellhop', 'Night Auditor', 'Doorkeeper',
-    'Executive Housekeeper', 'Room Attendant', 'Houseman', 'Maintenance Technician',
+    'Executive Housekeeper', 'Housekeeper', 'Houseman', 'Maintenance Technician',
     'Restaurant Manager', 'Cook', 'Server', 'Bartender', 
     'Security Officer'
 ] as const
+
+// Note: const arrays DO NOT CHANGE even when you reload the file. double check that if you ever get errors
 
 const payStruct = ['hourly', 'salary']
 const education = ['less_than_hs', 'hs', 'undergraduate', 'master', 'phd']

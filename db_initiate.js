@@ -49,7 +49,7 @@ for (let f of sqlFiles) {
 await client.query(finalSql);
 
 console.log("Initialized the database!\n")
-console.log("Seeding the database...\n")
+console.log("please call node ./src/db/seeding/main.ts to seed the database.\n")
 
 await client.end();
 

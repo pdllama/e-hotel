@@ -2,22 +2,30 @@
     "General Manager": {
         "salary_chance": 100,
         "pay_salary_min": 120000,
-        "pay_salary_max": 200000
+        "pay_salary_max": 200000,
+        "pay_hourly_min": 0,
+        "pay_hourly_max": 0
     }, 
     "Assistant Manager": {
         "salary_chance": 100,
         "pay_salary_min": 90000,
-        "pay_salary_max": 120000
+        "pay_salary_max": 120000,
+        "pay_hourly_min": 0,
+        "pay_hourly_max": 0
     }, 
     "Sales and Marketing Manager": {
         "salary_chance": 100,
         "pay_salary_min": 90000,
-        "pay_salary_max": 120000
+        "pay_salary_max": 120000,
+        "pay_hourly_min": 0,
+        "pay_hourly_max": 0
     }, 
     "Human Resources Manager": {
         "salary_chance": 100,
         "pay_salary_min": 90000,
-        "pay_salary_max": 120000
+        "pay_salary_max": 120000,
+        "pay_hourly_min": 0,
+        "pay_hourly_max": 0
     },
     "Receptionist": {
         "salary_chance": 70,

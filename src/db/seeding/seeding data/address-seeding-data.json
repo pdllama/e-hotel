@@ -60,7 +60,7 @@
     "language": "EN",
     "street_format": "n p",
     "postal_format": "ldl dld",
-    "cities": ["Ottawa", "Toronto", "Vancouver", "Victoria", "Québec City", "Calgary", "Niagara Falls", "Banff", "Halifax", "St. John's"],
+    "cities": ["Ottawa", "Toronto", "Vancouver", "Victoria", "Québec City", "Calgary", "Niagara Falls", "Banff", "Halifax", "St. John''s"],
     "states": ["Ontario", "Ontario", "British Columbia", "British Columbia", "Québec", "Alberta", "Ontario", "Alberta", "Nova Scotia", "Newfoundland and Labrador"]
   },
   "CL": {
@@ -117,7 +117,7 @@
     "street_format": "p n",
     "postal_format": "ddddd",
     "cities": ["Paris", "Nice"],
-    "states": ["Île-de-France", "Provence-Alpes-Côte d'Azur"]
+    "states": ["Île-de-France", "Provence-Alpes-Côte d''Azur"]
   },
   "DE": {
     "name": "Germany",

@@ -1,5 +1,5 @@
 import type { Hotel_Assignment, Chain_Assignment, City_Stats } from './../seedingutils.ts';
-import { get_rand_between, get_rand_idx, roll_chance_binary, roll_chance_multi } from './../seedingutils.ts';
+import { get_rand_arr_item, get_rand_between, roll_chance_binary, roll_chance_multi } from './../seedingutils.ts';
 import {default as chain_name_data} from "./../seeding data/hotel/chain-data.json" with {type:'json'} 
 import {default as role_pay_data} from "./../seeding data/hotel/role-pay-map.json" with {type:'json'} 
 import {v4 as uuidv4} from 'uuid';
@@ -125,6 +125,7 @@ function decide_hotel_chain(
 
                 city_stats[expansionCity].hotel_chains.push(randIntlChainName)
                 city_stats[expansionCity].hotel_sizes.push(decide_hotel_size("intl"))
+                city_stats[expansionCity].hotel_address_uuid.push(uuidv4())
                 city_stats[expansionCity].num_hotels+=1
             }
         } else {
@@ -161,8 +162,7 @@ function getRandLocalChainNotInCity(
     }
 
 
-
-    return allApplicableLocalChains[get_rand_idx(allApplicableLocalChains.length)] // can be undefined if theres no applicable local chain
+    return get_rand_arr_item(allApplicableLocalChains) // can be undefined if theres no applicable local chain
 } 
 
 function getRandIntlChain( //not in city
@@ -172,12 +172,12 @@ function getRandIntlChain( //not in city
     const intlChains = chains.filter(ca => ca.size == "intl").map(ca => ca.chain_name);
     const applicableIntlChains = intlChains.filter(ch => !curr_city_chains.includes(ch));
 
-    return applicableIntlChains[get_rand_idx(applicableIntlChains.length)] // can be undefined if theres no applicable intl chain
+    return get_rand_arr_item(applicableIntlChains) // can be undefined if theres no applicable intl chain
 }
 
 function popRandom(s:Set<string>) {
     const arr = Array.from(s);
-    const randElement = arr[get_rand_idx(arr.length)];
+    const randElement = get_rand_arr_item(arr);
     s.delete(randElement);
     return randElement
 }
@@ -190,7 +190,7 @@ function getExpandedIntlCountry(
 
     const intlCities: string[] = Object.keys(city_stats).filter(c => city_stats[c].country != city_stats[city].country && city_stats[c].num_hotels < 5)
 
-    return intlCities[get_rand_idx(intlCities.length)] // can be undefined if theres no intl city meeting criteria
+    return get_rand_arr_item(intlCities) // can be undefined if theres no intl city meeting criteria
 }
 
 const requiredEmpRoles = [
@@ -199,7 +199,7 @@ const requiredEmpRoles = [
 ] // 9 Employees excluding General Manager 
 const managerRoles = ['Assistant Manager', 'Sales and Marketing Manager', 'Human Resources Manager','Restaurant Manager'] // manager roles
 const scaledRoles = ['Housekeeper', 'Receptionist', 'Cook'] // roles that require more as more people come
-const addRoles = ['Maintenance Technician','Server', 'Bartender', 'Security Officer', 'Concierge', 'Bellhop'] // other possible roles 
+const addRoles = ['Maintenance Technician', 'Server', 'Bartender', 'Security Officer', 'Concierge', 'Bellhop'] // other possible roles 
 
 type RolePayType = typeof role_pay_data
 export function generateEmployees(num_rooms:number, hotel_address_id:string, homeCity:string, homeCityStats:City_Stats) {
@@ -211,11 +211,13 @@ export function generateEmployees(num_rooms:number, hotel_address_id:string, hom
 
     while ((i + 10) < num_rooms) {
         for (let sr of scaledRoles) {rolesAdded.push(sr)} // add one extra scaled role per 10 extra rooms
-        for (let j=0;j<2;j++) {rolesAdded.push(addRoles[get_rand_idx(addRoles.length)])} // add 2 random addRoles per 10 extra rooms
+        for (let j=0;j<2;j++) {rolesAdded.push(get_rand_arr_item(addRoles))} // add 2 random addRoles per 10 extra rooms
+        i += 10
         // total 5 extra roles per 10 rooms
     }
     while ((m+20) < num_rooms) {
-        rolesAdded.push(managerRoles[get_rand_idx(managerRoles.length)]) // add an extra manager role per 20 extra rooms
+        rolesAdded.push(get_rand_arr_item(managerRoles)) // add an extra manager role per 20 extra rooms
+        m+= 20
     }
 
 
@@ -225,12 +227,16 @@ export function generateEmployees(num_rooms:number, hotel_address_id:string, hom
         const roleData = role_pay_data[r as keyof RolePayType];
         type roleDataType = typeof roleData
         const pay_struct = roll_chance_binary(roleData.salary_chance) ? "salary" : "hourly"
+
+        const pay_min = pay_struct == "salary" ? roleData.pay_salary_min : roleData.pay_hourly_min
+        const pay_max = pay_struct == "salary" ? roleData.pay_salary_max : roleData.pay_hourly_max
+
         const fullEmployeeData = {person, education_level, works_in: {
             address_id: hotel_address_id,
             SSN: person.SSN,
             role: r,
             pay_struct,
-            pay: get_rand_between(roleData[`pay-${pay_struct}-min` as keyof roleDataType], roleData[`pay-${pay_struct}-max` as keyof roleDataType])
+            pay: get_rand_between(pay_min, pay_max)
         } as Works_In_Type}
         employees.push(fullEmployeeData)
     }

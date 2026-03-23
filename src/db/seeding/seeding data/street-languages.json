@@ -29,7 +29,7 @@
   "FR": {
     "prefixes": ["Rue","Avenue","Boulevard","Place","Allée","Chemin"],
     "names": [
-      "de la République","de la Liberté","de la Paix","de la Gare","de l'Église","de la Fontaine","de la Victoire","de la Nation","de l'Europe","du Marché",
+      "de la République","de la Liberté","de la Paix","de la Gare","de l''Église","de la Fontaine","de la Victoire","de la Nation","de l''Europe","du Marché",
       "Victor Hugo","Jean Jaurès","Pasteur","Voltaire","Molière","Descartes","Rousseau","Lafayette","Zola","Balzac",
       "Saint-Michel","Saint-Pierre","Saint-Jean","Saint-Paul","Saint-Jacques","Saint-Louis","Sainte-Anne","Sainte-Marie","Sainte-Claire","Saint-Antoine",
       "du Soleil","de la Lune","du Parc","du Château","du Moulin","du Lac","de la Forêt","des Fleurs","des Écoles","des Lilas",
@@ -65,7 +65,7 @@
       "Roma","Milano","Torino","Napoli","Firenze","Venezia","Genova","Bologna","Verona","Padova",
       "Garibaldi","Mazzini","Cavour","Verdi","Dante","Manzoni","Colombo","Marconi","Leonardo","Michelangelo",
       "Libertà","Indipendenza","Europa","Vittoria","Risorgimento","Unità","Pace","Progresso","Aurora","Primavera",
-      "San Marco","San Giovanni","San Pietro","San Paolo","Santa Maria","Santa Lucia","San Carlo","San Lorenzo","San Francesco","Sant'Antonio",
+      "San Marco","San Giovanni","San Pietro","San Paolo","Santa Maria","Santa Lucia","San Carlo","San Lorenzo","San Francesco","Sant''Antonio",
       "del Sole","della Luna","dei Fiori","del Lago","del Monte"
     ]
   },
@@ -228,6 +228,28 @@
       "Mekong", "ChaoPhraya", "Ping", "Nan", "Yom", "Chi", "Doi", "Phu", "Khao", "Pa",
       "Dao", "Phun", "Nang", "Supaporn", "Srisuda", "Wichai", "Suwan", "Pimchan", "Thida", "Kanok",
       "Chompoo", "Rang", "Saeng", "Nam", "Fah", "Lom", "Fon", "Tawan", "Phloen", "Sang"
+    ]
+  },
+
+  "KL": {
+    "prefixes": ["Aqqusernaq","Aqq.","Aqqusinersuaq","Aqqusinnguaq"],
+    "names": [
+      "Nuuk","Ilulissat","Sisimiut","Qaqortoq","Aasiaat","Maniitsoq","Tasiilaq","Upernavik",
+      "Nanortalik","Paamiut","Kangerluk","Kangia","Kangerlua","Kangerluarsuk","Sermersuaq",
+      "Sermitsiaq","Qeqertaq","Qeqertarsuaq","Qasigiannguit","Avannaata","Kitaa","Tunu",
+      "Kujalleq","Siku","Apuseq","Qanik","Anori","Seqineq","Qaammat","Ulloriaq",
+      "Nuna","Imarsuaq","Kuuk","Kuussuaq","Narsaq","Narsarsuaq","Illu","Illorsuaq",
+      "Tasiq","Tasiusaq"
+    ]
+  },
+  
+  "JP": {
+    "prefixes": ["dori","toori","gai","cho","chome","suji"],
+    "names": [
+      "sakura","matsu","take","ume","kaede","yanagi","tsubaki","fuji","kiku","hagi",
+      "yama","kawa","mori","hayashi","tani","oka","hara","hama","shima","misaki",
+      "higashi","nishi","minami","kita","chuo","hon","shin","moto","dai","sho",
+      "hinode","asahi","yuhi","hikari","tsuki","hoshi","sora","kumo","kaze","ame"
     ]
   }
 }

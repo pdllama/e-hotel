@@ -1,4 +1,5 @@
-import { get_rand_idx, roll_chance_binary, roll_chance_multi, get_rand_between } from "../seedingutils";
+import { roll_chance_binary, roll_chance_multi, get_rand_between, get_rand_arr_item, type Hotel_Stats } from "../seedingutils.ts";
+import { generateRoomProblem, type RoomProblem } from "./room-problem-seeding.ts";
 
 // Note: We differentiate room-specific vs hotel-specific amenities in the calculations here when there's no such distinction in the db (only room-specific).
 // This is just used to seed dynamic, sensible prices.
@@ -28,7 +29,8 @@ export interface RoomType {
     price: number, 
     capacity: number,
     view?: string,
-    extension_possible: boolean
+    extension_possible: boolean,
+    problem?: RoomProblem
 }
 
 export function generateRoom(
@@ -56,7 +58,8 @@ export function generateRoom(
         capacity: roll_chance_multi([60, 30, 10], [1, 2, 4]), // 60% chance for 1 bed, 30% chance for 2 bed, 10% chance for 4 bed
         price: 0,
         view: undefined,
-        extension_possible: false
+        extension_possible: false,
+        problem: undefined
     }
 
     room.price = base_prices[room.capacity == 1 ? "base" : room.capacity == 2 ? "two" : "four"]
@@ -76,8 +79,12 @@ export function generateRoom(
     const room_amns = roll_room_amenities(hotel_size)
     for (let i=0;i<room_amns.length;i++) {room.price += get_rand_between(10, 15)}
 
-    // todo: roll for amenities, roll for extension, update price, roll for problem.
+    const problem_type = roll_chance_multi([95, 4, 1], ["none", "resolved", "ongoing"])
+    if (problem_type != "none") {
+        room.problem = generateRoomProblem(hotel_address_id, room_number, problem_type)
+    }
 
+    return {room, room_amns}
 }
 
 
@@ -88,8 +95,8 @@ export function decideBaseRoomPrice(
     const max = hotel_size == 'sm' ? 70 : hotel_size == 'md' ? 150 : 249
     const base_price = Math.floor(Math.random() * (max - min + 1)) + min;
 
-    const cap2Price = base_price * get_rand_between(1.5, 2); // random num between 1.5-2
-    const cap4Price = base_price * get_rand_between(3, 4); // random num between 3-4
+    const cap2Price = Math.floor(base_price * get_rand_between(1.5, 2)); // random num between 1.5-2
+    const cap4Price = Math.floor(base_price * get_rand_between(3, 4)); // random num between 3-4
 
     return {base: base_price, two: cap2Price, four: cap4Price}
 }
@@ -106,7 +113,7 @@ export function decideHotelAmenities(
     if (numOtherAmns != 0) {
         let freeAmns = other_amns.map(am => am);
         for (let i=0;i<numOtherAmns;i++) {
-            const randAmn = freeAmns[get_rand_idx(freeAmns.length)]
+            const randAmn = get_rand_arr_item(freeAmns)
             base_amns.push(randAmn);
             freeAmns = freeAmns.filter(am => am != randAmn);
         }
@@ -130,7 +137,7 @@ function roll_room_amenities(hotel_size: string) {
     if (num_amns != 0) {
         let freeAmns = room_amenities.map(am => am);
         for (let i=0;i<num_amns;i++) {
-            const randAmn = freeAmns[get_rand_idx(freeAmns.length)]
+            const randAmn = get_rand_arr_item(freeAmns)
             amns.push(randAmn);
             freeAmns = freeAmns.filter(am => am != randAmn);
         }
@@ -138,6 +145,28 @@ function roll_room_amenities(hotel_size: string) {
     return amns;
 }
 
-function roll_num_of_rooms(hotel_size:string) {
+export function roll_num_of_rooms(hotel_size:string) {
     return hotel_size == "sm" ? get_rand_between(10, 60) : hotel_size == "md" ? get_rand_between(61, 120) : get_rand_between(121, 150)
+}
+
+export function roll_room_assignments(hotel_size: string) {
+    // This function rolls the room assignments per floor of a hotel. Aka, how the room numbers will be labelled.
+    // By default:
+    //  - Rooms always start on the second floor (200-300)
+    //  - Room x00 and x01 (ex 200, 201, 300, 301) is always reserved for every hotel.
+    //      - Medium and large size hotels may have x00-x03 and x00-x05 reserved (rolled) for other purposes
+    //  - small hotels will assign 30-35 rooms per floor
+    //  - med hotels will assign 25-30 rooms per floor
+    //  - large hotels will assign 20-25 rooms per floor 
+
+
+    // sm has no extra reserved rooms per floor (0), md has up to 2 extra reserved rooms per floor (2), lg has up to 4 (4).
+    const extra_reserved_assignments = hotel_size == "sm" ? 0 : Math.floor((Math.random()*(hotel_size == "md" ? 3 : 5))) 
+    
+
+    // rpf = rooms per floor
+    const baseline_rpf = hotel_size == "sm" ? 30 : hotel_size == "md" ? 25 : 20
+    const extra_rpf = Math.floor((Math.random()*6))
+
+    return {rpf: baseline_rpf + extra_rpf, reserved: 1+extra_reserved_assignments}
 }

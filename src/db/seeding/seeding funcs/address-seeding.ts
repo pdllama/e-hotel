@@ -1,4 +1,4 @@
-import { get_rand_idx, roll_chance_binary } from '../seedingutils'
+import { get_rand_arr_item, get_rand_idx, roll_chance_binary } from '../seedingutils.ts'
 import {default as streets} from './../seeding data/street-languages.json' with {type: "json"}
 import {default as address} from './../seeding data/address-seeding-data.json' with {type: "json"}
 
@@ -28,8 +28,8 @@ const centralAddressBook: AddressBook = {}
 
 type StreetType = typeof streets
 type AddressType = typeof address
-export function generateNewAddress(city:string, state:string, country:string, lang:string, canAptNum:boolean) {
-    const addressInfo = address[lang as keyof AddressType]
+export function generateNewAddress(city:string, state:string, country:string, lang:string, country_code: string, canAptNum:boolean) {
+    const addressInfo = address[country_code as keyof AddressType]
     const streetData = streets[lang as keyof StreetType];
     let street_name = generateStreetName(streetData, addressInfo.street_format)
     let street_number = generateStreetNum()
@@ -48,8 +48,8 @@ export function generateNewAddress(city:string, state:string, country:string, la
 }
 
 function generateStreetName(streetData:any, format:string) {
-    const randStreetPrefix = streetData.prefixes[get_rand_idx(streetData.prefixes.length)]
-    const randStreetName = streetData.names[get_rand_idx(streetData.names.length)]
+    const randStreetPrefix = get_rand_arr_item(streetData.prefixes)
+    const randStreetName = get_rand_arr_item(streetData.names)
     let streetName = ""
     for (let c of format) {
         if (c == "p") {streetName+=randStreetPrefix}
@@ -118,7 +118,7 @@ function checkUnique(address:Address, uniqueObj:any) {
             }
         }
         if (unique) {
-            centralAddressBook[address.city][address.street_name].push(address)
+            centralAddressBook[address.city][address.postal_code].push(address)
         }
         return unique
     }

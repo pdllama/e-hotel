@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS works_in (
     address_id  UUID,
     role        employee_role,
     pay_struct  pay_structure,
-    pay         INTEGER
+    pay         INTEGER,
     FOREIGN KEY (SSN) REFERENCES employee(SSN),
     FOREIGN KEY (address_id) REFERENCES address(address_id)
 );

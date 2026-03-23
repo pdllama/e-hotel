@@ -1,7 +1,9 @@
-import { education } from '../../../static/db_enum_types';
-import { get_rand_idx, roll_chance_binary, type City_Stats } from '../seedingutils';
+import { education } from '../../../static/db_enum_types.ts';
+import { get_rand_arr_item, get_rand_between, roll_chance_binary, type City_Stats } from '../seedingutils.ts';
 import {default as names} from './../seeding data/name-data.json' with {type: 'json'}
-import { generateNewAddress, type Address } from './address-seeding';
+import {default as roleMap} from "./../seeding data/hotel/role-pay-map.json" with {type: "json"}
+import { generateNewAddress, type Address } from './address-seeding.ts';
+import { monthDays } from '../seedingutils.ts';
 
 export interface PersonType {
     address: Address,
@@ -14,17 +16,18 @@ export interface PersonType {
 // We limit the amount of registration years to make logic for archives slightly easier.
 const validRegistrationYears = ['2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022']
 //mappings of month - # days in month
-const monthDays:{[key:number]: number} = 
-{1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
+
 
 
 type NameType = typeof names
 const centralSSNSet:Set<number> = new Set()
+const managerSalaryData = roleMap["General Manager"]
 
-export function generateEmployee(homeCity:string, homeCityStats:City_Stats) {
+export function generateEmployee(homeCity:string, homeCityStats:City_Stats, is_manager:boolean = false) {
     const person:PersonType = generatePerson(homeCity, homeCityStats);
-    const education_level = education[get_rand_idx(education.length)] // Rand education level.
-    return {person, education_level}
+    const education_level = get_rand_arr_item(education) // Rand education level.
+    const extra = is_manager ? {salary: get_rand_between(managerSalaryData.pay_salary_min, managerSalaryData.pay_salary_max)} : {}
+    return {person, education_level, ...extra}
 }
 
 export function generateCustomer(homeCity:string, homeCityStats:City_Stats) {
@@ -34,7 +37,7 @@ export function generateCustomer(homeCity:string, homeCityStats:City_Stats) {
 }
 
 function generatePerson(homeCity:string, homeCityStats:City_Stats) {
-    const addressData:Address = generateNewAddress(homeCity, homeCityStats.state, homeCityStats.country, homeCityStats.lang, true);
+    const addressData:Address = generateNewAddress(homeCity, homeCityStats.state, homeCityStats.country, homeCityStats.lang, homeCityStats.country_code, true);
     const nameData = generateNames(homeCityStats.lang);
     let SSN = generateSSN();
 
@@ -82,7 +85,7 @@ function generateNames(lang:string) {
     let last_name:string;
     if (nonLangName) {
         const otherLangs = Object.keys(names).filter(l => l != lang)
-        const randL = otherLangs[get_rand_idx(otherLangs.length)];
+        const randL = get_rand_arr_item(otherLangs);
         actualLang = randL
     }
     const langNamesData = names[actualLang as keyof NameType]
@@ -99,12 +102,12 @@ function generateNames(lang:string) {
 }
 
 function pullRandName(names:string[]) {
-    return names[get_rand_idx(names.length)];
+    return get_rand_arr_item(names);
 }
 
 function generateRegistrationYear() {
-    const year = validRegistrationYears[get_rand_idx(validRegistrationYears.length)];
+    const year = get_rand_arr_item(validRegistrationYears);
     const monthNum = Math.floor((Math.random()*12)+1);
-    const day = Math.floor(Math.random()*(monthDays[monthNum])+1)
+    const day = Math.floor(Math.random()*(monthDays[monthNum-1])+1)
     return `${year}-${monthNum}-${day}`
 }

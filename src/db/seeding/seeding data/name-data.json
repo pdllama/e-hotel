@@ -445,5 +445,20 @@
         "Vestergaard", "Engelbrecht", "Fischer", "Olsen", "Jensen", "Poulsen", "Kleist", "Mortensen",
         "Rasmussen", "Berthelsen", "Jakobsen", "Abelsen", "Frederiksen", "Motzfeldt", "Hansen", "Larsen"
     ]
-    }
+  },
+
+  "JP": {
+    "first_name": [
+      "Haruto","Yuto","Sota","Yuki","Hayato","Ryota","Kaito","Ren","Hinata","Takumi",
+      "Yui","Aoi","Sakura","Hina","Mei","Rin","Yuna","Akari","Nanami","Mio",
+      "Daiki","Kenta","Shota","Tsubasa","Keita","Riku","Kazuya","Naoki","Sho","Itsuki",
+      "Ayaka","Haruka","Kana","Rika","Sayaka","Emi","Kaori","Mika","Natsuki","Asuka"
+    ],
+    "last_name": [
+      "Sato","Suzuki","Takahashi","Tanaka","Watanabe","Ito","Yamamoto","Nakamura","Kobayashi","Kato",
+      "Yoshida","Yamada","Sasaki","Yamaguchi","Matsumoto","Inoue","Kimura","Hayashi","Shimizu","Yamazaki",
+      "Mori","Abe","Ikeda","Hashimoto","Ishikawa","Yamashita","Ogawa","Ishii","Hasegawa","Goto",
+      "Okada","Kondo","Maeda","Fujita","Endo","Aoki","Sakamoto","Murakami","Ota","Kaneko"
+    ]
+  }
 }

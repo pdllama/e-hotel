@@ -2,6 +2,8 @@
 // 1. make function to generate a random postal code for each allowed country
 // 2. function to generate 
 
+import { roll_num_of_rooms } from "./seeding funcs/room-seeding.ts"
+
 
 export interface Hotel_Assignment {
     chain_name: string,
@@ -17,6 +19,7 @@ export interface Chain_Assignment {
 export interface City_Stats {
     state: string,
     country: string,
+    country_code: string,
     lang: string,
     num_hotels: number,
     hotel_chains: string[]
@@ -25,12 +28,28 @@ export interface City_Stats {
 }
 
 export interface Hotel_Stats {
-    [key:string]: {
-        [key:number]: {
+    [key:string]: { // address_id
+        [key:number]: { // room_number
             room: {}
             problems: []
         }
     }
+}
+
+export interface ProblemMapping {
+    // maps out timing of room problems
+    [key:string]: { // hotel address_id
+        [key:number]: { // room_number
+            [key:number]: { // year
+                [key: number]: // month
+                    Set<Number> // set of days where there is a problem so no one can make a stay.
+            }
+        }
+    }
+}
+
+export interface Hotel_RoomNum_Map {
+    [key:string]: {size: string, numRooms: number, city: string}
 }
 
 export function roll_chance_binary(percent:number) {
@@ -67,15 +86,19 @@ export function get_rand_between(min:number, max:number) {
     return (Math.floor(Math.random() * (max - min + 1)) + min)
 }
 
+export function get_rand_arr_item(arr:any[]) {
+    return arr[get_rand_idx(arr.length)];
+}
+
 const year_min = 2000
 const year_max = 2026
-const monthDays:{[key:number]: number} = 
-{1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
+export const monthDays:{[key:number]: number} = 
+{0: 31, 1: 28, 2: 31, 3: 30, 4: 31, 5: 30, 6: 31, 7: 31, 8: 30, 9: 31, 10: 30, 11: 31} // 0-based so mod works.
 
 export function get_rand_date() {
     const year = get_rand_between(year_min, year_max).toString();
     const monthNum = Math.floor((Math.random()*12)+1);
-    const day = Math.floor(Math.random()*(monthDays[monthNum])+1);
+    const day = Math.floor(Math.random()*(monthDays[monthNum-1])+1);
     return `${year}-${monthNum < 10 ? `0${monthNum}` : monthNum}-${day < 10 ? `0${day}` : day}`
 }
 
@@ -84,44 +107,50 @@ export function get_rand_date_after(date:string, frame:number, min:number=1) {
     // min refers to the minimum number of days that must pass after the date. usually 1
     // note date will always be in the format "YYYY-MM-DD"
 
-    let date_year = parseInt(date.slice(0, date.indexOf("-")))
-    let date_month = parseInt(date.slice(date.indexOf("-")+1, date.indexOf("-")+3));
-    let date_day = parseInt(date.slice(date.length-2, date.length));
+    let {year, month, day} = parse_date(date)
 
     const addDays = get_rand_between(min, frame);
-    date_day += addDays 
-    while (date_day > monthDays[date_month%12]) {
-        date_day -= monthDays[date_month%12];
-        date_month += 1
+    day += addDays 
+    while (day > monthDays[((month-1)%12)]) {
+        day -= monthDays[(month-1)%12];
+        month += 1
     } 
-    while (date_month > 12) {
-        date_month -= 12
-        date_year++
+    while (month > 12) {
+        month -= 12
+        year++
     }
 
-    return `${date_year}-${date_month < 10 ? `0${date_month}` : date_month}-${date_day < 10 ? `0${date_day}` : date_day}`
+    return `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
 }
+
+export function parse_date(date:string) {
+    //parses a YYYY-MM-DD formatted date-string into its respective number components.
+    let year = parseInt(date.slice(0, date.indexOf("-")))
+    let month = parseInt(date.slice(date.indexOf("-")+1, date.indexOf("-")+3));
+    let day = parseInt(date.slice(date.length-2, date.length));
+    return {year, month, day}
+}
+
+
 
 export function get_rand_date_before(date:string, frame:number, min:number=1) {
     //same as above but before a date before
     // Algorithm is a little different, though.
 
-    let date_year = parseInt(date.slice(0, date.indexOf("-")))
-    let date_month = parseInt(date.slice(date.indexOf("-")+1, date.indexOf("-")+3));
-    let date_day = parseInt(date.slice(date.length-2, date.length));
+    let {year, month, day} = parse_date(date)
 
     const removeDays = get_rand_between(min, frame);
-    date_day -= removeDays 
-    while (date_day < 0) {
-        date_month -= 1
-        if (date_month < 1) {
-            date_month = 12;
-            date_year--;
+    day -= removeDays 
+    while (day < 1) {
+        month -= 1
+        if (month < 1) {
+            month = 12;
+            year--;
         }
-        date_day += monthDays[date_month];
+        day += monthDays[month-1];
     }
 
-    return `${date_year}-${date_month < 10 ? `0${date_month}` : date_month}-${date_day < 10 ? `0${date_day}` : date_day}`
+    return `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`
 }
 
 export function get_rand_time() {
@@ -133,4 +162,46 @@ export function get_rand_time() {
     const sec = secNum < 10 ? "0"+secNum : secNum.toString();
 
     return `${hour}:${min}:${sec}`
+}
+
+export function convertToHotelSizeMapping(cityStatMapping:{[key:string]: City_Stats}) {
+    const cities = Object.keys(cityStatMapping)
+    const result:Hotel_RoomNum_Map = {}
+    for (let city of cities) {
+        const cityStat = cityStatMapping[city]
+        for (let i = 0; i < cityStat.hotel_chains.length; i++) {
+            const hotelSize = cityStat.hotel_sizes[i]
+            result[cityStat.hotel_address_uuid[i]] = {size: hotelSize, numRooms: roll_num_of_rooms(hotelSize), city}
+        }
+    }
+    return result
+}
+
+export function addProblemMap(
+    address_id: string,
+    room_number: number,
+    year: number,
+    month:number,
+    day:number,
+    problemMap:ProblemMapping
+) {
+    const roomProblems = problemMap[address_id][room_number];
+    if (roomProblems[year] == undefined) {
+        roomProblems[year] = {}
+    }
+    if (roomProblems[year][month] == undefined) {
+        roomProblems[year][month] = new Set<number>();
+    }
+    roomProblems[year][month].add(day)
+}
+
+export function getCurrDateComponents() {
+    const date = new Date();
+    return {year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate()}
+}
+
+export function getYearDiff(date1:string, date2:string) {
+    let year1 = parseInt(date1.slice(0, date1.indexOf("-")))
+    let year2 = parseInt(date2.slice(0, date2.indexOf("-")))
+    return year2-year1
 }

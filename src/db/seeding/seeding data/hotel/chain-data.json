@@ -49,7 +49,7 @@
     "Hotel Rey Juan Carlos","Barcelo Royal Beach","Eurostars Suites","Catalonia Plaza","Vincci Soho",
     "Sercotel Plaza","H10 Andalucia","Parador de Granada","Tryp Atocha","Meliá Castilla","Barceló Sants",
     "NH Zurich","Eurostars Tower","Iberostar Las Letras","Vincci Mae","Sercotel Alfonso","H10 Urquinaona",
-    "Meliá Collection", "Gran Meliá", "Barceló Royal Beach", "Parador de Santiago", "Melia Granada", "Barceló Sevilla", "Eurostars Madrid",
+    "Meliá Collection", "Gran Meliá", "Parador de Santiago", "Melia Granada", "Barceló Sevilla", "Eurostars Madrid",
     "AC Hotel Malaga Palacio", "NH Collection Valencia", "H10 Costa Adeje", "Vincci Frontaura",
     "Iberostar Marbella", "Meliá Palma Bay", "Barceló Punta Umbria", "Sercotel Alcala", "Tryp Madrid Centro",
     "NH Collection Sevilla", "H10 Las Palmeras", "Vincci Capitol",
@@ -72,12 +72,12 @@
     "Kyriad Hotels","Adagio Aparthotel","Citadines Hotel","Pierre & Vacances Centre","Hôtel Mercure Bordeaux",
     "Hotel Concorde Montparnasse","Pullman Paris Tour Eiffel","Sofitel Paris Arc de Triomphe","Hotel Le Meurice",
     "Le Royal Monceau Raffles","Maison Albar Hotels Le Pont-Neuf","Hotel Molitor Paris","Hotel de Nell",
-    "Hotel d'Aubusson","Hotel Les Jardins de la Villa","Hotel Westin Paris Vendome","Hotel Vernet","Hotel Regina Louvre",
-    "Le Burgundy Paris","Hotel Le Dokhan's","Le Roch Hotel & Spa","Hotel Lutetia Paris","Hôtel du Collectionneur",
+    "Hotel d''Aubusson","Hotel Les Jardins de la Villa","Hotel Westin Paris Vendome","Hotel Vernet","Hotel Regina Louvre",
+    "Le Burgundy Paris","Hotel Le Dokhan''s","Le Roch Hotel & Spa","Hotel Lutetia Paris","Hôtel du Collectionneur",
     "Hotel Banke Paris","Hotel Montaigne","Hôtel Le Petit Paris","Maison Souquet","Hotel Brighton Paris",
     "Hotel Saint James Paris","Hotel Castille Paris","Hotel Grand Powers","Hotel La Belle Juliette","Hotel de Seze",
     "Hotel Fauchon Paris","Hotel Panache","Hôtel du Palais Biarritz","Le Grand Hotel Cannes","Hotel Martinez Cannes",
-    "Hotel Negresco Nice","Hotel Le Meurice Nice","Le Royal Antibes","Hotel La Bastide Saint-Tropez","Château de la Chèvre d'Or",
+    "Hotel Negresco Nice","Hotel Le Meurice Nice","Le Royal Antibes","Hotel La Bastide Saint-Tropez","Château de la Chèvre d''Or",
     "Hotel Les Roches Rouges","Hotel Cap Estel","Hotel Barrière Le Majestic","Hotel Barrière Le Normandy","Le Pigalle Hotel",
     "Mama Shelter Toulouse","Mama Shelter Marseille","Mama Shelter Lyon","Hôtel Vernet Paris","Hotel Marignan Champs-Elysées"
   ],
@@ -250,7 +250,7 @@
     "Campanile",
     "TripleTree by Hilton",
     "Hotel Elite Bristol",
-    "Andel's Hotels"
+    "Andel''s Hotels"
   ],
   "RO": [
     "Athenee Palace Hilton",
@@ -284,7 +284,7 @@
   ],
   "KL": [
     "Hotel Hans Egede",
-    "Seamen's Home Hotel",
+    "Seamen''s Home Hotel",
     "Hotel Arctic",
     "Hotel Sisimiut",
     "Hotel Nordlys",
