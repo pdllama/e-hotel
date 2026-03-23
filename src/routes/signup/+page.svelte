@@ -15,7 +15,6 @@
     let nameInit = {first_name: "", middle_name: "", last_name: ""}
     let form_data = $state({SSN: "", address: addressInit, name: nameInit})
 
-    // $inspect(form_data.address.country)
 </script>
 <div class='flex flex-col justify-start items-center gap-2 w-[90%] sm:w-auto'>
     <h1 class="text-3xl font-bold mb-4">Sign up</h1>
