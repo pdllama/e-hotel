@@ -189,6 +189,31 @@ export function seedReview(review:any) {
     return query
 }
 
+export function seedContactInfo(
+    is_email:boolean,
+    is_hotel:boolean,
+    idStr:string, //string that is used to identify the entity. chain_name for chains address_id for hotels
+    arrData:string[]
+) {
+    const relation_name = is_hotel ? 
+        is_email ? 'hotel_email' : "hotel_phone_number" : 
+        is_email ? "chain_email" : "chain_phone_number"
+    const att1 = is_hotel ? "address_id" : "chain_name"
+    const att2 = is_email ? "e_mail" : "phone_number"
+    const baseQuery = `
+        INSERT INTO ${relation_name}(${att1}, ${att2}) VALUES(`
+
+    let finalQuery = ""
+
+    for (let data of arrData) {
+        let copyQuery = baseQuery;
+        copyQuery += `'${idStr}', '${data}');\n`
+        finalQuery += copyQuery
+    }
+
+    return finalQuery
+}
+
 function seedFieldConditionally(values:any, field:string, returnFieldName: boolean, nonnumeric:boolean = false) {
     return values[field] != undefined ? `, ${returnFieldName ? field : nonnumeric ? `'${values[field]}'` : values[field]}` : ""
 }

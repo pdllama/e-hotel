@@ -4,12 +4,13 @@ import {default as countries} from './seeding data/address-seeding-data.json' wi
 import {default as amenities} from './seeding data/hotel/room-amenities.json' with {type:'json'}
 import { generateEmployees, seed_city } from './seeding funcs/hotel-seeding-funcs.ts';
 import { type Hotel_Assignment, type Chain_Assignment, type City_Stats, type Hotel_Stats, type Hotel_RoomNum_Map, convertToHotelSizeMapping, type ProblemMapping, parse_date, addProblemMap, get_rand_arr_item, roll_chance_multi, get_rand_between } from './seedingutils.ts';
-import { seedArchive, seedChains, seedCustomer, seedHotelEmployees, seedHotelRoom, seedHotels, seedReview } from "./querybuilders.ts";
+import { seedArchive, seedChains, seedContactInfo, seedCustomer, seedHotelEmployees, seedHotelRoom, seedHotels, seedReview } from "./querybuilders.ts";
 import { decideBaseRoomPrice, decideHotelAmenities, generateRoom, roll_room_assignments } from "./seeding funcs/room-seeding.ts";
 import {add, eachDayOfInterval} from "date-fns"
 import { generateCustomer } from "./seeding funcs/person-seeding.ts";
 import { generateArchive } from "./seeding funcs/archive-seeding.ts";
 import { generateReview } from "./seeding funcs/review-seeding.ts";
+import { generateChainEmails, generateHotelEmails, generateHotelNumbers } from "./seeding funcs/contact-seeding.ts";
 
 const { Client } = pkg;
 
@@ -19,9 +20,16 @@ const client = new Client({
 
 await client.connect();
 
-console.log("Deleting previous on the tables, if there were any...\n")
+console.log("Deleting previous values on the tables, if there were any...\n")
 
-const tables = ["review", "rental", "booking", "archive", "customer", "room_problem", "room_has_amenity", "amenity", "room", "works_in", "hotel", "employee", "hotel_chain", "person", "address"];
+const tables = [
+    "chain_email", "chain_phone_number", "hotel_email", "hotel_phone_number", 
+    "review", 
+    "rental", "booking", "archive", "customer", 
+    "room_problem", "room_has_amenity", "amenity", "room", 
+    "works_in", "hotel", "employee", "hotel_chain", 
+    "person", "address"
+];
 for (let t of tables) {await client.query(`DELETE FROM ${t}`)} // just deletes other data
 
 
@@ -127,6 +135,11 @@ console.log("Seeded Room Amenities!\n")
 
 console.log("Seeding Hotel Rooms...")
 
+
+// WARNING: THERE IS SOMETIMES AN INFINITE LOOP OCCURRING AT THIS STAGE.
+// Please triple-check the logic.
+
+
 // Generates the rooms for the hotels based on hotelSizeMapping
 for (let hid of hotel_address_ids) {
     problemMap[hid] = {}
@@ -140,7 +153,6 @@ for (let hid of hotel_address_ids) {
     let firstUsableRoom = currentRoom
     let roomLimit = currentRoom+rpf //roomLimit is the room number that is the last room number of the floor +1, because we count 202. ex 202 with rpf = 20, this value would be 222 when the last room number would be 221
     let numRoomsToBeAdded = sizeData.numRooms;
-    
 
     let insertQuery = ""
     while(numRoomsToBeAdded > 0) {
@@ -305,6 +317,36 @@ for (let hid of hotel_address_ids) {
 }
 
 console.log("Seeded Reviews!\n")
+
+console.log("Seeding Chain/Hotel Contact Info...")
+
+const visitedChains = new Set;
+
+for (let ch of chains) {
+    if (visitedChains.has(ch.chain_name)) {continue;} // chains has multiple same 
+    visitedChains.add(ch.chain_name)
+    let chContactQuery = ""
+    const emails = generateChainEmails(ch.chain_name);
+    const numbers = generateHotelNumbers();
+    chContactQuery += seedContactInfo(true, false, ch.chain_name, emails)
+    chContactQuery += seedContactInfo(false, false, ch.chain_name, numbers)
+    await client.query(chContactQuery)
+}
+
+for (let hid of hotel_address_ids) {
+    const hotelStat = hotelSizeMapping[hid];
+    const i = cityStats[hotelStat.city].hotel_address_uuid.indexOf(hid)
+    const chain_name = cityStats[hotelStat.city].hotel_chains[i]
+    
+    let hotelContactQuery = ""
+    const emails = generateHotelEmails(hotelStat.size, hotelStat.city, chain_name)
+    const phoneNumbers = generateHotelNumbers();
+    hotelContactQuery += seedContactInfo(true, true, hid, emails);
+    hotelContactQuery += seedContactInfo(false, true, hid, phoneNumbers);
+    await client.query(hotelContactQuery);
+}
+
+console.log("Seeded Chain/Hotel Contact Info!")
 
 console.log("\nSeeding complete! \n")
 
