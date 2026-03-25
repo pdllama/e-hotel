@@ -29,4 +29,4 @@ CREATE TABLE IF NOT EXISTS profile_picture (
     SSN     INTEGER,
     FOREIGN KEY (url) REFERENCES photo(url),
     FOREIGN KEY (SSN) REFERENCES person(SSN)
-)
+);

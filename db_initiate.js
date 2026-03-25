@@ -19,6 +19,10 @@ const sqlFiles = [
     "contact", "photo"
 ]
 
+const viewsFiles = [
+    "hotel_views"
+]
+
 let finalSql = ""
 // Constructing the string to create the ENUM types for the SQL query.
 // We have to do it this way rather than do it in an SQL file
@@ -44,6 +48,10 @@ for (let i = 0;i<allTypes.length;i++) {
 
 for (let f of sqlFiles) {
     finalSql += fs.readFileSync(`src/db/schema/${f}.sql`, "utf8")
+}
+
+for (let v of viewsFiles) {
+    finalSql += fs.readFileSync(`src/db/views/${v}.sql`, "utf8")
 }
 
 await client.query(finalSql);

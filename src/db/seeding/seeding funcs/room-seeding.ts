@@ -5,7 +5,7 @@ import { generateRoomProblem, type RoomProblem } from "./room-problem-seeding.ts
 // This is just used to seed dynamic, sensible prices.
 // Amenities are found in room-amenities.json in seeding
 
-const hotel_amenities = [
+export const hotel_amenities = [
     "Air Conditioning", "Heating", "Wi-Fi", "Room Service", "Toiletries", "Soundproofing",
     "Eco-friendly Amenities", "Baby Cot", "Wheelchair Accessible", "Pet-friendly" 
 ]

@@ -1,12 +1,64 @@
 
 
 
-/* Improve this view */
+/* View on the search page */
 CREATE VIEW hotel_search_table as 
-SELECT address_id, AVG(rating) as avg_rating, COUNT(*) as num_rooms, country, state, city, postal_code, street_name, street_number, chain_name
+SELECT address_id, avg_rating, num_rooms, avg_price, country, state, city, postal_code, street_name, street_number, chain_name, amenities
 FROM address 
     JOIN hotel using (address_id) 
     JOIN hotel_chain using (chain_name) 
-    JOIN room using (address_id) 
-    JOIN review using (address_id)
+    JOIN (
+		SELECT address_id, COUNT(*) as num_rooms, AVG(price) as avg_price FROM room GROUP BY address_id
+	) using (address_id) 
+    JOIN (
+		SELECT address_id, AVG(rating) as avg_rating FROM review GROUP BY address_id 
+	) using (address_id)
+    JOIN (
+    SELECT address_id, json_agg(amenity_name) AS amenities 
+    FROM (
+      SELECT DISTINCT h.address_id, rha.amenity_name
+      FROM hotel h LEFT JOIN room_has_amenity rha ON (h.address_id = rha.address_id)
+    )
+    GROUP BY address_id
+  ) using (address_id);
         
+/* View on the show hotel page */
+
+CREATE VIEW hotel_show_view AS
+SELECT address_id, avg_rating, num_rooms, avg_price, country, state, city, postal_code, street_name, street_number, chain_name, amenities, phone_numbers, emails
+FROM hotel_search_table
+  JOIN (
+    SELECT address_id, json_agg(phone_number) AS phone_numbers
+    FROM hotel_phone_number
+	  GROUP BY (address_id)
+  ) using (address_id)
+  JOIN (
+    SELECT address_id, json_agg(e_mail) AS emails
+    FROM hotel_email
+	  GROUP BY (address_id)
+  ) using (address_id);
+
+/* For cards in home page, and assignment instructions */
+CREATE VIEW rooms_by_area as
+SELECT DISTINCT city, avg_price, num_hotels, num_avail_rooms
+FROM address
+    JOIN (
+      SELECT city, state, country, AVG(price) AS avg_price
+      FROM address NATURAL JOIN room
+      GROUP BY (city, state, country)
+    ) using (city, state, country)
+    JOIN (
+      SELECT city, state, country, COUNT(*) AS num_avail_rooms
+      FROM address NATURAL JOIN room r
+      WHERE NOT EXISTS (
+        SELECT 1
+        FROM archive ar
+        WHERE (r.address_id = ar.address_id) AND (r.room_number = ar.room_number) AND ar.status IN ('booked', 'renting')
+      )
+      GROUP BY (city, state, country)
+    ) using (city, state, country)
+    JOIN (
+      SELECT city, state, country, COUNT(*) AS num_hotels
+      FROM address NATURAL JOIN hotel
+      GROUP BY (city, state, country)
+    ) using (city, state, country);

@@ -1,27 +1,26 @@
 <script lang="ts">
     import TextInput from "$lib/components/text-input.svelte";
     import searchIcon from "$lib/assets/search-icon.png"
-    import { enter_search } from "./searchlogic";
     import { debounce } from "$lib/util/debounce";
     import SearchDebounceResult from "./searchdebounceresult.svelte";
+    import { enter_search } from "./search_logic";
+    import { onMount } from "svelte";
 
     let search_input = $state("");
     let debounce_search_input = $state("");
-    let show_result = $state(false)
-    function clear() {search_input = "";}
-    function input_search(e:HTMLInputElement) {search_input = e.value; show_result = false;}
+    let focusedText = $state(false)
+    function clear() {search_input = ""; debounce_search_input=""}
+    function input_search(e:HTMLInputElement) {search_input = e.value;}
 
     const debounceUpdate = debounce<string>((val) => {
         debounce_search_input = val;
-        show_result = true;
     }, 750);
 
-    $inspect(debounce_search_input)
 
 </script>
 
 
-<div class="flex flex-col size-full max-w-[1000px] justify-start items-center gap-2">
+<div class="flex flex-col size-full max-w-[1000px] justify-start items-center gap-2 relative">
     <div class="flex w-[80%] items-center justify-center rounded-sm border border-black mx-2">
         <TextInput
             placeholder="Search Cities, Hotels, etc."
@@ -37,12 +36,21 @@
             clearHandler={clear}
             submitHandler={enter_search}
             submitText="SEARCH"
+            focusInHandler={() => focusedText=true}
+            focusOutHandler={() => focusedText=false}
         />
-        <SearchDebounceResult
-            search_query={debounce_search_input}
-            divClasses="w-[100%] max-w-[1000px] h-[50px] bg-white rounded-lg"
-        />
+        
     </div>
+    <SearchDebounceResult
+        search_query={debounce_search_input}
+        change_actual_text={(c:string) => search_input = c}
+        focused={focusedText}
+        divClasses="
+            flex w-[80%] items-center justify-center 
+            rounded-sm rounded-t-none border border-t-[0] border-black 
+            mx-2 absolute top-[52px] bg-white
+        "
+    />
     <div class="flex flex-col w-[80%] min-h-[400px] items-center justify-center">
         <p class="text-gray-500 italic text-size-[16px]">No search data</p>
     </div>

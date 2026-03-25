@@ -9,7 +9,8 @@
         clearHandler=null, submitHandler=null, //optional elements
         submitText="", submitButtonClasses="", submitTextClasses="", //optional elements
         label="", labelClasses="", showBorder=false, borderColor="black", //optional
-        numeric=false, charLimit=null //optional
+        numeric=false, charLimit=null, //optional
+        focusInHandler=null, focusOutHandler=null, //optional
     } = $props();
 
     const removePlaceholder = (e: HTMLInputElement) => {e.placeholder = "";}
@@ -61,8 +62,14 @@
         `}
         style={`border: 1px solid ${showBorder? borderColor : "white"}; border-radius: 8px;`}
         {...inputProps}
-        onfocus={(e) => forwardTarget(e, removePlaceholder)}
-        onfocusout={(e) => forwardTarget(e, replacePlaceholder)}
+        onfocus={(e) => {
+            if (focusInHandler!= null) {focusInHandler()}
+            forwardTarget(e, removePlaceholder)
+        }}
+        onfocusout={(e) => {
+            if (focusOutHandler!= null) {focusOutHandler()}
+            forwardTarget(e, replacePlaceholder)
+        }}
     />
     {#if (clearHandler !== null)}
             <Button
