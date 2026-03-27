@@ -37,6 +37,61 @@ export function city_debounced_query(query:string) {
             `
 }
 
+
+// The main search querying function. Filters by:
+//  1. chain_name/city name by a single query.
+//  2. minimum rating
+//  3. amenities
+//  4. price range
+export function search_hotel(query:string, numrows:number, otherQueries:any={}, skip:number=0) {
+    const {minRating, priceRange, amenities} = otherQueries // All this information gets formatted before this function is called
+
+    return `
+            SELECT address_id, chain_name, city, country, avg_price, avg_rating, amenities, COUNT(*) OVER() AS totalCount
+            FROM hotel_search_table as h
+            ${build_search_where_clause(query, minRating, priceRange, amenities)}
+            OFFSET ${skip} ROWS FETCH NEXT ${numrows} ROWS ONLY
+            `
+}
+
+function build_search_where_clause(query:string, minRating:number, price_range: {min:number, max:number}, amenities: string[]) {
+    let baseWhere = 'WHERE'
+    if (query) {baseWhere += ` (chain_name LIKE '%${query}%' OR city LIKE '%${query}%')`}
+    if (minRating) {baseWhere += ` ${baseWhere == "WHERE" ? '' : 'AND'} avg_rating >= ${minRating}`}
+    if (price_range != undefined) {baseWhere += ` ${baseWhere == "WHERE" ? '' : 'AND'} (avg_price > ${price_range.min} AND avg_price < ${price_range.max})`}
+    if (amenities != undefined) {
+        baseWhere += ` ${baseWhere == "WHERE" ? '' : 'AND'} EXISTS (
+            SELECT 1 
+            FROM (
+            ${hotels_with_all_specified_amenities(amenities)}
+            ) am
+            WHERE h.address_id = am.address_id
+        )`
+    }
+    return baseWhere == "WHERE" ? "" : baseWhere
+}
+
+// This function essentially does R/S where R is the table of hotels and their amenities, and S is the table of amenities we're looking for.
+// Allows us to query the hotels by which amenities any of their rooms have.
+function hotels_with_all_specified_amenities(amenities:string[]) {
+    const searched_for_amenities = build_valid_amenities_table(amenities);
+    return `
+        SELECT address_id
+        FROM (${get_all_hotel_amenities()})
+        WHERE amenity_name IN (${searched_for_amenities})
+        GROUP BY address_id
+        HAVING COUNT(*) = (SELECT COUNT(*) FROM (${searched_for_amenities}));
+    `
+}
+
+function build_valid_amenities_table(amenities:string[]) {
+    let whereClause = `WHERE`
+    for (let amenity of amenities) {
+        whereClause += ` amenity_name = '${amenity}'`
+    }
+    return `SELECT amenity_name FROM amenity ${whereClause}`
+}
+
 export function get_all_hotel_amenities() {
     return `SELECT DISTINCT address_id, amenity_name FROM room_has_amenity`
 }

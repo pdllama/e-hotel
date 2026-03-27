@@ -4,6 +4,7 @@
         children,
         onClick=() => {},
         buttonClasses="",
+        forceSubmit=false,
         totalContainerClasses="" // If we need a container around the button. optional
     } = $props();
 
@@ -44,6 +45,12 @@
             }
         }, 600)
     }
+
+    $effect(() => {
+        if (forceSubmit == true) {
+            button.click()
+        }
+    })
 </script>
 
 <style>

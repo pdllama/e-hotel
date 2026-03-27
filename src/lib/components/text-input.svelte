@@ -15,6 +15,8 @@
 
     const removePlaceholder = (e: HTMLInputElement) => {e.placeholder = "";}
     const replacePlaceholder = (e: HTMLInputElement) => {e.placeholder = placeholder}
+
+    let submitButton = $state(false)
 </script>
 
 <style>
@@ -45,6 +47,11 @@
             forwardTarget(e, oninput)
         }}
         onkeydown={(e:KeyboardEvent) => {
+            if (e.key === "Enter") {
+                console.log('HIT HERE')
+                e.preventDefault();
+                submitButton = true;
+            }
             if (numeric && e.key.length == 1 && isNaN(parseInt(e.key))) {
                 // If numeric and they typed a non-number
                 e.preventDefault()
@@ -83,6 +90,7 @@
             <Button
                 onClick={submitHandler}
                 buttonClasses={`min-w-[70px] mr-1 p-2 rounded-lg blue ${submitButtonClasses}`}
+                forceSubmit={submitButton}
             >
                 <span class={submitTextClasses}>{submitText}</span>
             </Button>

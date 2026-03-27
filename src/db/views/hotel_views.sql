@@ -5,15 +5,17 @@
 CREATE VIEW hotel_search_table as 
 SELECT address_id, avg_rating, num_rooms, avg_price, country, state, city, postal_code, street_name, street_number, chain_name, amenities
 FROM address 
-    JOIN hotel using (address_id) 
-    JOIN hotel_chain using (chain_name) 
-    JOIN (
-		SELECT address_id, COUNT(*) as num_rooms, AVG(price) as avg_price FROM room GROUP BY address_id
+    JOIN hotel using (address_id) /* Hotel Info */
+    JOIN hotel_chain using (chain_name) /* hotel_chain for chain_name */
+    JOIN ( /* total number of rooms and average price of the rooms */
+		SELECT address_id, COUNT(*) as num_rooms, AVG(price) as avg_price 
+    FROM room 
+    GROUP BY address_id
 	) using (address_id) 
-    JOIN (
+    JOIN ( /* average rating */
 		SELECT address_id, AVG(rating) as avg_rating FROM review GROUP BY address_id 
 	) using (address_id)
-    JOIN (
+    JOIN ( /* All amenities */
     SELECT address_id, json_agg(amenity_name) AS amenities 
     FROM (
       SELECT DISTINCT h.address_id, rha.amenity_name
@@ -23,7 +25,6 @@ FROM address
   ) using (address_id);
         
 /* View on the show hotel page */
-
 CREATE VIEW hotel_show_view AS
 SELECT address_id, avg_rating, num_rooms, avg_price, country, state, city, postal_code, street_name, street_number, chain_name, amenities, phone_numbers, emails
 FROM hotel_search_table
