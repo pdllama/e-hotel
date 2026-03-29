@@ -11,10 +11,9 @@ export async function load({url}:any) {
     const amenities = parseAmenitiesQuery(url.searchParams.get('amenities'))
 
     const otherQueries = {minRating, priceRange, amenities}
-    
 
     const numResults = 10
     const skip = page == undefined ? 0 : (page-1)*10
     const search_results = await dbPool.query(search_hotel(q, numResults, otherQueries, skip)).then(v => v.rows)
-    return {search_results}
+    return {search_results, otherQueries}
 }

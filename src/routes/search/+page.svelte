@@ -13,7 +13,7 @@
     interface SearchResult {search_results: any[]}
 
     // This will scream at you. Ignore it. It works.
-    let { data }: SearchResult = $props();
+    let { data, otherQueries }: SearchResult = $props();
     const q = page.url.searchParams.get('q');
 
     let search_input = $state(q ? q : '');
@@ -45,7 +45,7 @@
             icon={searchIcon}
             iconAlt="search icon"
             clearHandler={clear}
-            submitHandler={() => enter_search(search_input, page.url.search)}
+            submitHandler={() => enter_search(search_input, page.url.search.slice(1, page.url.search.length))}
             submitText="SEARCH"
             focusInHandler={() => focusedText=true}
             focusOutHandler={() => focusedText=false}
@@ -64,7 +64,7 @@
     />
     <div class="size-full flex justify-start align-center gap-5 my-8">
 
-        <FilterBar/>
+        <FilterBar currentQ={search_input}/>
         <div class={`flex flex-col w-[80%] min-h-[400px] justify-${data.search_results.length == 0 ? 'center' : 'start'} gap-1`}>
             {#if (data.search_results.length != 0)}
             <p class="mb-1 text-[12px] italic">{data.search_results[0].totalcount} results found</p>

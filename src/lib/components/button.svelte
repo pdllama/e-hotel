@@ -5,7 +5,9 @@
         onClick=() => {},
         buttonClasses="",
         forceSubmit=false,
-        totalContainerClasses="" // If we need a container around the button. optional
+        totalContainerClasses="", // If we need a container around the button. optional
+        disableRipple=false, //if we need to disable this.
+        otherButtonProps={}
     } = $props();
 
     let button:HTMLButtonElement;
@@ -78,8 +80,10 @@
     }
 </style>
 
-<button bind:this={button} class={`relative overflow-hidden cursor-change ${buttonClasses}`} onclick={ripple_handler}>
+<button bind:this={button} class={`relative overflow-hidden cursor-change ${buttonClasses}`} onclick={disableRipple ? (e:MouseEvent) => onClick() : ripple_handler} {...otherButtonProps}>
     {@render children()} 
+    {#if (!disableRipple)}
     <span bind:this={span} class="ripple-class"></span>
+    {/if}
 </button>
 

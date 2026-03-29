@@ -54,11 +54,11 @@ export function search_hotel(query:string, numrows:number, otherQueries:any={}, 
             `
 }
 
-function build_search_where_clause(query:string, minRating:number, price_range: {min:number, max:number}, amenities: string[]) {
+function build_search_where_clause(query:string, minRating:number, price_range: {min:number, max:number|string}, amenities: string[]) {
     let baseWhere = 'WHERE'
-    if (query) {baseWhere += ` (chain_name LIKE '%${query}%' OR city LIKE '%${query}%')`}
+    if (query) {baseWhere += ` (UPPER(chain_name) LIKE UPPER('%${query}%') OR UPPER(city) LIKE UPPER('%${query}%'))`}
     if (minRating) {baseWhere += ` ${baseWhere == "WHERE" ? '' : 'AND'} avg_rating >= ${minRating}`}
-    if (price_range != undefined) {baseWhere += ` ${baseWhere == "WHERE" ? '' : 'AND'} (avg_price > ${price_range.min} AND avg_price < ${price_range.max})`}
+    if (price_range != undefined) {baseWhere += ` ${baseWhere == "WHERE" ? '' : 'AND'} (avg_price > ${price_range.min}${price_range.max == 'inf' ? '' : ` AND avg_price < ${price_range.max}`})`}
     if (amenities != undefined) {
         baseWhere += ` ${baseWhere == "WHERE" ? '' : 'AND'} EXISTS (
             SELECT 1 
@@ -75,19 +75,21 @@ function build_search_where_clause(query:string, minRating:number, price_range: 
 // Allows us to query the hotels by which amenities any of their rooms have.
 function hotels_with_all_specified_amenities(amenities:string[]) {
     const searched_for_amenities = build_valid_amenities_table(amenities);
-    return `
+    const query = `
         SELECT address_id
         FROM (${get_all_hotel_amenities()})
         WHERE amenity_name IN (${searched_for_amenities})
         GROUP BY address_id
-        HAVING COUNT(*) = (SELECT COUNT(*) FROM (${searched_for_amenities}));
+        HAVING COUNT(*) = (SELECT COUNT(*) FROM (${searched_for_amenities}))
     `
+    return query
 }
 
 function build_valid_amenities_table(amenities:string[]) {
     let whereClause = `WHERE`
-    for (let amenity of amenities) {
-        whereClause += ` amenity_name = '${amenity}'`
+    for (let i = 0; i < amenities.length ; i++) {
+        const amenity = amenities[i]
+        whereClause += ` amenity_name = '${amenity}'${i != amenities.length-1 ? ` OR` : ''}`
     }
     return `SELECT amenity_name FROM amenity ${whereClause}`
 }
