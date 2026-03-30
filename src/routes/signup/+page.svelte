@@ -1,6 +1,8 @@
 <script lang="ts">
+    import { goto } from "$app/navigation";
     import Button from "$lib/components/button.svelte";
     import TextInput from "$lib/components/text-input.svelte";
+    import { addNotification } from "$lib/notificationStore";
     import AddressInput from "$lib/partial/signup-form/address-input.svelte";
     import PersonInfoInput from "$lib/partial/signup-form/person-info-input.svelte";
     import { stateChanges } from "./signuplogic";
@@ -14,6 +16,17 @@
     }
     let nameInit = {first_name: "", middle_name: "", last_name: ""}
     let form_data = $state({SSN: "", address: addressInit, name: nameInit})
+
+    const submit = async() => {
+        const response = await fetch(`/signup`, {method: 'POST', body: JSON.stringify(form_data)}).then(data => data.json())
+        if (response.status == 400) {
+            addNotification({body: response.error, success: false, errorStatus: 400})
+        }
+        else if (response.status == 201) {
+            addNotification({body: 'Created User!', success: true, errorStatus: null})
+            goto('/login')
+        }
+    }
 
 </script>
 <div class='flex flex-col justify-start items-center gap-2 w-[90%] sm:w-auto'>
@@ -44,6 +57,7 @@
     />
     <Button
         buttonClasses={"bg-cyan-400 border border-black mb-8 rounded p-3 sm:mt-8"}
+        onClick={submit}
     >
         <span class="text-xl font-bold font-mono">SIGN UP</span>
     </Button>

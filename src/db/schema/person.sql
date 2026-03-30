@@ -28,3 +28,10 @@ CREATE TABLE IF NOT EXISTS works_in (
     FOREIGN KEY (SSN) REFERENCES employee(SSN),
     FOREIGN KEY (address_id) REFERENCES address(address_id)
 );
+
+CREATE TABLE IF NOT EXISTS sessions (
+    session_token   TEXT PRIMARY KEY,
+    SSN             INTEGER NOT NULL,
+    expires_at      TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (SSN) REFERENCES person(SSN) ON DELETE CASCADE
+);

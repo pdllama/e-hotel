@@ -1,3 +1,5 @@
+import { State } from "country-state-city"
+
 type SignupFormData = {
     SSN: string, 
     address: {
@@ -34,7 +36,7 @@ enum StreetField {
 const stateChanges = {
     handleSSNChange: (value:string, state:SignupFormData) => {return {...state, SSN: value}},
     handleNameChange: (value:string, state:SignupFormData, field:NameField) => {
-       return {...state, name: {...state.name, [field]:value}}
+       return {...state, name: {...state.name, [field]: value}}
     },
 
     handleStreetChange: (value:string, state:SignupFormData, field:StreetField) => {
@@ -45,7 +47,6 @@ const stateChanges = {
         }
 
         // const newObj = type == "number" ? {number: value} : type == "apt_number" ? {apt_number: value} : {name: value}
-        // state.address.street[field] = value
         return {...state, address: {...state.address, street: {...state.address.street, [field]: value}}}
     },
 
@@ -54,11 +55,8 @@ const stateChanges = {
             // ... do special regex checking for postal code here
         }
 
-        // We want to reset state/city if country is changed
-        const otherFields = field == AddressField.country ? {state: "", city: ""} : {}
-
         // state.address[field] = value
-        return {...state, address: {...state.address, [field]: value, ...otherFields}}
+        return {...state, address: {...state.address, [field]: value}}
     }
 }
 

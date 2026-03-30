@@ -52,9 +52,26 @@ function enter_search(query:string, otherQueries:string) {
     }
 }
 
-function pagination(query:string, pageNum:number) {
-
+function change_page(query:string, otherQueries:string, newPage:number, oldPage:number) {
+    const otherQueriesString = getOtherQueriesString(otherQueries) // This includes p= by design, if page is there
+    const addition = newPage == 1 ? 
+        otherQueriesString.includes('p=') ? false : '' : 
+        !otherQueriesString.includes('p=') ? `p=${newPage}` : true
+    const realOtherQueriesString = addition == false ? 
+        (otherQueriesString.indexOf('&') == -1 ? '' : otherQueriesString.slice(otherQueriesString.indexOf('&')+1, otherQueriesString.length) ): 
+        addition == true ? otherQueriesString.replace(`p=${oldPage}`, `p=${newPage}`) : 
+        addition == '' ? otherQueriesString : addition+`${otherQueriesString == "" ? '' : `&${otherQueriesString}`}`
+        
+    if (query == '' || query == null) {
+        
+        const urlstring = `/search${realOtherQueriesString == '' ? '' : `?${realOtherQueriesString}`}`
+        goto(urlstring);
+    } else {
+        const urlstring = `/search?q=${query}${realOtherQueriesString != "" ? `&${realOtherQueriesString}` : ''}`;
+        goto(urlstring);
+    }
 }
+
 
 function getOtherQueriesString(fullQueryString:string) {
     if (fullQueryString == "") {return ""}
@@ -80,7 +97,50 @@ function parsePriceRange(queryString:string|null) {
     return {min: formatted[0], max: priceRange[1] == 'inf' ? 'inf' : formatted[1]}
 }
 
+function createPagination(page:number, maxPage: number) {
+    const leftPagination:(number|'...')[] = [1]
+    const rightPagination:(number|'...')[] = (page == maxPage || page == maxPage-1) ? [] : [maxPage]
+    switch (page) {
+        case (1):
+            if (maxPage > 3) {rightPagination.unshift('...')}
+            rightPagination.unshift(2);
+            leftPagination.pop()
+            break
+        case (2):
+            if (maxPage > 4) {rightPagination.unshift('...')}
+            if (maxPage != 2) {rightPagination.unshift(3);}
+            break
+        case (3):
+            leftPagination.push(2);
+            if (maxPage > 5) {rightPagination.unshift('...')}
+            if (maxPage != 3) {rightPagination.unshift(4);}
+            break
+        case (maxPage-2):
+            leftPagination.push('...')
+            leftPagination.push(page-1)
+            rightPagination.unshift(maxPage-1)
+            break
+        case (maxPage-1):
+            leftPagination.push('...')
+            leftPagination.push(page-1)
+            rightPagination.push(maxPage)
+            break
+        case (maxPage):
+            leftPagination.push('...')
+            leftPagination.push(page-1)
+            break
+        default: 
+            leftPagination.push('...')
+            leftPagination.push(page-1)
+            rightPagination.unshift('...')
+            rightPagination.unshift(page+1)
+    }
+    
+    return {leftPagination, rightPagination}
+}
+
 export {
     enter_search, parseAmenitiesQuery, parsePriceRange,
-    getNewRatingQuery, getNewPriceRangeQuery, getNewAmenitiesQuery, build_query_conditionally
+    getNewRatingQuery, getNewPriceRangeQuery, getNewAmenitiesQuery, build_query_conditionally,
+    createPagination, change_page
 }

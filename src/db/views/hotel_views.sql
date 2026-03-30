@@ -26,7 +26,7 @@ FROM address
         
 /* View on the show hotel page */
 CREATE VIEW hotel_show_view AS
-SELECT address_id, avg_rating, num_rooms, avg_price, country, state, city, postal_code, street_name, street_number, chain_name, amenities, phone_numbers, emails
+SELECT address_id, avg_rating, num_rooms, total_capacity, avg_price, country, state, city, postal_code, street_name, street_number, chain_name, amenities, phone_numbers, emails
 FROM hotel_search_table
   JOIN (
     SELECT address_id, json_agg(phone_number) AS phone_numbers
@@ -37,6 +37,11 @@ FROM hotel_search_table
     SELECT address_id, json_agg(e_mail) AS emails
     FROM hotel_email
 	  GROUP BY (address_id)
+  ) using (address_id)
+  JOIN (
+    SELECT address_id, SUM(capacity) AS total_capacity
+    FROM room
+    GROUP BY (address_id)
   ) using (address_id);
 
 /* For cards in home page, and assignment instructions */

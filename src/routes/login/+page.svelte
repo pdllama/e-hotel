@@ -1,9 +1,22 @@
 <script lang="ts">
     import TextInput from "$lib/components/text-input.svelte";
     import Button from "$lib/components/button.svelte";
+    import { addNotification } from "$lib/notificationStore";
+    import { goto } from "$app/navigation";
 
     let SSNinput = $state("")
     const changeInput = (e:HTMLInputElement) => {SSNinput = e.value}
+
+    async function submit() {
+        const response = await fetch(`/login`, {method: 'POST', body: JSON.stringify({SSN: SSNinput})}).then(data => data.json())
+        if (response.error) {
+            addNotification({body: response.error, success: false, errorStatus: response.status})
+        }
+        else {
+            addNotification({body: 'Logged In!', success: true, errorStatus: null})
+            goto('/')
+        }
+    }
 
 </script>
 
@@ -25,6 +38,7 @@
     />
     <Button
         buttonClasses={"bg-cyan-400 border border-black rounded p-3 my-8"}
+        onClick={() => submit()}
     >
         <span class="text-xl font-bold font-mono">LOGIN</span>
     </Button>

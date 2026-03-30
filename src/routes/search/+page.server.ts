@@ -5,7 +5,7 @@ import { parseAmenitiesQuery, parsePriceRange } from "./search_logic"
 
 export async function load({url}:any) {
     const q = url.searchParams.get('q')
-    const page = url.searchParams.get('page')
+    const page = url.searchParams.get('p')
     const minRating = url.searchParams.get('rating')
     const priceRange = parsePriceRange(url.searchParams.get('price'))
     const amenities = parseAmenitiesQuery(url.searchParams.get('amenities'))

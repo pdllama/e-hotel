@@ -2,7 +2,7 @@
     import Select from "$lib/components/select/select.svelte";
     import TextInput from "$lib/components/text-input.svelte";
     import { AddressField, NameField, StreetField } from "../../../routes/signup/signuplogic";
-    import {listOfCountries, getListOfStatesByCountry, getListOfCitiesByCountry} from "./../../../static/address_inputs.ts"
+    import {listOfCountries, countryNameToIsoCodeMap, getListOfStatesByCountry, getListOfCitiesByCountry} from "./../../../static/address_inputs.ts"
 
     let {
         addressValues=$bindable(),
@@ -20,8 +20,8 @@
     // To-do : make the derivation of the below two more responsive.
     //          See slowdown when selecting France as the country
 
-    let stateSelectOptions = $derived.by(() => addressValues.country == "" ? [] : getListOfStatesByCountry(addressValues.country))
-    let citySelectOptions = $derived.by(() => addressValues.country == "" ? [] : getListOfCitiesByCountry(addressValues.country))
+    let stateSelectOptions = $derived.by(() => addressValues.country == "" ? [] : getListOfStatesByCountry(countryNameToIsoCodeMap[addressValues.country]))
+    let citySelectOptions = $derived.by(() => addressValues.country == "" ? [] : getListOfCitiesByCountry(countryNameToIsoCodeMap[addressValues.country]))
 
     
 
