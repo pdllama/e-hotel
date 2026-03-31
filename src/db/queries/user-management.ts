@@ -61,3 +61,11 @@ export function get_user_data_from_session(token:string) {
         WHERE session_token = '${token}'
     `
 }
+
+export function get_employed_hotels(SSN:number) {
+    return `
+        SELECT SSN, role, address_id, chain_name, street_name, street_number, city, state, country, postal_code
+        FROM works_in NATURAL JOIN hotel NATURAL JOIN address
+        WHERE SSN = ${SSN}
+    `
+}

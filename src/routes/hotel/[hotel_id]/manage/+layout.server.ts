@@ -1,0 +1,19 @@
+import { dbPool } from "../../../../db/pool";
+import { authenticate, authorize } from "../../../authentication";
+
+export async function load({ locals, params, url }:any) {
+    authenticate(locals, '/login', {body: 'You have to login to view this route!', success: false, errorStatus: 401})
+    const fullData = await dbPool.query(`SELECT * FROM hotel NATURAL JOIN address NATURAL JOIN works_in WHERE SSN = ${locals.user.SSN}`).then(v => v.rows[0])
+    authorize(fullData != undefined, `/hotel/${params.hotel_id}`, {body: "You aren't authorized to view this route!", success: false, errorStatus: 403})
+
+    //Full Data:
+    //  all attributes of hotel (chain_name, address_id)
+    //  all attributes of works_in (role, paystruct, pay)
+    //  all attributes of associating address
+
+    return {
+        user: {...locals.user},
+        pathname: url.pathname,
+        manageData: {...fullData, is_manager: fullData.manager_id == locals.user.SSN}
+    };
+}

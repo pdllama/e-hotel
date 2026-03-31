@@ -21,8 +21,9 @@
              <p class="text-[24px]">{data.user.accountType[0].toUpperCase()+data.user.accountType.slice(1, data.user.accountType.length)} Account</p>
         </div>
     </div>
-    <div class='flex flex-col justify-center align-center size-full md:flex-row gap-2'>
+    <div class='flex flex-col justify-center align-center size-full md:flex-row gap-2 grow'>
         <div class='flex flex-row align-center w-[100%] h-[100%] md:flex-col md:w-[20%]'>
+            <div class='flex flex-row align-center w-[100%] h-full md:flex-col'>
             {#each settingsOpts as setting}
                 <Button 
                     buttonClasses={`
@@ -40,9 +41,13 @@
                     <p class={`font-bold text-[20px] ${active_opt != setting ? 'opacity-50' : ''}`}>{setting == 'info' ? "Account Info" : setting == 'bookings' ? 'Bookings' : 'Employment'}</p>
                 </Button>
             {/each}
+            </div>
+            
         </div>
+        
         <div class='flex flex-col w-[100%] md:w-[80%]'>
             {@render children()}
         </div>
     </div>
+    
 </div>

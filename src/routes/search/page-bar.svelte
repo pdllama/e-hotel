@@ -6,11 +6,14 @@
     let {
         page=$bindable(1),
         numResults=$bindable(0),
+        numResultsPerPage=10,
         query,
-        queryString
+        queryString,
+        customChangePage=null
     } = $props()
 
-    let maxPage = Math.ceil(numResults % 10 == 0 ? numResults/10-1 : numResults/10)
+    // svelte-ignore state_referenced_locally
+    let maxPage = Math.ceil(numResults % numResultsPerPage == 0 ? numResults/numResultsPerPage-1 : numResults/numResultsPerPage)
 
     const pagination:Pagination = $derived(createPagination(page, maxPage))
     const iteration = $derived([...pagination.leftPagination, page, ...pagination.rightPagination])
@@ -18,7 +21,8 @@
     const handleChangePage = (newPage:number) => {
         let oldPage = page;
         page = newPage;
-        change_page(query, queryString, newPage, oldPage)
+        if (customChangePage) {customChangePage(newPage)}
+        else {change_page(query, queryString, newPage, oldPage)}
     }
 
     //${p == '...' ? '' : 'border border-gray-500'}

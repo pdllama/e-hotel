@@ -20,8 +20,6 @@ export async function POST({ request }:any) {
         }
     }
 
-    console.log(address_id)
-
     try {
         if (create_new_add && editedAddress) {await dbPool.query(insert_address(address, address_id))}
         await dbPool.query(edit_user(SSN, name.first_name, name.middle_name, name.last_name, address_id));

@@ -2,7 +2,7 @@
     import TextInput from "$lib/components/text-input.svelte";
     import Button from "$lib/components/button.svelte";
     import { addNotification } from "$lib/notificationStore";
-    import { goto } from "$app/navigation";
+    import { goto, invalidateAll } from "$app/navigation";
 
     let SSNinput = $state("")
     const changeInput = (e:HTMLInputElement) => {SSNinput = e.value}
@@ -14,6 +14,7 @@
         }
         else {
             addNotification({body: 'Logged In!', success: true, errorStatus: null})
+            await invalidateAll()
             goto('/')
         }
     }

@@ -44,6 +44,26 @@ FROM hotel_search_table
     GROUP BY (address_id)
   ) using (address_id);
 
+CREATE VIEW chain_view AS
+SELECT co_address, chain_name, street_name, street_number, postal_code, city, state, country, phone_numbers, emails, num_hotels
+FROM hotel_chain
+  JOIN address ON (co_address = address_id)
+  JOIN (
+    SELECT chain_name, json_agg(phone_number) AS phone_numbers
+    FROM chain_phone_number
+    GROUP BY (chain_name)
+  ) USING (chain_name)
+  JOIN (
+    SELECT chain_name, json_agg(e_mail) AS emails
+    FROM chain_email
+    GROUP BY (chain_name)
+  ) USING (chain_name)
+  JOIN (
+    SELECT chain_name, COUNT(*) AS num_hotels
+    FROM hotel
+    GROUP BY (chain_name)
+  ) USING (chain_name)
+
 /* For cards in home page, and assignment instructions */
 CREATE VIEW rooms_by_area as
 SELECT DISTINCT city, avg_price, num_hotels, num_avail_rooms

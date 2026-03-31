@@ -102,6 +102,10 @@ export function get_specific_hotel(add_id:string) {
     return `SELECT * FROM hotel_show_view WHERE address_id = '${add_id}'`
 }
 
+export function get_specific_chain(chain_name:string) {
+    return `SELECT * FROM chain_view WHERE chain_name = '${chain_name}'`
+}
+
 // SELECT address_id, chain_name, city, country, avg_price, avg_rating, amenity_name
 // FROM hotel_search_table NATURAL JOIN (
 // 	SELECT DISTINCT ON (address_id, amenity_name) address_id, amenity_name

@@ -1,9 +1,17 @@
 <script lang="ts">
-    import { goto } from '$app/navigation';
+    import { goto, invalidateAll } from '$app/navigation';
     import Button from '$lib/components/button.svelte';
+    import { addNotification } from '$lib/notificationStore.js';
 
 
     let {data} = $props()
+
+    const logout = async() => {
+        await fetch(`/logout`, {method: 'POST'});
+        addNotification({body: 'Logged out!', success:true, errorStatus: 201})
+        await invalidateAll()
+        goto('/')
+    } 
 
 </script>
 
@@ -16,4 +24,7 @@
     <p class='text-[18px]'><span class='font-bold'>Postal Code: </span> {data.user.postal_code}</p>
     <p class='text-[18px]'><span class='font-bold'>Location: </span> {data.user.city}, {data.user.state}, {data.user.country}</p>
     <Button buttonClasses='p-2 bg-indigo-200 rounded-lg mt-5 w-[150px] hover:bg-indigo-300' onClick={() => goto(`/user/${data.user.ssn}/edit`)}>Edit Information</Button>
+    <div class='flex flex-col mt-15'>
+        <Button buttonClasses='p-2 bg-cyan-100 hover:bg-cyan-200 border border-black rounded-lg w-[150px]' onClick={logout}>Log Out</Button>
+    </div>
 </div>
