@@ -4,7 +4,8 @@
         listOfOptions, selected=$bindable(""), changeSelected,
         name,
         divClasses="", label="", labelClasses="", //optional
-        disabled=false//optional
+        disabled=false,//optional
+        singleValue=false, //If options come in a diff format
     } = $props()
 
 </script>
@@ -22,9 +23,9 @@
 >
     {#each listOfOptions as option}
         <option 
-            value={option.value}
+            value={singleValue ? option : option.value}
         >
-            {option.name}
+            {singleValue ? option : option.name}
         </option>
     {/each}
 </select>

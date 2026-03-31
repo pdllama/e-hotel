@@ -6,10 +6,10 @@
     let { children, data } = $props();
 
     // svelte-ignore state_referenced_locally
-    const settingsOpts = data.user.accountType == 'Customer' ? ['info', 'bookings'] : ['info', 'bookings', 'employment']
+    const settingsOpts = data.user.accountType == 'customer' ? ['info', 'bookings'] : ['info', 'bookings', 'employment']
 
     // svelte-ignore state_referenced_locally
-    let active_opt = $state(data.pathname.includes('bookings') ? 'bookings' : (data.pathname.includes('employment') && data.user.accountType != 'Customer') ? 'employment' : 'info')
+    let active_opt = $state(data.pathname.includes('bookings') ? 'bookings' : (data.pathname.includes('employment') && data.user.accountType != 'customer') ? 'employment' : 'info')
 
 </script>
 

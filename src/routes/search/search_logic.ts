@@ -74,7 +74,7 @@ function change_page(query:string, otherQueries:string, newPage:number, oldPage:
 
 
 function getOtherQueriesString(fullQueryString:string) {
-    if (fullQueryString == "") {return ""}
+    if (!fullQueryString) {return ""}
     if (fullQueryString.includes('q=') && (!fullQueryString.includes('&'))) {return ''}
     if (fullQueryString.includes('q=')) {return fullQueryString.slice(fullQueryString.indexOf('&')+1, fullQueryString.length)}
     return fullQueryString

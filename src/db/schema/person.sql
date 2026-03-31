@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS employee (
 
 CREATE TABLE IF NOT EXISTS customer (
     SSN                 INTEGER     PRIMARY KEY,
-    registration_date   DATE,
+    registration_date   DATE        DEFAULT CURRENT_DATE,
     FOREIGN KEY (SSN) REFERENCES person(SSN)
 );
 
