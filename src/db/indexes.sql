@@ -5,8 +5,7 @@
     Useful because we want to ensure theres no overlap between archives, which requires frequent checks on archives 
     for all customers looking to book rooms
  */
-CREATE INDEX archive_availability
-ON archive (address_id, room_number, status, stay_start_date, stay_end_date);
+CREATE INDEX archive_availability ON archive (address_id, room_number, status, stay_start_date, stay_end_date);
 
 
 /* 

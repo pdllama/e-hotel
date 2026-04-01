@@ -43,14 +43,14 @@ function construct_c_booking_where(status:string, from:string, to:string) {
     return where
 }
 
-export function get_archive(aID:string) {
+export function get_archive(aID:string, hotel_sided:boolean=false) {
     return `
         SELECT
         av.archive_id, av.address_id, av.guest_id, av.room_number, av.status, 
         av.stay_start_date, av.stay_end_date,
         av.created_at, av.paid_for,
         av.check_in_time, av.check_out_time,
-        av.chain_name, av.street_name, av.street_number, av.city, av.state, av.country,
+        ${hotel_sided ? 'av.first_name, av.middle_name, av.last_name' : 'av.chain_name, av.street_name, av.street_number, av.city, av.state, av.country'},
         av.price, av.capacity, av.view, av.extension_possible, amenities
         FROM archive_view av LEFT JOIN ( 
             SELECT ta.address_id, ta.room_number, json_agg(amenity_name) AS amenities 
@@ -98,6 +98,42 @@ export function get_nearest_booking(address_id:string, room_number:number) {
         )
     `
 }
+
+export function search_hotel_bookings(hotel_id:number, status:string, from:string, to: string, name:string, room_num:number, skip:number=0) {
+    return `
+        SELECT
+        archive_id, address_id, room_number, status, 
+        stay_start_date, stay_end_date,
+        created_at, paid_for,
+        first_name, middle_name, last_name,
+        check_in_time, check_out_time, 
+        price, capacity, COUNT(*) OVER() AS totalCount
+        FROM archive_view
+        WHERE address_id = '${hotel_id}'${construct_h_booking_where(status, from, to, name, room_num)} 
+        OFFSET ${skip} ROWS FETCH NEXT 10 ROWS ONLY
+    `
+}
+
+function construct_h_booking_where(status:string, from:string, to:string, name:string, room_num:number) {
+    let where = ''
+    if (status) {
+        where += ` AND status = '${status}'`
+    }
+    if (from) {
+        where += ` AND stay_start_date > '${from}'`
+    }
+    if (to) {
+        where += ` AND stay_end_date < '${to}'`
+    }
+    if (name) {
+        where += ` AND (UPPER(first_name) LIKE UPPER('%${name}%') OR UPPER(middle_name) LIKE UPPER('%${name}%') OR UPPER(last_name) LIKE UPPER('%${name}%'))`
+    }
+    if (room_num) {
+        where += ` AND room_number = ${room_num}`
+    }
+    return where
+}
+
 
 
 // archive_id      UUID    PRIMARY KEY,

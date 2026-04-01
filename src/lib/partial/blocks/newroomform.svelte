@@ -9,11 +9,12 @@
 
     let {
         finalizeFunc,
-        init={number: '', price: '', capacity: 1, view: null, extension_possible: false, amenities: []}
+        init={number: '', price: '', capacity: 1, view: null, extension_possible: false, amenities: []} as NewRoomType,
+        update=false
     } = $props()
 
     
-    let state:NewRoomType = $state({number: '', price: '', capacity: 1, view: null, extension_possible: false, amenities: []})
+    let state:NewRoomType = $state(init)
     const amenityOptions = [
         'Air Conditioning', 'Heating', 'Wi-Fi', 'Television', 'Mini Bar', 'Refrigerator', 'Coffee Maker', 'Safe', 'Desk', 'Seating Area', 
         'Room Service', 'Hair Dryer', 'Toiletries', 'Bathrobe', 'Slippers', 'Bathtub', 'Iron', 'Closet', 'Soundproofing', 'Electric Kettle',
@@ -27,7 +28,7 @@
 </script>
 
 <div class='flex flex-col gap-4 ml-4'>
-    <p class='font-bold text-[24px] mb-3'>Create New Room</p>
+    <p class='font-bold text-[24px] mb-3'>{update ? 'Update Room' : 'Create New Room'}</p>
     <TextInput
         placeholder={'e.g. 202'}
         label={'Room Number: '}
@@ -94,5 +95,5 @@
             {/each}
         </div>
     </div>
-    <Button buttonClasses='p-2 bg-cyan-100 hover:bg-cyan-200 cursor-pointer border border-black rounded-lg w-[150px] mb-6' onClick={() => finalizeFunc(state)}>Add New Room</Button>
+    <Button buttonClasses='p-2 bg-cyan-100 hover:bg-cyan-200 cursor-pointer border border-black rounded-lg w-[150px] mb-6' onClick={() => finalizeFunc(state)}>{update ? 'Update' : 'Add New'} Room</Button>
 </div>

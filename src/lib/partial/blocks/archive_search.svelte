@@ -7,11 +7,14 @@
     import Archiveblock from "../ui/archiveblock.svelte";
     import { page } from "$app/state";
     import Button from "$lib/components/button.svelte";
+    import TextInput from "$lib/components/text-input.svelte";
+    import { stateChanges } from "../../../routes/signup/signuplogic";
 
     let {
         data,
         gotoFunc,
-        archiveBlockFunction
+        archiveBlockFunction,
+        hotel_side=false
         // data.search_state = {
         //  status:string, 
         // from: {day, month, year (numbers)}, 
@@ -41,6 +44,8 @@
         if (from && search_state.status != 'renting') { if (searchQuery.length != 0) {searchQuery+='&'} searchQuery+=`from=${from}`}
         const to = parseTimestamp(search_state.to)
         if (to && search_state.status != 'renting') { if (searchQuery.length != 0) {searchQuery+='&'} searchQuery+=`to=${to}`}
+        if (search_state.name && hotel_side) {if (searchQuery.length != 0) {searchQuery+='&'} searchQuery+= `name=${search_state.name}`}
+        if (search_state.room && hotel_side) {if (searchQuery.length != 0) {searchQuery+='&'} searchQuery+= `room=${search_state.room}`}
         return searchQuery == '' ? '' : `?${searchQuery}`
     }
 
@@ -65,7 +70,12 @@
     </div>
     {#if (search_state.status != 'renting')}
     <div class='flex flex-col gap-1 w-[80%]'>
-        <p>Date Search Format - DD:MM:YYYY</p>
+        <div class='flex flex-row gap-5 items-center'>
+            <p>Date Search Format - DD:MM:YYYY</p>
+            <Button buttonClasses='p-1 border border-black cursor-pointer bg-cyan-100 hover:bg-cyan-200 rounded-lg' onClick={() => search_state = {...search_state, from: {year: '', month: '', day: ''}, to: {year: '', month: '', day: ''}}}>
+                Reset Dates
+            </Button>
+        </div>
         <div class='flex flex-row gap-3'>
             <Select 
                 listOfOptions={fromDayArr}
@@ -130,6 +140,27 @@
         </div>
     </div>
     {/if}
+    {#if (hotel_side)} 
+        <TextInput
+            nameId='name'
+            label='Name: '
+            placeholder='Mary'
+            divClasses="border border-black rounded-lg w-[300px]"
+            labelClasses='font-bold'
+            value={search_state.name}
+            oninput={(e:HTMLInputElement) => search_state.name = e.value}
+        />
+        <TextInput
+            nameId='room'
+            label='Room Number: '
+            placeholder='231'
+            divClasses="border border-black rounded-lg w-[300px]"
+            numeric
+            labelClasses='font-bold w-[250px]'
+            value={search_state.room}
+            oninput={(e:HTMLInputElement) => search_state.room = e.value == '' ? '' : parseInt(e.value)}
+        />
+    {/if}
     <div class='flex flex-row gap-1'>
         <Button
             buttonClasses='p-2 hover:bg-cyan-300 bg-cyan-200 cursor-pointer'
@@ -149,20 +180,21 @@
                     status={result.status}
                     archive_data={result}
                     onClick={() => archiveBlockFunction(result.archive_id)}
+                    is_user_page={!hotel_side}
                 />
             {:else}
             <div class="flex flex-col size-full justify-center items-center">
                 <p class='text-[12px] italic'>No results found</p>
             </div>
             {/each}
-            {#if (data.results[0] !== undefined && !isNaN(parseInt(data.results[0].totalcount)) && parseInt(data.results[0].totalcount) > 5)}
+            {#if (data.results[0] !== undefined && !isNaN(parseInt(data.results[0].totalcount)) && parseInt(data.results[0].totalcount) > (hotel_side ? 10 : 5))}
             <div class='flex flex-row items-center gap-4 mb-5'>
                 <PageBar 
                     page={search_state.page == 0 ? 1 : search_state.page}
                     numResults={data.results[0] == undefined ? 0 : parseInt(data.results[0].totalcount)}
                     query=''
                     queryString={page.url.search.slice(1, page.url.search.length)}
-                    numResultsPerPage={5}
+                    numResultsPerPage={hotel_side ? 10 : 5}
                     customChangePage={(page:number) => changePage(page)}
                 />
             </div>

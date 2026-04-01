@@ -106,6 +106,15 @@ export function get_specific_chain(chain_name:string) {
     return `SELECT * FROM chain_view WHERE chain_name = '${chain_name}'`
 }
 
+export function get_all_problems(address_id:string, room_number:number, num_rows:number, skip:number) {
+    return `
+        SELECT *, COUNT(*) OVER() AS TOTAL_COUNT 
+        FROM room_problem 
+        WHERE address_id = '${address_id}'${room_number ? ` AND room_number = ${room_number}` : ''}
+        OFFSET ${skip} FETCH NEXT ${num_rows} ROWS ONLY
+    `
+}
+
 // SELECT address_id, chain_name, city, country, avg_price, avg_rating, amenity_name
 // FROM hotel_search_table NATURAL JOIN (
 // 	SELECT DISTINCT ON (address_id, amenity_name) address_id, amenity_name

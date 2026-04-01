@@ -24,3 +24,34 @@ $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER prevent_overlap BEFORE INSERT ON archive
 FOR EACH ROW EXECUTE FUNCTION check_overlap();
+
+/*
+    I ran into problems trying to retain archives when a room is deleted solely with constraints, because room_number and address_id is a composite key.
+    So I created custom triggers for room deletion and hotel deletion
+*/
+
+CREATE OR REPLACE FUNCTION nullify_on_room_deletion()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE archive SET address_id = NULL, room_number = NULL 
+    WHERE address_id = OLD.address_id AND room_number = OLD.room_number;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER nullify_archive_room_deletion BEFORE DELETE ON room 
+FOR EACH ROW EXECUTE FUNCTION nullify_on_room_deletion();
+
+
+
+CREATE OR REPLACE FUNCTION nullify_on_hotel_deletion()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE archive SET address_id = NULL, room_number = NULL 
+    WHERE address_id = OLD.address_id;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER nullify_archive_hotel_deletion BEFORE DELETE ON hotel
+FOR EACH ROW EXECUTE FUNCTION nullify_on_hotel_deletion();

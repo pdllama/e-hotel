@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS review (
     address_id  UUID    NOT NULL,
     rating      INTEGER CHECK (rating BETWEEN 1 AND 5),
     contents    TEXT,
-    FOREIGN KEY (author_id) REFERENCES customer(SSN),
-    FOREIGN KEY (address_id) REFERENCES hotel(address_id)
+    FOREIGN KEY (author_id) REFERENCES customer(SSN) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (address_id) REFERENCES hotel(address_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS review_vote (
@@ -13,6 +13,6 @@ CREATE TABLE IF NOT EXISTS review_vote (
     voter       INTEGER,
     is_like     BOOLEAN NOT NULL,
     PRIMARY KEY (review_id, voter),
-    FOREIGN KEY (review_id) REFERENCES review(review_id),
-    FOREIGN KEY (voter) REFERENCES customer(SSN)
+    FOREIGN KEY (review_id) REFERENCES review(review_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (voter) REFERENCES customer(SSN) ON DELETE CASCADE ON UPDATE CASCADE
 );

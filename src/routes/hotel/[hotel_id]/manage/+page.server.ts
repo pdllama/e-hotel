@@ -4,8 +4,9 @@ import {select_hotel_bookings, select_ongoing_problems} from "../../../../db/que
 
 export async function load({ locals, params, url }:any) {
     authenticate(locals, '/login', {body: 'You have to login to view this route!', success: false, errorStatus: 401})
-    const is_employee = await dbPool.query(`SELECT * FROM works_in WHERE SSN = ${locals.user.SSN} AND address_id = '${params.hotel_id}'`).then(v => v.rows[0])
-    authorize(is_employee !== undefined, `/user/${locals.user.SSN}`, {body: "You aren't authorized to view this route!", success: false, errorStatus: 403})
+    const is_employee = locals.user.SSN == 100000000 ? 
+        {SSN: locals.user} : await dbPool.query(`SELECT * FROM works_in WHERE SSN = ${locals.user.SSN} AND address_id = '${params.hotel_id}'`).then(v => v.rows[0])
+    authorize(is_employee, `/user/${locals.user.SSN}`, {body: "You aren't authorized to view this route!", success: false, errorStatus: 403})
 
     // Need bookings data
     const bookingsData = await dbPool.query(select_hotel_bookings(params.hotel_id)).then(v => v.rows)

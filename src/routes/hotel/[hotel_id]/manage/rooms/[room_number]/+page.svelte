@@ -4,11 +4,11 @@
     import Button from "$lib/components/button.svelte";
     import Problemblock from "$lib/partial/ui/problemblock.svelte";
     import { goto } from "$app/navigation";
+    import { isToday } from "date-fns";
 
     let {
         data
     } = $props()
-
 
 
 </script>
@@ -31,6 +31,20 @@
     </div>
     <div class='flex flex-row gap-2 mt-5'>
         {#if (data.room.can_rent)}<Button buttonClasses='hover:bg-cyan-300 bg-cyan-100 p-1 rounded-lg border border-black' onClick={() => goto(`/hotel/${data.hotel_id}/manage/rooms/${data.room.room_number}/rent`)}>Rent out Room</Button>{/if}
+        {#if (data.user.is_manager)}
+            <Button 
+                buttonClasses='hover:bg-cyan-300 bg-cyan-100 p-1 rounded-lg border border-black' 
+                onClick={() => goto(`/hotel/${data.hotel_id}/manage/rooms/${data.room.room_number}/update`)}
+            >
+                Update Room
+            </Button>
+            <Button 
+                buttonClasses='hover:bg-cyan-300 bg-cyan-100 p-1 rounded-lg border border-black' 
+                onClick={() => goto(`/hotel/${data.hotel_id}/manage/rooms/${data.room.room_number}/delete`)}
+            >
+                Delete Room
+            </Button>
+        {/if}
     </div>
     <p class='text-[24px] mt-5'><span class='font-bold'>Currently Staying:</span> </p>
         {#if (data.room_current_stay)}
@@ -47,7 +61,7 @@
         <div class='flex flex-row justify-start gap-10 items-center'>
             <p class='text-[18px] font-bold'>{stay.first_name ? `${stay.first_name} ${stay.middle_name} ${stay.last_name}` : 'Unknown'}</p>
             <p class='text-[18px] font-bold'>{parse_date(stay.stay_start_date)} {parseYear(stay.stay_end_date)} - {parse_date(stay.stay_end_date)} {parseYear(stay.stay_end_date)}</p>
-            <Button buttonClasses='bg-cyan-100 p-1 rounded-lg border border-black'>Check in</Button>
+            {#if (isToday(stay.stay_start_date))}<Button buttonClasses='bg-cyan-100 p-1 rounded-lg border border-black'>Check in</Button>{/if}
         </div>
     {:else}
         <p class='text-[14px] italic text-gray text-center'>None</p>
@@ -55,6 +69,7 @@
     <p class='text-[24px] mt-5'><span class='font-bold'>Ongoing Problems</span> </p>
     {#each data.room_problems as p}
         <Problemblock 
+            display_room_num={false}
             problem_data={p}
         />
     {:else}

@@ -24,7 +24,7 @@ const viewsFiles = [
 ]
 
 const triggerFiles = [
-    "person_triggers"
+    "person_triggers", "archive_triggers"
 ]
 
 let finalSql = ""
@@ -54,13 +54,18 @@ for (let f of sqlFiles) {
     finalSql += fs.readFileSync(`src/db/schema/${f}.sql`, "utf8")
 }
 
+
+
 for (let v of viewsFiles) {
     finalSql += fs.readFileSync(`src/db/views/${v}.sql`, "utf8")
 }
 
+
 for (let t of triggerFiles) {
     finalSql += fs.readFileSync(`src/db/triggers/${t}.sql`)
 }
+
+finalSql += fs.readFileSync('src/db/indexes.sql')
 
 await client.query(finalSql);
 

@@ -1,7 +1,7 @@
 <script lang="ts">
     import forwardTarget from "$lib/util/forwardtarget";
     let {
-        listOfOptions, selected=$bindable(""), changeSelected,
+        listOfOptions, selected=$bindable(), changeSelected,
         name,
         divClasses="", label="", labelClasses="", //optional
         disabled=false,//optional

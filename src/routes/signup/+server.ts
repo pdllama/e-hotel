@@ -24,6 +24,6 @@ export async function POST({ request }:any) {
         return new Response(JSON.stringify({ success: true, status: 201 }));
     } catch (err) {
         console.log(err)
-        return new Response(JSON.stringify({ error: 'Unknown Error Occurred', status: 400 }));
+        return new Response(JSON.stringify({ error: err.message, status: 400 }));
     }
 }

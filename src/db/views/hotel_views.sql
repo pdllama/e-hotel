@@ -62,7 +62,7 @@ FROM hotel_chain
     SELECT chain_name, COUNT(*) AS num_hotels
     FROM hotel
     GROUP BY (chain_name)
-  ) USING (chain_name)
+  ) USING (chain_name);
 
 /* For cards in home page, and assignment instructions */
 CREATE VIEW rooms_by_area as

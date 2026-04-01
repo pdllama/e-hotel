@@ -54,7 +54,7 @@
     <p class='text-[32px] font-bold'>Ongoing Room Problems</p>
     <div class='flex flex-col gap-1'>
         {#each data.problems as p}
-            <Problemblock problem_data={p} list_status={false} onClick={() => goto(`/hotel/${data.hotel_id}/manage/problems/${p.problem_id}`)}/>
+            <Problemblock problem_data={p} list_status={false}/>
         {:else}
             <p class='w-[100%] text-center italic text-gray text-[14px]'>No Ongoing Room Problems</p>
         {/each}
