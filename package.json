@@ -48,6 +48,7 @@
 		"country-state-city": "^3.2.1",
 		"date-fns": "^4.1.0",
 		"drizzle-orm": "^0.45.1",
+		"flowbite-datepicker": "^2.0.0",
 		"flowbite-svelte": "^1.33.0",
 		"pg": "^8.20.0",
 		"uuid": "^13.0.0"

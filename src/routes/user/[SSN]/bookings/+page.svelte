@@ -39,8 +39,14 @@
         {:else}
             <p class='w-[100%] text-center italic text-gray text-[14px]'>No Ongoing Stays</p>
         {/each}
-        {#if data.upcomingBookings.length > 3}
-            <p class='italic text-[16px]'>... {data.upcomingBookings.length -3} other ongoing stays</p>
+        {#if data.currentRentals.length > 3}
+            <p class='italic text-[16px]'>... {data.currentRentals.length -3} other ongoing stays</p>
+            <Button 
+                buttonClasses="p-2 bg-cyan-100 rounded-lg w-[200px] border border-black hover:bg-cyan-300 cursor-pointer"
+                onClick={() => goto(`/user/${data.user.ssn}/bookings/search?status='renting'`)}
+            >
+                <p>See All Ongoing Stays</p>
+            </Button>
         {/if}
     </div>
     <Button 

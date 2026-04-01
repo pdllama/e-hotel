@@ -11,6 +11,7 @@
         height='100px',
         onClick=null
     } = $props()
+
 </script>
 
 {#if (onClick)}
@@ -25,12 +26,13 @@
             <p class='text-[14px]'>{archive_data.street_number} {archive_data.street_name} - {archive_data.city}, {archive_data.state}, {archive_data.country}</p>
         {/if}
         <p class='text-[14px]'>
-            {#if (is_user_page)}
-                Room {archive_data.room_number} - <span class='font-bold'>${archive_data.price}/night</span>, {archive_data.capacity} Bed, <span class='font-bold'>${getNumDays(archive_data.stay_start_date, archive_data.stay_end_date)*archive_data.price}</span> total
-            {:else}
-                {archive_data.first_name} {archive_data.middle_name} {archive_data.last_name}
-            {/if}
+                {#if (is_user_page)}Room {archive_data.room_number} -{/if}
+                <span class='font-bold'>${archive_data.price}/night</span>, {archive_data.capacity} Bed, <span class='font-bold'>${getNumDays(archive_data.stay_start_date, archive_data.stay_end_date)*archive_data.price}</span> total
+                
         </p>
+        {#if (!is_user_page && archive_data.first_name)}
+            <p class='text-[14px]'>Customer: {archive_data.first_name} {archive_data.middle_name} {archive_data.last_name}</p>
+        {/if}
         <p class='text-[14px]'>
             {#if (archive_data.status == 'booked')}
                 {parse_date(archive_data.stay_start_date)} {parseYear(archive_data.stay_end_date)} - {parse_date(archive_data.stay_end_date)} {parseYear(archive_data.stay_end_date)} [<span class='font-bold'>{archive_data.paid_for ? 'PAID' : 'UNPAID'}</span>]

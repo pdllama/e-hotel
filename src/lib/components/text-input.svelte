@@ -11,6 +11,7 @@
         label="", labelClasses="", showBorder=false, borderColor="black", //optional
         numeric=false, charLimit=null, //optional
         focusInHandler=null, focusOutHandler=null, //optional
+        nodivpadding=false
     } = $props();
 
     const removePlaceholder = (e: HTMLInputElement) => {e.placeholder = "";}
@@ -30,7 +31,7 @@
     
 </style>
 
-<div class={`flex justify-center items-center p-1 shadow ${divClasses}`}>
+<div class={`flex justify-center items-center ${nodivpadding ? '' : 'p-1'} shadow ${divClasses}`}>
     {#if (icon !== null)}
         <img alt={iconAlt} src={icon} width="30px" height="30px" class={`p-1 mx-1 ${iconClasses}`}/>
     {/if}
@@ -48,7 +49,6 @@
         }}
         onkeydown={(e:KeyboardEvent) => {
             if (e.key === "Enter") {
-                console.log('HIT HERE')
                 e.preventDefault();
                 submitButton = true;
             }

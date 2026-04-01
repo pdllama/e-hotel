@@ -1,6 +1,4 @@
-import { addNotification } from "$lib/notificationStore";
 import { dbPool } from "../../../db/pool";
-import { redirect } from "@sveltejs/kit";
 import { authenticate, authorize } from "../../authentication";
 
 export async function load({ locals, params, url }:any) {

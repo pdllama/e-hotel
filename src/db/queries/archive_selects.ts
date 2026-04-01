@@ -65,6 +65,40 @@ export function get_archive(aID:string) {
 }
 
 
+export function select_hotel_bookings(address_id:string, is_dashboard:boolean=true) {
+    return `SELECT 
+        archive_id, address_id, room_number, status, 
+        stay_start_date, stay_end_date,
+        created_at, paid_for,
+        check_in_time, check_out_time,
+        first_name, middle_name, last_name,
+        price, capacity
+        FROM archive_view
+        WHERE address_id = '${address_id}'${is_dashboard ? " AND (status = 'renting' OR status = 'booked')" : ''}
+    `
+}
+
+export function select_ongoing_problems(address_id:string, skip:number=0, num_rows:number=3) {
+    return `SELECT *, COUNT(*) OVER() AS totalCount FROM room_problem WHERE address_id = '${address_id}' AND status = 'ongoing' OFFSET ${skip} FETCH NEXT ${num_rows} ROWS ONLY`
+}
+
+
+// When doing a direct rental, we know the customer is going to be using the room immediately to some point in the future.
+// This query gets the nearest booking from the current date to see whats the absolute longest the customer can stay.
+export function get_nearest_booking(address_id:string, room_number:number) {
+    return `
+        SELECT MIN(stay_start_date) as nearest_booking
+        FROM (
+            SELECT stay_start_date 
+            FROM archive
+            WHERE status = 'booked' 
+                AND address_id = '${address_id}'
+                AND room_number = ${room_number} 
+                AND stay_start_date > CURRENT_DATE
+        )
+    `
+}
+
 
 // archive_id      UUID    PRIMARY KEY,
 // guest_id        INTEGER,

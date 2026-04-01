@@ -85,7 +85,7 @@ function hotels_with_all_specified_amenities(amenities:string[]) {
     return query
 }
 
-function build_valid_amenities_table(amenities:string[]) {
+export function build_valid_amenities_table(amenities:string[]) {
     let whereClause = `WHERE`
     for (let i = 0; i < amenities.length ; i++) {
         const amenity = amenities[i]
