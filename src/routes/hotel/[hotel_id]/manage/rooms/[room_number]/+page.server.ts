@@ -31,7 +31,7 @@ export async function load({ locals, params, url }:any) {
     if (!room) {
         error(404, "Room Not Found")
     }
-    const room_stays_total = await dbPool.query(`SELECT first_name, middle_name, last_name, status, stay_start_date, stay_end_date FROM archive a LEFT JOIN person p ON (a.guest_id = p.SSN) WHERE address_id = '${params.hotel_id}' AND room_number = '${params.room_number}' AND( status = 'booked' OR status = 'renting')`).then(v => v.rows)
+    const room_stays_total = await dbPool.query(`SELECT first_name, middle_name, last_name, status, stay_start_date, stay_end_date, archive_id FROM archive a LEFT JOIN person p ON (a.guest_id = p.SSN) WHERE address_id = '${params.hotel_id}' AND room_number = '${params.room_number}' AND( status = 'booked' OR status = 'renting')`).then(v => v.rows)
     const room_upcoming = room_stays_total.filter(rs => rs.status !== 'renting');
     const room_current_stay = room_stays_total.filter(rs => rs.status === 'renting')[0]
     const room_problems = await dbPool.query(`SELECT * FROM room_problem WHERE address_id = '${params.hotel_id}' AND room_number = '${params.room_number}'`).then(v => v.rows)

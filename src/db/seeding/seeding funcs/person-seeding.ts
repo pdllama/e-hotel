@@ -23,6 +23,8 @@ type NameType = typeof names
 const centralSSNSet:Set<number> = new Set()
 const managerSalaryData = roleMap["General Manager"]
 
+centralSSNSet.add(100000000) // Admin SSN
+
 export function generateEmployee(homeCity:string, homeCityStats:City_Stats, is_manager:boolean = false) {
     const person:PersonType = generatePerson(homeCity, homeCityStats);
     const education_level = get_rand_arr_item(education) // Rand education level.

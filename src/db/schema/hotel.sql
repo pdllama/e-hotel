@@ -49,3 +49,14 @@ CREATE TABLE IF NOT EXISTS room_has_amenity (
     FOREIGN KEY (address_id, room_number) REFERENCES room(address_id, room_number) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS works_in (
+    SSN         INTEGER,
+    address_id  UUID,
+    role        employee_role,
+    pay_struct  pay_structure,
+    pay         INTEGER,
+    PRIMARY KEY (SSN, address_id),
+    FOREIGN KEY (SSN) REFERENCES employee(SSN) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (address_id) REFERENCES hotel(address_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+

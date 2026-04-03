@@ -1,0 +1,18 @@
+import { authenticate, authorize } from "../../../../../../authentication";
+import { dbPool } from "../../../../../../../db/pool";
+
+export async function load({ locals, params, url }:any) {
+    authenticate(locals, '/login', {body: 'You have to login to view this route!', success: false, errorStatus: 401})
+    const is_employee = locals.user.SSN == 100000000 ? 
+        {SSN: locals.user, role: 'General Manager'} : 
+        await dbPool.query(`SELECT * FROM works_in WHERE SSN = ${locals.user.SSN} AND address_id = '${params.hotel_id}'`).then(v => v.rows[0])
+    authorize(is_employee, `/hotel/${params.hotel_id}`, {body: "You aren't authorized to view this route!", success: false, errorStatus: 403}, true)
+
+    const person_data = await dbPool.query(`SELECT * FROM person WHERE SSN = ${params.SSN}`).then(r => r.rows[0])
+   
+    return {
+        user: {...locals.user, is_manager: is_employee.role == 'General Manager'},
+        hotel_id: params.hotel_id,
+        person_data
+    };
+}

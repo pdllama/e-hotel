@@ -1,6 +1,6 @@
 <script lang="ts">
     const {
-        name, numHotels, avgPrice, imgLink="", imgAlt=name,
+        name, numHotels, avgPrice, numAvailRooms, imgLink="", imgAlt=name,
         onClick=null
     } = $props();
 
@@ -80,6 +80,7 @@
     >
         <p class="text-xl color-black font-bold mb-1">{name}</p>
         <p class="text-sm color-black"><span class="font-bold text-md">{numHotels}</span> Hotels</p>
-        <p class="text-sm color-black"><span class="font-bold text-md">${avgPrice}</span> Avg.</p>
+        <p class="text-sm color-black"><span class="font-bold text-md">${Math.round(avgPrice)}</span> Avg.</p>
+        <p class="text-sm color-black"><span class="font-bold text-md">{numAvailRooms}</span> Available Rooms</p>
     </div>
 </div>

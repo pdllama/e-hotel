@@ -11,6 +11,8 @@ import { generateCustomer } from "./seeding funcs/person-seeding.ts";
 import { generateArchive } from "./seeding funcs/archive-seeding.ts";
 import { generateReview } from "./seeding funcs/review-seeding.ts";
 import { generateChainEmails, generateHotelEmails, generateHotelNumbers } from "./seeding funcs/contact-seeding.ts";
+import { generateNewAddress } from "./seeding funcs/address-seeding.ts";
+import {v4 as uuidv4} from 'uuid'
 
 const { Client } = pkg;
 
@@ -63,7 +65,51 @@ for (let country of country_codes as (keyof CountriesType)[]) {
     }
 }
 
+//"cities": ["Ottawa", "Toronto", "Vancouver", "Victoria", "Québec City", "Calgary", "Niagara Falls", "Banff"],
+//City_Stats {
+//     state: string,
+//     country: string,
+//     country_code: string,
+//     lang: string,
+//     num_hotels: number,
+//     hotel_chains: string[]
+//     hotel_sizes: string[],
+//     hotel_address_uuid: string[]
+// }
+
+// {
+//     chain_name: string,
+//     size: string,    // local, intl
+//     city: string   // tells you where to put the co-address
+// }
+
+// For the purposes of the assignment we need to assign 5 hotel chains with 8 hotels with 5 rooms each. 
+// We will statically assign hotels to Canadian cities. 
+
+const extraChains = [{chain_name: "Canadian Elite Hotels", size: 'local', city: 'Ottawa'}, {chain_name: "Northern Frontier Stays", size: 'local', city: 'Calgary'}, 
+    {chain_name: 'Snowy Retreats', size: 'local', city: 'Toronto'}, {chain_name: 'Coastal LifeStyle Hospitality', size: 'local', city: 'Vancouver'}, 
+    {chain_name: 'Five-Star Wonder Hotel', size: 'local', city: 'Niagara Falls'}]
+
+
+for (let city of ["Ottawa", "Toronto", "Vancouver", "Victoria", "Québec City", "Calgary", "Niagara Falls", "Banff"]) {
+    for (let extraChain of extraChains) {
+        cityStats[city].num_hotels += 1
+        cityStats[city].hotel_chains.push(extraChain.chain_name)
+        cityStats[city].hotel_sizes.push(roll_chance_multi([30, 40, 30], ['sm', 'md', 'lg']))
+        cityStats[city].hotel_address_uuid.push(uuidv4())
+    }
+}
+for (let ec of extraChains) {chains.push(ec)}
+
+
+
 console.log("Generated city data!\n")
+
+// Insert admin information
+const uuidadd = uuidv4()
+await client.query(`INSERT INTO address(address_id, street_name, street_number, apt_number, postal_code, city, state, country) VALUES ('${uuidadd}', 'uOttawa Street', 98, 0, 'L5S 2E7', 'Ottawa', 'Ontario', 'Canada')`)
+await client.query(`INSERT INTO person(SSN, first_name, middle_name, last_name, address) VALUES (100000000, 'Administrator', '', '', '${uuidadd}')`)
+await client.query(`INSERT INTO customer(SSN) VALUES (100000000)`)
 
 console.log("Generating hotel data...")
 

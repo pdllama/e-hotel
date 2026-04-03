@@ -7,6 +7,10 @@
     import { enter_search } from "./search/search_logic";
     import SearchDebounceResult from "./search/searchdebounceresult.svelte";
     import { debounce } from "$lib/util/debounce";
+    import { goto } from "$app/navigation";
+    import Button from "$lib/components/button.svelte";
+
+    let {data} = $props()
 
     let countrySearch = $state("");
     let debounce_search_input = $state("");
@@ -21,6 +25,8 @@
     const debounceUpdate = debounce<string>((val) => {
         debounce_search_input = val;
     }, 750);
+
+    console.log(data.rooms_by_area)
 
     //items={[{name: "Mexico City", numHotels: 634, avgPrice: 172}, {name: "random city", numHotels: 17, avgPrice: 87}]}
 </script>
@@ -79,6 +85,9 @@
     <h2 class="font-bold">Popular Destinations</h2>
     <CardCarousel
         type="destination"
-        items={cityHotelData}
+        items={data.rooms_by_area}
     />
+    <div class='flex flex-row justify-center w-[100%] my-5'>
+    <Button buttonClasses='p-2 bg-indigo-200 rounded-lg hover:bg-indigo-300' onClick={() => goto(`/hotel/by-area`)}>See Other Destinations</Button>
+    </div>
 </div>

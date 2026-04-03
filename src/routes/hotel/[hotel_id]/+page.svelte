@@ -3,6 +3,8 @@
     import { Rating } from 'flowbite-svelte';
     import placeholder from "$lib/assets/placeholder.png"
     import Tag from '$lib/components/tag.svelte';
+    import Button from '$lib/components/button.svelte';
+    import { goto } from '$app/navigation';
     export let data : PageData
     
     const hotel = data.results
@@ -50,5 +52,10 @@
             {/if}
         </div>
     </div>
-    To-do: book room (form, view rooms, etc), recent reviews
+    <Button
+        buttonClasses='w-[150px] h-[50px] p-2 hover:bg-cyan-200 bg-cyan-100 cursor-pointer rounded-lg border border-black my-5'
+        onClick={() => goto(`/hotel/${hotel.address_id}/book`)}
+    >
+        Book Room
+    </Button>
 </div>

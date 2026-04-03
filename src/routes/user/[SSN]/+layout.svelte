@@ -6,7 +6,7 @@
     let { children, data } = $props();
 
     // svelte-ignore state_referenced_locally
-    const settingsOpts = data.user.accountType == 'customer' ? ['info', 'bookings'] : ['info', 'bookings', 'employment']
+    const settingsOpts = data.user.ssn === 100000000 ? ['info', 'bookings', 'admin'] : data.user.accountType == 'customer' ? ['info', 'bookings'] :  ['info', 'bookings', 'employment']
 
     // svelte-ignore state_referenced_locally
     let active_opt = $state(data.pathname.includes('bookings') ? 'bookings' : (data.pathname.includes('employment') && data.user.accountType != 'customer') ? 'employment' : 'info')
@@ -18,7 +18,8 @@
         <img src={userProfilePic} width={"200px"} height={"200px"} alt="placeholder" class="opacity-90"/>
         <div class="flex flex-col w-[100%] justify-center ">
              <p class="font-bold text-[36px]">{data.user.first_name} {data.user.middle_name} {data.user.last_name}</p>
-             <p class="text-[24px]">{data.user.accountType[0].toUpperCase()+data.user.accountType.slice(1, data.user.accountType.length)} Account</p>
+             {#if (data.user.ssn != 100000000)}<p class="text-[24px]">{data.user.accountType[0].toUpperCase()+data.user.accountType.slice(1, data.user.accountType.length)} Account</p>
+             {:else}<p class="text-[24px]">Admin Account</p>{/if}
         </div>
     </div>
     <div class='flex flex-col justify-center align-center size-full md:flex-row gap-2 grow'>
@@ -38,7 +39,7 @@
                         goto(setting == 'info' ? `/user/${data.user.SSN}` : `/user/${data.user.SSN}/${setting}`)
                     }}
                 >
-                    <p class={`font-bold text-[20px] ${active_opt != setting ? 'opacity-50' : ''}`}>{setting == 'info' ? "Account Info" : setting == 'bookings' ? 'Bookings' : 'Employment'}</p>
+                    <p class={`font-bold text-[20px] ${active_opt != setting ? 'opacity-50' : ''}`}>{setting == 'info' ? "Account Info" : setting == 'bookings' ? 'Bookings' : setting == 'admin' ? 'Admin' : 'Employment'}</p>
                 </Button>
             {/each}
             </div>

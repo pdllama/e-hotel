@@ -6,7 +6,7 @@
     let { children, data } = $props();
 
     // svelte-ignore state_referenced_locally
-    const settingsOpts = data.manageData.is_manager ? ['dashboard', 'rooms', 'archives', 'problems', 'employees', 'hotel'] : ['dashboard', 'rooms', 'archives', 'problems', 'employees']
+    const settingsOpts = ['dashboard', 'rooms', 'archives', 'problems', 'employees', 'hotel']
 
     // svelte-ignore state_referenced_locally
     let active_opt = $state(data.pathname.includes('rooms') ? 'rooms' :

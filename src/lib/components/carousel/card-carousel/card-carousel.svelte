@@ -126,9 +126,10 @@
     >
         {#each items as item}
             <DestinationCard
-                name={item.name}
-                numHotels={item.numHotels}
-                avgPrice={item.avgPrice}
+                name={item.city}
+                numHotels={item.num_hotels}
+                numAvailRooms={item.num_avail_rooms}
+                avgPrice={item.avg_price}
                 imgLink={item.imgLink}
             />
         {:else}

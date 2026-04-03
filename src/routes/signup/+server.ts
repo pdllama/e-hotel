@@ -21,6 +21,7 @@ export async function POST({ request }:any) {
     try {
         if (create_new_add) {await dbPool.query(insert_address(address, address_id))}
         await dbPool.query(sign_up_user(SSN, name.first_name, name.middle_name, name.last_name, address_id));
+        await dbPool.query(`INSERT INTO customer(SSN) VALUES (${SSN})`)
         return new Response(JSON.stringify({ success: true, status: 201 }));
     } catch (err) {
         console.log(err)

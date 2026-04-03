@@ -19,17 +19,6 @@ CREATE TABLE IF NOT EXISTS customer (
     FOREIGN KEY (SSN) REFERENCES person(SSN) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS works_in (
-    SSN         INTEGER,
-    address_id  UUID,
-    role        employee_role,
-    pay_struct  pay_structure,
-    pay         INTEGER,
-    PRIMARY KEY (SSN, address_id),
-    FOREIGN KEY (SSN) REFERENCES employee(SSN) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (address_id) REFERENCES address(address_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS sessions (
     session_token   TEXT PRIMARY KEY,
     SSN             INTEGER NOT NULL,
