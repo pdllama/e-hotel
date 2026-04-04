@@ -1,6 +1,6 @@
 <script lang="ts">
     const {
-        name, numHotels, avgPrice, numAvailRooms, imgLink="", imgAlt=name,
+        name, numHotels, country='', avgPrice, numAvailRooms, imgLink="", imgAlt=name,
         onClick=null
     } = $props();
 
@@ -62,6 +62,7 @@
         shadow rounded-2xl hover:cursor-pointer
         overflow-hidden
     "
+    onclick={onClick}
 >
     <div 
         class={`w-[100%] h-[70%] rounded-t-2xl flex justify-center items-center overflow-hidden relative ${conditionalBg}`}
@@ -78,7 +79,7 @@
         
         class="w-[97%] h-[30%] rounded-2xl flex flex-col justify-center items-start m-1 p-4"
     >
-        <p class="text-xl color-black font-bold mb-1">{name}</p>
+        <p class="text-l color-black font-bold mb-1">{name}{country ? `, ${country}`: ''}</p>
         <p class="text-sm color-black"><span class="font-bold text-md">{numHotels}</span> Hotels</p>
         <p class="text-sm color-black"><span class="font-bold text-md">${Math.round(avgPrice)}</span> Avg.</p>
         <p class="text-sm color-black"><span class="font-bold text-md">{numAvailRooms}</span> Available Rooms</p>

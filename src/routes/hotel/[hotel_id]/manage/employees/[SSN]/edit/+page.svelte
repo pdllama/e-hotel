@@ -65,6 +65,7 @@
         divClasses='gap-1 w-[300px]'
         labelClasses='text-nowrap min-w-[50px] font-bold'
     />
+    <p class='text-[18px] mt-5'><span class='font-bold'>Warning</span>: If this employee is assigned General Manager, the current one will be re-assigned to a different role!</p>
     <div class='flex gap-5 my-5'>
         <Button
             buttonClasses='p-2 hover:bg-cyan-300 bg-cyan-200 cursor-pointer w-[100px] rounded-lg border border-black my-2'

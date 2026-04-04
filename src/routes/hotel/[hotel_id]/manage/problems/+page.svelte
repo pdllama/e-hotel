@@ -35,7 +35,7 @@
         oninput={(e:HTMLInputElement) => room_num.room = e.value == '' ? '' : parseInt(e.value)}
     />
     <Button
-        buttonClasses='p-2 hover:bg-cyan-300 bg-cyan-200 cursor-pointer w-[150px] rounded-lg border border-black'
+        buttonClasses='p-2 hover:bg-cyan-300 bg-cyan-200 cursor-pointer w-[150px] min-h-[50px] rounded-lg border border-black'
         onClick={search}
     >
         Search

@@ -26,8 +26,6 @@
         debounce_search_input = val;
     }, 750);
 
-    console.log(data.rooms_by_area)
-
     //items={[{name: "Mexico City", numHotels: 634, avgPrice: 172}, {name: "random city", numHotels: 17, avgPrice: 87}]}
 </script>
 

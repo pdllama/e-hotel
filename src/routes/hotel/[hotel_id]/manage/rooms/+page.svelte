@@ -8,7 +8,7 @@
     import { monthDays } from "../../../../../db/seeding/seedingutils.js";
     import roomIcon from '$lib/assets/room.png'
     import Button from "$lib/components/button.svelte";
-    import { goto } from "$app/navigation";
+    import { goto, invalidateAll } from "$app/navigation";
     import PageBar from "../../../../search/page-bar.svelte";
     import { page } from "$app/state";
 

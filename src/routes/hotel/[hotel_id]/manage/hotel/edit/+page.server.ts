@@ -10,6 +10,7 @@ export async function load({ locals, params, url }:any) {
     const hotelBasics = await dbPool.query(`
         SELECT * 
         FROM hotel h 
+            NATURAL JOIN address
             JOIN person p ON (p.SSN = h.manager_id)
             LEFT JOIN (
                 SELECT address_id, json_agg(phone_number) as phone_numbers

@@ -14,8 +14,8 @@
 <div class='flex flex-col justify-start ml-3'>
     <Button buttonClasses='p-1 bg-indigo-200 rounded-lg mt-1 mb-3 w-[150px] hover:bg-indigo-300' onClick={() => history.back()}>Back</Button>
     <p class='text-[24px]'><span class='font-bold'>{data.archive.status == 'booked' ? 'Upcoming Booking' : data.archive.status == 'renting' ? 'Ongoing Stay' : data.archive.status == 'completed' ? 'Past Stay' : 'Cancelled Booking'}</span></p>
-    <p class='text-[18px] mt-5'><span class='font-bold'>Customer: </span> {data.archive.first_name} {data.archive.middle_name} {data.archive.last_name}</p>
-       <p class='text-[18px]'><span class='font-bold'>Stay Dates: </span> {parse_date(data.archive.stay_start_date)} {parseYear(data.archive.stay_end_date)} - {parse_date(data.archive.stay_end_date)} {parseYear(data.archive.stay_end_date)}</p>
+    <p class='text-[18px] mt-5'><span class='font-bold'>Customer: </span> {data.archive.first_name == null ? '[DELETED]' : `${data.archive.first_name} ${data.archive.middle_name} ${data.archive.last_name}`}</p>
+    <p class='text-[18px]'><span class='font-bold'>Stay Dates: </span> {parse_date(data.archive.stay_start_date)} {parseYear(data.archive.stay_end_date)} - {parse_date(data.archive.stay_end_date)} {parseYear(data.archive.stay_end_date)}</p>
 
     <p class='text-[18px] mt-5'><span class='font-bold'>Room Number: </span> {data.archive.room_number}</p>
     <p class='text-[18px]'><span class='font-bold'>Price: </span> ${data.archive.price} per night</p>

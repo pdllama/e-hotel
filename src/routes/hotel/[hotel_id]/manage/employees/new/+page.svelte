@@ -75,7 +75,7 @@
             addNotification({body: "Added the new employee!", success: true, errorStatus: 201})
             goto(`/hotel/${data.hotel_id}/manage/employees/${state.SSN}`)
        } else {
-            addNotification({body: 'Something went wrong!', success:false, errorStatus: 403})
+            addNotification({body: res.error, success:false, errorStatus: 403})
        }
     }
 

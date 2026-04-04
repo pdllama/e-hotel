@@ -12,6 +12,9 @@ export async function POST({ request }:any) {
     try {
         const response = await dbPool.query(query_address(address)).then(v => v.rows[0])
         if (response == undefined) throw new Error();
+        const inUseByChainOrHotel = await dbPool.query(`SELECT 1 FROM hotel WHERE address_id = '${response.address_id}'`).then(v => v.rows[0]) !== undefined || 
+            await dbPool.query(`SELECT 1 FROM hotel_chain WHERE co_address = '${response.address_id}'`).then(v => v.rows[0]) !== undefined
+        if (inUseByChainOrHotel) {return new Response(JSON.stringify({ error: 'Address is in use by a hotel or hotel chain!', status: 400 }));}
         address_id = response.address_id
         create_new_add = false
     } catch (err) {

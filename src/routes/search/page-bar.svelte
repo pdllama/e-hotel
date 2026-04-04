@@ -13,7 +13,7 @@
     } = $props()
 
     // svelte-ignore state_referenced_locally
-    let maxPage = Math.ceil(numResults % numResultsPerPage == 0 ? numResults/numResultsPerPage-1 : numResults/numResultsPerPage)
+    let maxPage = $derived(Math.ceil(numResults % numResultsPerPage == 0 ? numResults/numResultsPerPage-1 : numResults/numResultsPerPage))
 
     const pagination:Pagination = $derived(createPagination(page, maxPage))
     const iteration = $derived([...pagination.leftPagination, page, ...pagination.rightPagination])

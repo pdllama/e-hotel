@@ -66,7 +66,7 @@ FROM hotel_chain
 
 /* For cards in home page, and assignment instructions */
 CREATE VIEW rooms_by_area as
-SELECT DISTINCT city, avg_price, num_hotels, num_avail_rooms
+SELECT DISTINCT country, city, avg_price, num_hotels, num_avail_rooms
 FROM address
     JOIN (
       SELECT city, state, country, AVG(price) AS avg_price

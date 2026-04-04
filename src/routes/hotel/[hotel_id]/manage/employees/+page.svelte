@@ -67,7 +67,7 @@
     <p class='font-bold'>Results:</p>
     {#each data.results as emp}
         <Employeeblock 
-            height='60px'
+            height={data.user.is_manager ? '80px' : '60px'}
             employee={emp}
             manager_view={data.user.is_manager}
             onClick={() => goto(`/hotel/${data.hotel_id}/manage/employees/${emp.ssn}`)}
