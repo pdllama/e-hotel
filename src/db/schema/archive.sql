@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS archive (
 CREATE TABLE IF NOT EXISTS booking (
     archive_id      UUID        PRIMARY KEY,
     created_at      TIMESTAMP   DEFAULT CURRENT_TIMESTAMP   NOT NULL,
-    paid_for        BOOLEAN,
+    paid_for        BOOLEAN     DEFAULT false,
     FOREIGN KEY (archive_id) REFERENCES archive(archive_id)
 );
 
