@@ -341,6 +341,12 @@ for (let hid of hotel_address_ids) {
 
 console.log("Seeded Archives!\n")
 
+// Add the trigger after, which prevents rentals or bookings from being created before today.
+await client.query(`
+    CREATE TRIGGER prevent_overlap BEFORE INSERT ON archive
+    FOR EACH ROW EXECUTE FUNCTION check_overlap();
+`)
+
 console.log("Seeding Reviews...")
 
 // sm has 5-10 reviews. md has 10-15 reviews. lg has 20-30 reviews.

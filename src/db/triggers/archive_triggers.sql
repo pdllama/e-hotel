@@ -4,6 +4,9 @@
     booking that overlaps with those dates.
 
     This trigger stops archive inserts (bookings or direct rentals) that overlap with a previous one.
+
+    It also checks that any archives inserted with a "booked" or "renting" status 
+    has a stay_start_date today or after, never before, AND that the start date is before the end date.
  */ 
 
 CREATE OR REPLACE FUNCTION check_overlap()
@@ -11,6 +14,14 @@ RETURNS TRIGGER AS $$
 BEGIN 
     IF (NEW.status = 'booked' OR NEW.status = 'renting')
     THEN 
+        IF NEW.stay_start_date < CURRENT_DATE
+        THEN RAISE EXCEPTION 'You cannot book or rent out a room in the past!';
+        END IF;
+
+        IF NEW.stay_start_date > NEW.stay_end_date 
+        THEN RAISE EXCEPTION 'Stay End Date cannot be before the Stay Start Date!';
+        END IF;
+
         IF EXISTS (
             SELECT 1 FROM archive WHERE address_id = NEW.address_id AND room_number = NEW.room_number AND stay_start_date < NEW.stay_end_date AND stay_end_date > NEW.stay_start_date
         )
@@ -21,9 +32,6 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
-CREATE TRIGGER prevent_overlap BEFORE INSERT ON archive
-FOR EACH ROW EXECUTE FUNCTION check_overlap();
 
 /*
     I ran into problems trying to retain archives when a room is deleted solely with constraints, because room_number and address_id is a composite key.
