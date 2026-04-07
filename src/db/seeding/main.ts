@@ -46,7 +46,7 @@ const problemMap:ProblemMapping = {}
 const numCustomers = 5000 //Can customize the number of customers
 
 const customerSSN:number[] = new Array(5000) // list of all customer SSNs. 
-const customerRegDate:string[] = new Array(5000) // list of customer RegDate. used for archive seeding.
+const customerRegDate:string[] = new Array(5000) // list of customer Registration Dates. used for archive seeding.
 
 
 type CountriesType = typeof countries
@@ -359,9 +359,9 @@ for (let hid of hotel_address_ids) {
     const numReviews = get_rand_between(minReviews, maxReviews);
     const averageStarRating = roll_chance_multi([50, 20, 5, 10, 15], [5, 4, 3, 2, 1])
 
-    const random_author = get_rand_arr_item(customerSSN)
-
+    
     for (let i = 0; i < numReviews; i++) {
+        const random_author = get_rand_arr_item(customerSSN)
         const review = generateReview(hid, averageStarRating, random_author);
         review_query += seedReview(review)
     }

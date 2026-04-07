@@ -40,7 +40,7 @@
         >
             Edit
         </Button>
-        {#if (!(data.user.SSN == data.employee.ssn || data.user.SSN == 100000000))}
+        {#if (!(data.user.SSN == data.employee.ssn))}
             <Button
                 buttonClasses='p-2 hover:bg-cyan-300 bg-cyan-200 cursor-pointer w-[100px] rounded-lg border border-black'
                 onClick={() => goto(`/hotel/${data.hotel_id}/manage/employees/${data.employee.ssn}/fire`)}

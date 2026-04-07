@@ -33,6 +33,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+/* Note: the trigger that runs this function is added AFTER seeding the archives. See main.ts in seeding folder. */
+
 /*
     I ran into problems trying to retain archives when a room is deleted solely with constraints, because room_number and address_id is a composite key.
     So I created custom triggers for room deletion and hotel deletion

@@ -35,7 +35,7 @@ export async function POST({request, locals }:any) {
         const aId = uuidv4()
         await dbPool.query(`INSERT INTO archive(archive_id, guest_id, address_id, room_number, status, stay_start_date, stay_end_date) VALUES 
             ('${aId}', ${SSN}, '${hotel_id}', ${room_number}, 'renting', '${stay_start_date}', '${stay_end_date}')`)
-        await dbPool.query(`INSERT INTO rental(archive_id, checked_in_by, check_in_time) VALUES('${aId}', ${locals.user.SSN}, '${new Date().toISOString()}')`)
+        await dbPool.query(`INSERT INTO rental(archive_id, checked_in_by, check_in_time) VALUES('${aId}', ${locals.user.SSN == 100000000 ? null : locals.user.SSN}, '${new Date().toISOString()}')`)
         return new Response(JSON.stringify({ success: true, status: 201 }));
     } catch (err) {
         console.log(err)

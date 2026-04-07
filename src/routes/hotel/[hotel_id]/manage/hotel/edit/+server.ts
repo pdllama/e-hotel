@@ -22,11 +22,16 @@ export async function PUT({request }:any) {
         }
     }
 
-    const addedNumbers = !phone_numbers ? [] : phone_numbers.filter((pn:string) => !oldPhoneNumbers.includes(pn) && pn != '')
-    const removedNumbers = !oldPhoneNumbers ? [] : oldPhoneNumbers.filter((pn:string) => !phone_numbers.includes(pn))
+    const opn = oldPhoneNumbers == null ? [] : oldPhoneNumbers
+    const pns = phone_numbers == null ? [] : phone_numbers
+    const oe = oldEmails == null ? [] : oldEmails
+    const ems = emails == null ? [] : emails
 
-    const addedEmails = !emails ? [] : emails.filter((e:string) => !oldEmails.includes(e) && e != '')
-    const removedEmails = !oldEmails ? [] : oldEmails.filter((e:string) => !emails.includes(e))
+    const addedNumbers = !phone_numbers ? [] : phone_numbers.filter((pn:string) => !opn.includes(pn) && pn != '')
+    const removedNumbers = !oldPhoneNumbers ? [] : oldPhoneNumbers.filter((pn:string) => !pns.includes(pn))
+
+    const addedEmails = !emails ? [] : emails.filter((e:string) => !oe.includes(e) && e != '')
+    const removedEmails = !oldEmails ? [] : oldEmails.filter((e:string) => !ems.includes(e))
 
     for (let an of addedNumbers) {
         await dbPool.query(`INSERT INTO hotel_phone_number(address_id, phone_number) VALUES ('${hotel_id}', '${an}')`)

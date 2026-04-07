@@ -33,26 +33,32 @@ export async function PUT({request }:any) {
         }
     }
 
-    const addedNumbers = !phone_numbers ? [] : phone_numbers.filter((pn:string) => !oldPhoneNumbers.includes(pn) && pn != '')
-    const removedNumbers = !oldPhoneNumbers ? [] : oldPhoneNumbers.filter((pn:string) => !phone_numbers.includes(pn))
+    const opn = oldPhoneNumbers == null ? [] : oldPhoneNumbers
+    const pns = phone_numbers == null ? [] : phone_numbers
+    const oe = oldEmails == null ? [] : oldEmails
+    const ems = emails == null ? [] : emails
 
-    const addedEmails = !emails ? [] : emails.filter((e:string) => !oldEmails.includes(e) && e != '')
-    const removedEmails = !oldEmails ? [] : oldEmails.filter((e:string) => !emails.includes(e))
+
+    const addedNumbers = !phone_numbers ? [] : phone_numbers.filter((pn:string) => !opn.includes(pn) && pn != '')
+    const removedNumbers = !oldPhoneNumbers ? [] : oldPhoneNumbers.filter((pn:string) => !pns.includes(pn))
+
+    const addedEmails = !emails ? [] : emails.filter((e:string) => !oe.includes(e) && e != '')
+    const removedEmails = !oldEmails ? [] : oldEmails.filter((e:string) => !ems.includes(e))
 
     for (let an of addedNumbers) {
         await dbPool.query(`INSERT INTO chain_phone_number(chain_name, phone_number) VALUES ('${new_chain_name}', '${an}')`)
     }
 
     for (let rn of removedNumbers) {
-        await dbPool.query(`DELETE FROM chain_phone_number WHERE address_id = '${new_chain_name}' AND phone_number = '${rn}'`)
+        await dbPool.query(`DELETE FROM chain_phone_number WHERE chain_name = '${new_chain_name}' AND phone_number = '${rn}'`)
     }
 
     for (let ae of addedEmails) {
-        await dbPool.query(`INSERT INTO chain_email(address_id, e_mail) VALUES ('${new_chain_name}', '${ae}')`)
+        await dbPool.query(`INSERT INTO chain_email(chain_name, e_mail) VALUES ('${new_chain_name}', '${ae}')`)
     }
 
     for (let re of removedEmails) {
-        await dbPool.query(`DELETE FROM chain_email WHERE address_id = '${new_chain_name}' AND e_mail = '${re}'`)
+        await dbPool.query(`DELETE FROM chain_email WHERE chain_name = '${new_chain_name}' AND e_mail = '${re}'`)
     }
     
 
